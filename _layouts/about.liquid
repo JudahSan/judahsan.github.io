@@ -4,7 +4,8 @@ layout: default
 <div class="post">
     <header class="post-header">
         {% if page.profile %}
-            <div id="profile-photo" class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
+            <div id="profile-photo"
+                 class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
                 {% if page.profile.image %}
                     {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
                     {% if page.profile.image_circular %}
@@ -12,7 +13,7 @@ layout: default
                     {% else %}
                         {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
                     {% endif %}
-                    {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
+                    {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3 }}px, (min-width: 576px)
                         30vw, 95vw"{% endcapture %}
                     {%
                             include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
@@ -44,7 +45,8 @@ layout: default
         <!-- News -->
         {% if page.news and site.announcements.enabled %}
             <h2>
-                <a href="{{ '/news/' | relative_url }}" style="color: inherit;">{{ site.data[site.active_lang].strings.news }}</a>
+                <a href="{{ '/news/' | relative_url }}"
+                   style="color: inherit;">{{ site.data[site.active_lang].strings.news }}</a>
             </h2>
             {% include news.liquid limit=true %}
         {% endif %}
@@ -52,7 +54,8 @@ layout: default
         <!-- Latest posts -->
         {% if site.latest_posts.enabled %}
             <h2>
-                <a href="{{ '/blog/' | relative_url }}" style="color: inherit;">{{ site.data[site.active_lang].strings.latest_posts }}</a>
+                <a href="{{ '/blog/' | relative_url }}"
+                   style="color: inherit;">{{ site.data[site.active_lang].strings.latest_posts }}</a>
             </h2>
             {% include latest_posts.liquid %}
         {% endif %}
@@ -60,7 +63,8 @@ layout: default
         <!-- Selected papers -->
         {% if page.selected_papers %}
             <h2>
-                <a href="{{ '/publications/' | relative_url }}" style="color: inherit;">{{ site.data[site.active_lang].strings.selected_publications }}</a>
+                <a href="{{ '/publications/' | relative_url }}"
+                   style="color: inherit;">{{ site.data[site.active_lang].strings.selected_publications }}</a>
             </h2>
             {% include selected_papers.liquid %}
         {% endif %}

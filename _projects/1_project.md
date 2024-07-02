@@ -8,7 +8,9 @@ category: work
 related_publications: true
 ---
 
-Space shooter <a href="https://play.google.com/store/apps/details?id=com.gameupafrica.IntoTheVoid&pcampaignid=web_share">Into the Void</a>
+Space
+shooter <a href="https://play.google.com/store/apps/details?id=com.gameupafrica.IntoTheVoid&pcampaignid=web_share">Into
+the Void</a>
 
 
 <div class="row">
