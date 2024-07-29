@@ -76,56 +76,61 @@
       "courses": ["Mathematics and Computer Science"]
     }
   ],
-  "awards": [
-    {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
-    }
-  ],
   "certificates": [
     {
-      "name": "Machine Learning",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-location-dot"
-    },
-    {
-      "name": "Quantum Computing",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
+      "name": "Microsoft Certified: Azure Fundamentals",
+      "date": "2022-02-12",
+      "issuer": "Microsoft",
+      "url": "https://www.credly.com/badges/d5d4c4ad-cf20-4845-89db-9d4c3d606d86?source=linked_in_profile",
       "icon": "fa-solid fa-tag"
     },
     {
-      "name": "Quantum Information",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
+      "name": "AWS Certified Cloud Practitioner",
+      "date": "2022-09-24",
+      "issuer": "AWS",
+      "url": "https://cp.certmetrics.com/amazon/en/public/verify/credential/2YZDHFS1RBE1QR9Q",
       "icon": "fa-solid fa-envelope"
     },
     {
-      "name": "Quantum Cryptography",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
+      "name": "Financial Modeling & Valuation Analyst (FMVA) ",
+      "date": "2022-08-01",
+      "issuer": "CFI",
+      "url": "https://credentials.corporatefinanceinstitute.com/86c5c867-86f1-4d42-bebb-97668897205a",
       "icon": "fa-solid fa-hashtag"
     },
     {
-      "name": "Quantum Communication",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
+      "name": "React Learning Program",
+      "date": "2023-10-09",
+      "issuer": "Andela",
+      "url": "https://credsverse.com/credentials/197ae99d-1ef5-4d77-b99d-def38e080fd5",
       "icon": "fa-solid fa-calendar"
     },
     {
-      "name": "Quantum Teleportation",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
+      "name": "Google IT Automation with Python Professional Certificate",
+      "date": "2021-03-22",
+      "issuer": "Coursera",
+      "url": "https://www.credly.com/badges/0318c014-e300-4fb2-96b6-8da2a5ca812a/linked_in_profile",
+      "icon": "fa-solid fa-location-dot"
+    },
+    {
+      "name": "GameUp Africa Bootcamp",
+      "date": "2021-02-16",
+      "issuer": "Gameup Africa",
+      "url": "https://drive.google.com/file/d/1ImeJnCt0_JxDXKVt77fOT6ZZIlYyMHJ7/view",
+      "icon": "fa-solid fa-location-dot"
+    },
+    {
+      "name": "Google Data Analytics Professional Certificate",
+      "date": "2022-01-13",
+      "issuer": "Coursera",
+      "url": "https://www.credly.com/badges/0301ee19-b9a8-4048-bff0-ab89d84f5081?source=linked_in_profile",
+      "icon": "fa-solid fa-location-dot"
+    },
+    {
+      "name": "Google Project Management:",
+      "date": "2024-04-30",
+      "issuer": "Coursera",
+      "url": "https://www.coursera.org/account/accomplishments/specialization/PUB6BBWWNA99",
       "icon": "fa-solid fa-clipboard-check"
     }
   ],
