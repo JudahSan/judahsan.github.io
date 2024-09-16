@@ -49,7 +49,7 @@ search_enable: true
 socials_in_search: true
 
 # Dimensions
-max_width: 1000px
+max_width: 930px
 
 # TODO: add layout settings (single page vs. multi-page)
 
@@ -216,7 +216,8 @@ exclude:
   - package.json
   - package-lock.json
   - purgecss.config.js
-  - README.md
+  - OLDREADME.md
+  - OLDREADME.md
   - vendor
 keep_files:
   - CNAME

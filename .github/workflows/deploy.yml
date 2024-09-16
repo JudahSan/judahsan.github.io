@@ -27,7 +27,8 @@ on:
       - "!CUSTOMIZE.md"
       - "!FAQ.md"
       - "!INSTALL.md"
-      - "!README.md"
+      - "!OLDREADME.md"
+      - "!OLDRADME.md"
   pull_request:
     branches:
       - master
@@ -54,7 +55,8 @@ on:
       - "!CUSTOMIZE.md"
       - "!FAQ.md"
       - "!INSTALL.md"
-      - "!README.md"
+      - "!OLDREADME.md"
+      - "!OLDREADME.md"
   workflow_dispatch:
 
 permissions:
