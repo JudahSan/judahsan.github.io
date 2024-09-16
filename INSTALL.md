@@ -88,6 +88,8 @@ For a hands-on walkthrough of running al-folio locally without using Docker, che
 Assuming you have [Ruby](https://www.ruby-lang.org/en/downloads/) and [Bundler](https://bundler.io/) installed on your system (_hint: for ease of managing ruby gems, consider using [rbenv](https://github.com/rbenv/rbenv)_), and also [Python](https://www.python.org/) and [pip](https://pypi.org/project/pip/) (_hint: for ease of managing python packages, consider using a virtual environment, like [venv](https://docs.python.org/pt-br/3/library/venv.html) or [conda](https://docs.conda.io/en/latest/)_).
 
 ```bash
+# install imagemagick
+$ sudo apt-get install imagemagick
 $ bundle install
 # assuming pip is your Python package manager
 $ pip install jupyter
