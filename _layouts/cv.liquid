@@ -104,7 +104,7 @@ layout: default
                 {% when 'certificates' %}
                   {% include resume/certificates.liquid %}
                 {% when 'references' %}
-                  {% include resume/references.liquid %}
+                  {% comment %}{% include resume/references.liquid %}{% endcomment %}
                 {% else %}
 
               {% endcase %}

@@ -2,7 +2,7 @@
 layout: page
 title: ATM SIM
 description: ATM sim app
-img:
+img: assets/img/atm.png
 importance: 4
 category: fun
 ---

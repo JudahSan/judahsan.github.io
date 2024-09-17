@@ -9,6 +9,9 @@ last_name:
 email: baraka.judah@gmail.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Software engineer, game developer, and all around tech geek.
+footer_text: >
+  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
 keywords: backend, c++, c, haskell, java, javascript, nodejs, python, rust, typescript # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: /profile_pic.jpg # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
@@ -217,7 +220,7 @@ exclude:
   - package-lock.json
   - purgecss.config.js
   - OLDREADME.md
-  - OLDREADME.md
+  - README.md
   - vendor
 keep_files:
   - CNAME
