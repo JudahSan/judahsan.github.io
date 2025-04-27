@@ -64,7 +64,7 @@ WORKDIR /srv/jekyll
 RUN gem install --no-document jekyll bundler
 RUN bundle install --no-cache
 
-EXPOSE 8080
+EXPOSE 8001
 
 COPY bin/entry_point.sh /tmp/entry_point.sh
 

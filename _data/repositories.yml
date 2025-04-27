@@ -1,14 +1,10 @@
 github_users:
-  - torvalds
-  - alshedivat
-
-repo_description_lines_max: 2
+  - judahsan
 
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+  - judahsan/party-music-cast-controller
+  - judahsan/echoes_of_elysium-godot-port
+  - judahsan/Dungeon_Explorer
+  - judahsan/medimartxpress
+  - judahsan/echoes_of_elysium
+  - judahsan/arc_platform
