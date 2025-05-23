@@ -1,28 +1,45 @@
 ---
 layout: profiles
 permalink: /people/
-title: people
-description: members of the lab or group
+title: Straw Hat
+description: The legendary crew sailing to find the One Piece
 nav: true
 nav_order: 7
 
 profiles:
-  # if you want to include more than one profile, just replicate the following block
-  # and create one content file for each profile inside _pages/
   - align: right
-    image: prof_pic.jpg
-    content: about_einstein.md
-    image_circular: false # crops the image to make it circular
+    image: luffy.jpeg
+    content: about_luffy.md
+    image_circular: true
     more_info: >
-      <p>555 your office number</p>
-      <p>123 your address street</p>
-      <p>Your City, State 12345</p>
+      <p>Captain of the Straw Hat Pirates</p>
+      <p>Devil Fruit: Gomu Gomu no Mi</p>
+      <p>Bounty: ฿3,000,000,000</p>
+
   - align: left
-    image: prof_pic.jpg
-    content: about_einstein.md
-    image_circular: false # crops the image to make it circular
+    image: zoro.jpeg
+    content: about_zoro.md
+    image_circular: true
     more_info: >
-      <p>555 your office number</p>
-      <p>123 your address street</p>
-      <p>Your City, State 12345</p>
+      <p>Combatant/Swordsman</p>
+      <p>Three Sword Style Master</p>
+      <p>Bounty: ฿1,111,000,000</p>
+
+  - align: right
+    image: nami.jpeg
+    content: about_nami.md
+    image_circular: true
+    more_info: >
+      <p>Navigator</p>
+      <p>Weather Science Expert</p>
+      <p>Bounty: ฿366,000,000</p>
+
+  - align: left
+    image: sanji.jpeg
+    content: about_sanji.md
+    image_circular: true
+    more_info: >
+      <p>Chef</p>
+      <p>Black Leg Style Fighter</p>
+      <p>Bounty: ฿1,032,000,000</p>
 ---

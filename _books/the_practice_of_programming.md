@@ -13,7 +13,7 @@ buy_link: https://www.amazon.com/Practice-Programming-Brian-W-Kernighan/dp/02016
 released: 1999
 # stars: # Add star rating here (1-5)
 # goodreads_review: # Add Goodreads review ID here
-status: To Read # Or Reading, Finished, On Hold, Dropped
+status: Finished # Or Reading, Finished, On Hold, Dropped
 ---
 
-Write book synopsis here
+[//]: # (Write book synopsis here)

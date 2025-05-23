@@ -7,7 +7,7 @@ first_name: Judah
 middle_name: M
 last_name:
 contact_note: >
-  Email is generally the most reliable way to get a hold of me.
+  Email is generally the most reliable way to get a hold of me. Followed by github.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Computer Science and Game Dev fellow
 footer_text: >
@@ -88,7 +88,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Judah's Blog # blog_name will be displayed in your blog page
-blog_description: I write about computer science, game development, anime and all around tech.
+blog_description: I occasionally write about software and game development, anime, and problems I've experienced with software and how I resolve them.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 

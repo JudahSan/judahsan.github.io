@@ -5,6 +5,7 @@ date: 2025-01-27 10:00:00
 description: Open Web UI and Ollama Ubuntu setup guide
 tags: ollama open-webui ai
 categories: llm
+giscus_comments: true
 tabs: true
 ---
 

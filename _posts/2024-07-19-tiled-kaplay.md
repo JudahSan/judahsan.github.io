@@ -5,6 +5,7 @@ date: 2024-07-18 23:01:00
 description: Using Tiled Web Map Level editor with Kaplay.
 tags: level-design
 categories: posts
+giscus_comments: true
 thumbnail: assets/img/tiled.jpg
 ---
 
