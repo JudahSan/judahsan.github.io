@@ -1,27 +1,38 @@
 ---
-
 layout: page  
 title: Medimartxpress  
-description: Fostering accessibility for all Kenyans, Medimartxpress is steadfast in providing a seamless experience for accessing premium, secure, and budget-friendly medicine and wellness products online.  
+description: Fostering accessibility for all Kenyans, Medimartxpress provides a seamless experience for accessing premium, secure, and budget-friendly medicine and wellness products online.  
 img: assets/img/medi_logo.jpeg  
 importance: 4  
-category: work
+category: [experiments, work]
+---
+
+## Medimartxpress 💊  
+
+**Medimartxpress** is a medical e-commerce platform built to make healthcare more **accessible and affordable** for Kenyans.  
+It provides a seamless way for users to browse, order, and receive **medicine and wellness products** securely, with a strong emphasis on **premium quality** and **budget-friendly pricing**.  
+
+The platform is powered by **Ruby on Rails** and extended to mobile using **Turbo Native**, ensuring a consistent experience across web and Android devices.  
+
+👉 Source Code: [Medimartxpress on GitHub](https://github.com/JudahSan/medimartxpress)  
+⚡ Note: The project is actively evolving and will receive future updates.  
 
 ---
 
-### Medimartxpress
+### Key Features
+- 🛒 **E-commerce for healthcare**: order medicine and wellness products online.  
+- 📱 **Turbo Native Android app**: seamless mobile experience built on top of Rails.  
+- 🔒 **Secure access**: emphasis on safe transactions and trusted providers.  
+- 🌍 **For Kenyans**: bridging the healthcare accessibility gap.  
 
-**Project Purpose:**  
-Medimartxpress is designed to make healthcare more accessible to all Kenyans by providing an easy-to-use platform for ordering medicine and wellness products online. The goal is to bridge the gap between healthcare providers and individuals in need of secure, premium, and budget-friendly health products, ensuring everyone has access to essential healthcare.
+---
 
-**Tech Stack:**
-- **Front-end:** Tailwind, Javascript && HTML
-- **Back-end:** Ruby on Rails
-- **Database:** PostgreSQL
-- **Rich Text Editor:** WIP
-
-**Link to Project:**  
-[Visit Medimartxpress](https://github.com/JudahSan/medimartxpress) (Update the link when it's available)
+### Tech Stack
+- **Front-end:** Tailwind CSS, JavaScript, HTML  
+- **Back-end:** Ruby on Rails  
+- **Database:** PostgreSQL  
+- **Mobile:** Turbo Native (Android)  
+- **Rich Text Editor:** WIP  
 
 ---
 
@@ -38,9 +49,5 @@ Medimartxpress is designed to make healthcare more accessible to all Kenyans by 
 </div>
 
 <div class="caption">
-    Medimartxpress: Your one-stop shop for all health and wellness products.
+    Medimartxpress: Your one-stop shop for medicine and wellness products in Kenya.
 </div>
-
-{% raw %}
-
-{% endraw %}

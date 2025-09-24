@@ -2,12 +2,19 @@
 layout: page
 title: projects
 permalink: /projects/
-description: I'll update this in due time
+description: A showcase of my work, experiments, and contributions.
 nav: true
 nav_order: 3
-display_categories: [work, fun]
+display_categories: 
+  - work          # Professional / client / production projects
+  - open-source   # Open source contributions and projects
+  - fun           # Small fun/experimental games, casual builds
+  - personal      # Personal apps / side projects
+  - experiments   # Learning prototypes, demos, or research
+  - learning
 horizontal: false
 ---
+
 
 <!-- pages/projects.md -->
 <div class="projects">

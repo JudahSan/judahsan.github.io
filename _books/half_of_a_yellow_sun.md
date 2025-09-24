@@ -8,8 +8,8 @@ isbn: 1400095204 # Add ISBN here if available
 categories: history fiction
 tags: historical fiction war
 buy_link: https://www.amazon.com/Half-Yellow-Chimamanda-Ngozi-Adichie/dp/1400095204 # Add purchase link here
-# started: # Add start date here (YYYY-MM-DD)
-# finished: # Add finish date here (YYYY-MM-DD)
+started: 2025-02-30 # Add start date here (YYYY-MM-DD)
+finished: 2025-06-17 # Add finish date here (YYYY-MM-DD)
 # released: # Add release year here
 # stars: # Add star rating here (1-5)
 # goodreads_review: 58044798 # Add Goodreads review ID here

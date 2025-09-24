@@ -8,8 +8,8 @@ isbn: 9781386137085 # Add ISBN here if available
 categories: self-help personal-development motivation
 tags: productivity goals golang
 # buy_link: # Add purchase link here
-# started: # Add start date here (YYYY-MM-DD)
-# finished: # Add finish date here (YYYY-MM-DD)
+started: 2024-10-30 # Add start date here (YYYY-MM-DD)
+finished: 2025-01-20 # Add finish date here (YYYY-MM-DD)
 # released: # Add release year here
 # stars: # Add star rating here (1-5)
 # goodreads_review: 58044798 # Add Goodreads review ID here

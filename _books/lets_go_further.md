@@ -9,11 +9,11 @@ categories: self-help personal-development motivation
 tags: productivity goals golang
 buy_link: https://lets-go-further.alexedwards.net/#packages
 started: 2025-02-20 # Add start date here (YYYY-MM-DD)
-# finished: 2025-01-10 # Add finish date here (YYYY-MM-DD)
+finished: 2025-04-10 # Add finish date here (YYYY-MM-DD)
 # released: # Add release year here
 stars: 5 # Add star rating here (1-5)
 # goodreads_review: # Add Goodreads review ID here
-status: Reading # Or Reading, Finished, On Hold, Dropped
+status: Finished # Or Reading, Finished, On Hold, Dropped
 ---
 
 Let’s Go is a clear, concise and easy-to-follow guide to web development with Go.

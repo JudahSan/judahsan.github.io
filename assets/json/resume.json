@@ -1,12 +1,12 @@
 {
   "basics": {
     "name": "Judah M.",
-    "label": "SWE",
+    "label": "Highly trained engineer with almost a decade of industry experience",
     "image": "",
     "email": "baraka.judah@gmail.com",
     "phone": "",
     "url": "https://judahsan.github.io/",
-    "summary": "A full-stack software engineer",
+    "summary": "A highly trained engineer with almost a decade of industry experience in tech including leadership experience across various other industry verticals. Judah is passionate about finding creative solutions to business problems and developing human capital.",
     "location": {
       "city": "Nairobi",
       "countryCode": "KE",
@@ -14,9 +14,14 @@
     },
     "profiles": [
       {
-        "network": "Twitter",
-        "username": "@b_joyboi",
-        "url": "https://twitter.com/@b_joyboi"
+        "network": "GitHub",
+        "username": "judahsan",
+        "url": "https://github.com/judahsan"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "judah-m-136b06149",
+        "url": "https://www.linkedin.com/in/judah-m-136b06149"
       }
     ]
   },
@@ -35,16 +40,17 @@
       ]
     },
     {
-      "name": "Freelance SWE",
-      "position": "FullStack Developer",
-      "url": "",
-      "startDate": "2023-08-08",
-      "endDate": "",
-      "summary": "Worked as a freelance web developer, specializing in responsive web design and user experience.",
+      "name": "African Ruby Community",
+      "position": "Open Source Contributor",
+      "url": "https://rubycommunity.africa",
+      "startDate": "2023-03-01",
+      "endDate": "present",
+      "summary": "Fostered the growth of Ruby and Ruby on Rails developers across Africa through meetups, conferences, and open-source contributions.",
       "highlights": [
-        "Built and maintained websites for various clients using HTML, CSS, JavaScript, and Ruby.",
-        "Focused on creating accessible and responsive designs for better user experience.",
-        "Integrated third-party services and APIs to enhance website functionality."
+        "ARC Platform Maintenance & Code Review - Maintained and reviewed code for the community platform.",
+        "RubyConf Website Development & Maintenance - Contributed to building the 2024 RubyConf Africa websites and the Mini Conf site under the tech lead’s guidance.",
+        "Conference Planning & Support - Assisted in organizing RubyConf Africa 2024, focusing on Discord and Reddit community engagement and managing technical logistics.",
+        "Ongoing Improvements - Enhancing website features, optimizing performance, and integrating analytics to support conference marketing efforts."
       ]
     }
   ],
@@ -208,17 +214,25 @@
   ],
   "references": [
     {
-      "name": "Professor Joy Mutegi",
-      "icon": "fa-solid fa-laptop",
-      "reference": "Software Developer,\nAWS\n+254728554466\ninfoptwo@gmail.com"
-    },
-    {
-      "name": "Professor John Doe",
-      "icon": "fa-solid fa-thumbtack",
-      "reference": "Head of FOST\nMultimedia University of Kenya"
+      "name": "Available upon request",
+      "reference": ""
     }
   ],
   "projects": [
+    {
+      "name": "TMS Companion App",
+      "summary": "A cross-platform tool to help you stay consistent in your TMS memorization, offering series, songs, plenary guides, and more.",
+      "highlights": [
+        "Crossplatform (iOS/Android, PC)",
+        "Multi-language support (Kenyan dialects + international)",
+        "Optimized for mobile-first use with responsive design",
+        "Offline access for memorized content",
+        "User-friendly interface with intuitive navigation"
+      ],
+      "startDate": "2023-10-22",
+      "endDate": "present",
+      "url": "https://tms-companion.netlify.app/"
+    },
     {
       "name": "Into the Void",
       "summary": "Developed new features for gameplay, and reviewed game design documents for quality improvement.",
@@ -250,7 +264,7 @@
         "Responsive Design"
       ],
       "startDate": "2024-02-20",
-      "endDate": "2024-08-05",
+      "endDate": "2025-08-05",
       "url": "https://rubyconf.africa"
     },
     {
