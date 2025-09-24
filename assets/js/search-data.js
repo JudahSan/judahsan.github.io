@@ -18,21 +18,21 @@ ninja.data = [{
           },
         },{id: "nav-projects",
           title: "projects",
-          description: "I&#39;ll update this in due time",
+          description: "A showcase of my work, experiments, and contributions.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
           },
         },{id: "nav-repositories",
           title: "repositories",
-          description: "Edit the `_data/repositories.yml` and change the `github_users` and `github_repos` lists to include your own GitHub profile and repositories.",
+          description: "GitHub profile and repositories.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/repositories/";
           },
         },{id: "nav-cv",
           title: "cv",
-          description: "This is a description of the page. You can modify it in &#39;_pages/cv.md&#39;. You can also change or remove the top pdf download button.",
+          description: "Resume",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
@@ -58,7 +58,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-honeypots-a-lightweight-bot-defense-strategy",
+            },{id: "post-testing-pull-requests-locally-with-git-worktrees",
+        
+          title: "Testing Pull Requests Locally with Git Worktrees",
+        
+        description: "A step-by-step guide to using Git worktrees for PR testing.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/git-worktrees/";
+          
+        },
+      },{id: "post-honeypots-a-lightweight-bot-defense-strategy",
         
           title: "Honeypots, A Lightweight Bot Defense Strategy",
         
@@ -187,6 +198,11 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/programming_ruby_3_3/";
+            },},{id: "books-",
+          title: '',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/system_design_interview/";
             },},{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
@@ -197,6 +213,26 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_practice_of_programming/";
+            },},{id: "books-the-secret-lives-of-baba-segi-39-s-wives",
+          title: 'The Secret Lives of Baba Segi&amp;#39;s Wives',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_secret_lives_of_baba_segis_wives/";
+            },},{id: "books-tiny-c-projects",
+          title: 'Tiny C Projects',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/tiny_c_projects/";
+            },},{id: "books-writing-an-interpreter-in-go",
+          title: 'Writing an Interpreter in Go',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/wirting_an_interpreter_in_go/";
+            },},{id: "books-writing-a-compiler-in-go",
+          title: 'Writing a Compiler in Go',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/writing_a_compiler_in_go/";
             },},{id: "news-a-simple-inline-announcement",
           title: 'A simple inline announcement.',
           description: "",
@@ -210,24 +246,44 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-into-the-void",
           title: 'Into the Void',
-          description: "Space shooter game",
+          description: "A retro-inspired casual space shooter built with Unity",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{id: "projects-medimartxpress",
           title: 'Medimartxpress',
-          description: "Fostering accessibility for all Kenyans, Medimartxpress is steadfast in providing a seamless experience for accessing premium, secure, and budget-friendly medicine and wellness products online.",
+          description: "Fostering accessibility for all Kenyans, Medimartxpress provides a seamless experience for accessing premium, secure, and budget-friendly medicine and wellness products online.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project/";
-            },},{id: "projects-atm-sim",
-          title: 'ATM SIM',
-          description: "ATM sim app",
+            },},{id: "projects-echoes-of-elysium",
+          title: 'Echoes of Elysium',
+          description: "A fun and simple platformer built with Godot as part of my game development learning journey.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/3_project/";
             },},{id: "projects-tms-companion-app",
           title: 'TMS Companion App',
-          description: "Forgot or misplaced your TMS pack? Worry not, this app was designed to help remain consistent in your TMS series memorization.",
+          description: "A cross-platform tool to help you stay consistent in your TMS memorization, offering series, songs, plenary guides, and more.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/4_project/";
+            },},{id: "projects-african-ruby-community-platform",
+          title: 'African Ruby Community Platform',
+          description: "Open-source community platform for the African Ruby Community (ARC), built and maintained by contributors across East Africa.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_project/";
+            },},{id: "projects-rubyconf-africa-website",
+          title: 'RubyConf Africa Website',
+          description: "Official website for RubyConf Africa, built with Jekyll and maintained by community contributors.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/6_project/";
+            },},{id: "projects-admanus-group-platform",
+          title: 'Admanus Group Platform',
+          description: "Admanus Group.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/8_project/";
+            },},{id: "projects-operating-systems",
+          title: 'Operating Systems',
+          description: "CSKlub-OS club MIT 61810 Operating System Engineering .",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/9_project/";
             },},{
         id: 'social-email',
         title: 'email',
@@ -262,13 +318,6 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("https://leetcode.com/u/judahsan/", "_blank");
-        },
-      },{
-        id: 'social-rss',
-        title: 'RSS Feed',
-        section: 'Socials',
-        handler: () => {
-          window.open("/feed.xml", "_blank");
         },
       },{
       id: 'light-theme',
