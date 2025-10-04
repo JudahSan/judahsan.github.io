@@ -178,6 +178,11 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/dart_apprentice/";
+            },},{id: "books-essentialism",
+          title: 'Essentialism',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/essentialism/";
             },},{id: "books-half-of-a-yellow-sun",
           title: 'Half of a Yellow Sun',
           description: "",
@@ -198,8 +203,13 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/programming_ruby_3_3/";
-            },},{id: "books-",
-          title: '',
+            },},{id: "books-quitter",
+          title: 'Quitter',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/quitter/";
+            },},{id: "books-system-design-interview",
+          title: 'System Design Interview',
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/system_design_interview/";
@@ -208,6 +218,11 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
+            },},{id: "books-the-power-of-habit",
+          title: 'The Power of Habit',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_power_of_habit/";
             },},{id: "books-the-practice-of-programming",
           title: 'The Practice of Programming',
           description: "",
@@ -218,6 +233,16 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_secret_lives_of_baba_segis_wives/";
+            },},{id: "books-thinking-fast-and-slow",
+          title: 'Thinking, Fast and Slow',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/thinking_fast_and_slow/";
+            },},{id: "books-this-child-will-be-great",
+          title: 'This Child Will Be Great',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/this_child_will_be_great/";
             },},{id: "books-tiny-c-projects",
           title: 'Tiny C Projects',
           description: "",
