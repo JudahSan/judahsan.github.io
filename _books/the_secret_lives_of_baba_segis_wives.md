@@ -2,9 +2,9 @@
 layout: book-review
 title: The Secret Lives of Baba Segi's Wives
 author: Lola Shoneyin
-cover: assets/img/book_covers/baba_segi.jpg # Add cover image path here if available
+cover:  # Add cover image path here if available
 # olid: # Add Open Library ID here if available
-isbn: 9780061946382 # Add ISBN here if available
+isbn: 9780061946370 # Add ISBN here if available
 categories: fiction satire
 tags: polygamy nigerian literature women
 buy_link: https://www.amazon.com/Secret-Lives-Baba-Segis-Wives/dp/0061946389 # Add purchase link here

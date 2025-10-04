@@ -2,9 +2,9 @@
 layout: book-review
 title: Writing a Compiler in Go
 author: Thorsten Ball
-cover: assets/img/book_covers/writing_compiler_go.jpeg # Add cover image path here if available
+cover: # Add cover image path here if available
 # olid: # Add Open Library ID here if available
-isbn: 9783982016111
+isbn: 9783982016108
 categories: programming compilers
 tags: golang compilers programming-languages
 buy_link: https://compilerbook.com/ # Official site

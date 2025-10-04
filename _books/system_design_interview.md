@@ -1,10 +1,10 @@
 ---
 layout: book-review
-title: System Design Interview: An Insider's Guide
+title: System Design Interview
 author: Alex Xu
-cover: assets/img/book_covers/system_design_interview.jpeg # Add cover image path here if available
+cover:  # Add cover image path here if available
 # olid: # Add Open Library ID here if available
-isbn: 9798604286352 # ISBN for Volume 1
+isbn: 9798664653403 # ISBN for Volume 1
 categories: technology career
 tags: system-design interview preparation software-engineering
 buy_link: https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/B08CMF2CQF # Add purchase link here

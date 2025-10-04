@@ -2,9 +2,9 @@
 layout: book-review
 title: Programming Ruby 3.3
 author: Noel Rappin and Dave Thomas
-cover: assets/img/book_covers/pixel_axe_ruby.jpg # Add cover image path here if available
+cover:  # Add cover image path here if available
 # olid: # Add Open Library ID here if available
-isbn: 9781680509823
+isbn: 0974514055
 categories: programming ruby web-development
 tags: reference tutorial best-practices
 buy_link: https://www.amazon.com/Programming-Ruby-3-3-Pragmatic-Programmers/dp/1680509766

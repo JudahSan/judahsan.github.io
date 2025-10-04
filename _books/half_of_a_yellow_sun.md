@@ -2,7 +2,7 @@
 layout: book-review
 title: Half of a Yellow Sun
 author: Chimamanda Ngozi Adichie
-cover: assets/img/book_covers/half_sun.jpg # Add cover image path here if available
+cover: # Add cover image path here if available
 # olid: # Add Open Library ID here if available
 isbn: 1400095204 # Add ISBN here if available
 categories: history fiction

@@ -2,9 +2,9 @@
 layout: book-review
 title: Writing an Interpreter in Go
 author: Thorsten Ball
-cover: assets/img/book_covers/writing_interpreter_go.png # Add cover image path here if available
+cover: # Add cover image path here if available
 # olid: # Add Open Library ID here if available
-isbn: 9783000558086
+isbn: 3982016118
 categories: programming compilers
 tags: golang interpreters programming-languages
 buy_link: https://interpreterbook.com/ # Official site

@@ -7,7 +7,7 @@ cover: # Add cover image path here if available
 isbn: 020161586X
 categories: computer-science programming software-development
 tags: best-practices coding style algorithms
-buy_link: https://www.amazon.com/Practice-Programming-Brian-W-Kernighan/dp/020161586X
+buy_link: https://www.amazon.com/Practice-Programming-Brian-W-Kernighan/dp/02016158
 # started: # Add start date here (YYYY-MM-DD)
 # finished: # Add finish date here (YYYY-MM-DD)
 released: 1999
