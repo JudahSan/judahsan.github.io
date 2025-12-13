@@ -7,6 +7,9 @@ tags: level-design
 categories: posts
 giscus_comments: true
 thumbnail: assets/img/tiled.jpg
+mermaid:
+    enabled: true
+    zoomable: true
 ---
 
 Personal notes from  [JLegendDev's blog post](https://jslegenddev.substack.com/p/how-to-use-tiled-with-kaplayjs)

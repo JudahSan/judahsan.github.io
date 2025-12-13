@@ -17,7 +17,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/alshedivat/al-folio)](https://github.com/alshedivat/al-folio/releases/latest)
 [![GitHub license](https://img.shields.io/github/license/alshedivat/al-folio?color=blue)](https://github.com/alshedivat/al-folio/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/alshedivat/al-folio)](https://github.com/alshedivat/al-folio)
+[![GitHub stars](https://img.shields.io/github/stars/alshedivat/al-folio)](https://github.com/alshedivat/al-folio/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/alshedivat/al-folio)](https://github.com/alshedivat/al-folio/fork)
 
 </div>
@@ -145,7 +145,7 @@ Feel free to add your own page(s) by sending a PR.
 <a href="https://tonideleo.github.io/" target="_blank">★</a>
 <a href="https://alonkellner.com/" target="_blank">★</a>
 <a href="https://berylbir.github.io/" target="_blank">★</a>
-<a href="https://thefermi0n.github.io/" target="_blank">★</a>
+<a href="https://global-anomaly.github.io/" target="_blank">★</a>
 <a href="https://mingsun-kaust.github.io/" target="_blank">★</a>
 <a href="https://hdocmsu.github.io/" target="_blank">★</a>
 <a href="https://trandangtrungduc.github.io/" target="_blank">★</a>
@@ -168,6 +168,10 @@ Feel free to add your own page(s) by sending a PR.
 <a href="https://eilamshapira.com/" target="_blank">★</a>
 <a href="https://freifrauvonbleifrei.github.io/" target="_blank">★</a>
 <a href="https://thomasbourke1.github.io/" target="_blank">★</a>
+<a href="https://siddharthsule.com/" target="_blank">★</a>
+<a href="https://waynexucn.github.io/" target="_blank">★</a>
+<a href="https://zlatanajanovic.com/" target="_blank">★</a>
+<a href="https://mchadolias.github.io/" target="_blank">★</a>
 </td>
 </tr>
 <tr>
@@ -234,37 +238,37 @@ Run the test yourself: [Google Lighthouse PageSpeed Insights](https://pagespeed.
 <!--ts-->
 
 - [al-folio](#al-folio)
-  - [User community](#user-community)
-  - [Lighthouse PageSpeed Insights](#lighthouse-pagespeed-insights)
-    - [Desktop](#desktop)
-    - [Mobile](#mobile)
-  - [Table Of Contents](#table-of-contents)
-  - [Getting started](#getting-started)
-  - [Installing and Deploying](#installing-and-deploying)
-  - [Customizing](#customizing)
-  - [Features](#features)
-    - [Light/Dark Mode](#lightdark-mode)
-    - [CV](#cv)
-    - [People](#people)
-    - [Publications](#publications)
-    - [Collections](#collections)
-    - [Layouts](#layouts)
-      - [The iconic style of Distill](#the-iconic-style-of-distill)
-      - [Full support for math &amp; code](#full-support-for-math--code)
-      - [Photos, Audio, Video and more](#photos-audio-video-and-more)
-    - [Other features](#other-features)
-      - [GitHub's repositories and user stats](#githubs-repositories-and-user-stats)
-      - [Theming](#theming)
-      - [Social media previews](#social-media-previews)
-      - [Atom (RSS-like) Feed](#atom-rss-like-feed)
-      - [Related posts](#related-posts)
-      - [Code quality checks](#code-quality-checks)
-  - [FAQ](#faq)
-  - [Contributing](#contributing)
-    - [Maintainers](#maintainers)
-    - [All Contributors](#all-contributors)
-  - [Star History](#star-history)
-  - [License](#license)
+    - [User community](#user-community)
+    - [Lighthouse PageSpeed Insights](#lighthouse-pagespeed-insights)
+        - [Desktop](#desktop)
+        - [Mobile](#mobile)
+    - [Table Of Contents](#table-of-contents)
+    - [Getting started](#getting-started)
+    - [Installing and Deploying](#installing-and-deploying)
+    - [Customizing](#customizing)
+    - [Features](#features)
+        - [Light/Dark Mode](#lightdark-mode)
+        - [CV](#cv)
+        - [People](#people)
+        - [Publications](#publications)
+        - [Collections](#collections)
+        - [Layouts](#layouts)
+            - [The iconic style of Distill](#the-iconic-style-of-distill)
+            - [Full support for math &amp; code](#full-support-for-math--code)
+            - [Photos, Audio, Video and more](#photos-audio-video-and-more)
+        - [Other features](#other-features)
+            - [GitHub's repositories and user stats](#githubs-repositories-and-user-stats)
+            - [Theming](#theming)
+            - [Social media previews](#social-media-previews)
+            - [Atom (RSS-like) Feed](#atom-rss-like-feed)
+            - [Related posts](#related-posts)
+            - [Code quality checks](#code-quality-checks)
+    - [FAQ](#faq)
+    - [Contributing](#contributing)
+        - [Maintainers](#maintainers)
+        - [All Contributors](#all-contributors)
+    - [Star History](#star-history)
+    - [License](#license)
   <!--te-->
 
 ## Getting started
