@@ -2,7 +2,7 @@
 layout: book-review
 title: This Child Will Be Great
 author: Ellen Johnson Sirleaf
-cover: 
+cover:
 isbn: 9780061353482
 categories: biography leadership africa
 tags: memoir politics resilience

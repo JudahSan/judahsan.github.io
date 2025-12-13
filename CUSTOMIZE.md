@@ -5,37 +5,37 @@ Here we will give you some tips on how to customize the website. One important t
 <!--ts-->
 
 - [Customize](#customize)
-    - [Project structure](#project-structure)
-    - [Configuration](#configuration)
-    - [Modifying the CV information](#modifying-the-cv-information)
-    - [Modifying the user and repository information](#modifying-the-user-and-repository-information)
-    - [Creating new pages](#creating-new-pages)
-    - [Creating new blog posts](#creating-new-blog-posts)
-    - [Creating new projects](#creating-new-projects)
-    - [Adding some news](#adding-some-news)
-    - [Adding Collections](#adding-collections)
-    - [Adding a new publication](#adding-a-new-publication)
-        - [Author annotation](#author-annotation)
-        - [Buttons (through custom bibtex keywords)](#buttons-through-custom-bibtex-keywords)
-    - [Changing theme color](#changing-theme-color)
-    - [Adding social media information](#adding-social-media-information)
-    - [Adding a newsletter](#adding-a-newsletter)
-    - [Removing content](#removing-content)
-        - [Removing the blog page](#removing-the-blog-page)
-        - [Removing the news section](#removing-the-news-section)
-        - [Removing the projects page](#removing-the-projects-page)
-        - [Removing the publications page](#removing-the-publications-page)
-        - [Removing the repositories page](#removing-the-repositories-page)
-        - [You can also remove pages through commenting out front-matter blocks](#you-can-also-remove-pages-through-commenting-out-front-matter-blocks)
-    - [Adding Token for Lighthouse Badger](#adding-token-for-lighthouse-badger)
-        - [Personal Access Token (fine-grained) Permissions for Lighthouse Badger:](#personal-access-token-fine-grained-permissions-for-lighthouse-badger)
-    - [Customizing fonts, spacing, and more](#customizing-fonts-spacing-and-more)
-    - [Scheduled Posts](#scheduled-posts)
-        - [Name Format](#name-format)
-        - [Important Notes](#important-notes)
-    - [Setting up a Personal Access Token (PAT) for Google Scholar Citation Updates](#setting-up-a-personal-access-token-pat-for-google-scholar-citation-updates)
-        - [Why is a PAT required?](#why-is-a-pat-required)
-        - [How to set up the PAT](#how-to-set-up-the-pat)
+  - [Project structure](#project-structure)
+  - [Configuration](#configuration)
+  - [Modifying the CV information](#modifying-the-cv-information)
+  - [Modifying the user and repository information](#modifying-the-user-and-repository-information)
+  - [Creating new pages](#creating-new-pages)
+  - [Creating new blog posts](#creating-new-blog-posts)
+  - [Creating new projects](#creating-new-projects)
+  - [Adding some news](#adding-some-news)
+  - [Adding Collections](#adding-collections)
+  - [Adding a new publication](#adding-a-new-publication)
+    - [Author annotation](#author-annotation)
+    - [Buttons (through custom bibtex keywords)](#buttons-through-custom-bibtex-keywords)
+  - [Changing theme color](#changing-theme-color)
+  - [Adding social media information](#adding-social-media-information)
+  - [Adding a newsletter](#adding-a-newsletter)
+  - [Removing content](#removing-content)
+    - [Removing the blog page](#removing-the-blog-page)
+    - [Removing the news section](#removing-the-news-section)
+    - [Removing the projects page](#removing-the-projects-page)
+    - [Removing the publications page](#removing-the-publications-page)
+    - [Removing the repositories page](#removing-the-repositories-page)
+    - [You can also remove pages through commenting out front-matter blocks](#you-can-also-remove-pages-through-commenting-out-front-matter-blocks)
+  - [Adding Token for Lighthouse Badger](#adding-token-for-lighthouse-badger)
+    - [Personal Access Token (fine-grained) Permissions for Lighthouse Badger:](#personal-access-token-fine-grained-permissions-for-lighthouse-badger)
+  - [Customizing fonts, spacing, and more](#customizing-fonts-spacing-and-more)
+  - [Scheduled Posts](#scheduled-posts)
+    - [Name Format](#name-format)
+    - [Important Notes](#important-notes)
+  - [Setting up a Personal Access Token (PAT) for Google Scholar Citation Updates](#setting-up-a-personal-access-token-pat-for-google-scholar-citation-updates)
+    - [Why is a PAT required?](#why-is-a-pat-required)
+    - [How to set up the PAT](#how-to-set-up-the-pat)
 
 <!--te-->
 
@@ -340,14 +340,14 @@ In this folder you need to store your file in the same format as you would in `_
 - The scheduler uploads posts everyday at 🕛 23:30 UTC
 - It will only upload posts at 23:30 UTC of their respective scheduled days, It's not uploaded in 23:59 in case there are a lot of files as the scheduler must finish before 00:00
 - It will only upload files which follow the pattern `yyyy-mm-dd-title.md`
-    - This means that only markdown files will be posted
-    - It means that any markdown which do not follow this pattern will not be posted
+  - This means that only markdown files will be posted
+  - It means that any markdown which do not follow this pattern will not be posted
 - The scheduler works by moving posts from the `_scheduled/` directory to `_posts/`, it will not post to folders like `_projects/` or `_news/`
 - The date in the name of the file is the day that file will be uploaded on
-    - `2024-08-27-file1.md` will not be posted before or after 27-August-2024 (Scheduler only works for posts scheduled on the present day)
-    - `2025-08-27-file2.md` will be posted exactly on 27-August-2025
-    - `File3.md` will not be posted at all
-    - `2026-02-31-file4.md` is supposed to be posted on 31-February-2026, but there is no 31st in February hence this file will never be posted either
+  - `2024-08-27-file1.md` will not be posted before or after 27-August-2024 (Scheduler only works for posts scheduled on the present day)
+  - `2025-08-27-file2.md` will be posted exactly on 27-August-2025
+  - `File3.md` will not be posted at all
+  - `2026-02-31-file4.md` is supposed to be posted on 31-February-2026, but there is no 31st in February hence this file will never be posted either
 
 ## Setting up a Personal Access Token (PAT) for Google Scholar Citation Updates
 
@@ -377,18 +377,18 @@ GitHub restricts the default `GITHUB_TOKEN` from triggering other workflows when
 
 1. **Create a Personal Access Token**
 
-    - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens).
-    - Click "Generate new token" (classic or fine-grained).
-    - Grant at least the following permissions:
-        - `repo` (for classic tokens if repo is private), `public_repo` (for classic tokens if repo is public) or `contents: read/write` (for fine-grained tokens)
-    - Save the token somewhere safe.
+   - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens).
+   - Click "Generate new token" (classic or fine-grained).
+   - Grant at least the following permissions:
+     - `repo` (for classic tokens if repo is private), `public_repo` (for classic tokens if repo is public) or `contents: read/write` (for fine-grained tokens)
+   - Save the token somewhere safe.
 
 2. **Add the PAT as a repository secret**
 
-    - Go to your repository on GitHub.
-    - Navigate to `Settings` > `Secrets and variables` > `Actions` > `New repository secret`.
-    - Name the secret `PAT` (must match the name used in the workflow).
-    - Paste your PAT and save.
+   - Go to your repository on GitHub.
+   - Navigate to `Settings` > `Secrets and variables` > `Actions` > `New repository secret`.
+   - Name the secret `PAT` (must match the name used in the workflow).
+   - Paste your PAT and save.
 
 3. **Workflow usage**
    The workflow `.github/workflows/update-citations.yml` uses this PAT to commit updates to `_data/citations.yml`.

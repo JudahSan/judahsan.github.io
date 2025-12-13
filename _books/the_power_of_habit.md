@@ -2,7 +2,7 @@
 layout: book-review
 title: The Power of Habit
 author: Charles Duhigg
-cover: 
+cover:
 isbn: 081298160X
 categories: psychology self-help productivity
 tags: habits behavior-change motivation

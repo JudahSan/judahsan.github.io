@@ -15,4 +15,3 @@ released: 2002
 # goodreads_review: # Add Goodreads review ID here
 status: Reading # Or Reading, Finished, On Hold, Dropped
 ---
-

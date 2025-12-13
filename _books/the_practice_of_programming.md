@@ -16,4 +16,4 @@ released: 1999
 status: Finished # Or Reading, Finished, On Hold, Dropped
 ---
 
-[//]: # (Write book synopsis here)
+[//]: # "Write book synopsis here"

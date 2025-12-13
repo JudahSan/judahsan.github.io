@@ -63,9 +63,7 @@
       "startDate": "2022-08-01",
       "endDate": "2022-12-01",
       "summary": "Contributed to the 2022 GameUp Africa Bootcamp as a technical support team member. Assisted aspiring game developers in building games, troubleshooting issues, and working on course projects. Played a key role in ensuring a smooth experience and fostering learning and growth.",
-      "highlights": [
-        "Played a key role in ensuring a smooth experience and fostering learning and growth."
-      ]
+      "highlights": ["Played a key role in ensuring a smooth experience and fostering learning and growth."]
     },
     {
       "organization": "DeepLearning.AI",
@@ -75,9 +73,7 @@
       "startDate": "2022-08-01",
       "endDate": "2022-12-01",
       "summary": "Assisted learners taking the GANs course offered by Deeplearning.ai on coursera.",
-      "highlights": [
-        "Empowered aspiring GAN practitioners and contribute to their professional growth."
-      ]
+      "highlights": ["Empowered aspiring GAN practitioners and contribute to their professional growth."]
     },
     {
       "organization": "DeepLearning.AI",
@@ -87,9 +83,7 @@
       "startDate": "2022-08-01",
       "endDate": "present",
       "summary": "Course tester",
-      "highlights": [
-        ""
-      ]
+      "highlights": [""]
     }
   ],
   "education": [
@@ -102,9 +96,7 @@
       "startDate": "",
       "endDate": "",
       "score": "",
-      "courses": [
-        "Mathematics and Computer Science"
-      ]
+      "courses": ["Mathematics and Computer Science"]
     }
   ],
   "certificates": [
@@ -236,10 +228,7 @@
     {
       "name": "Into the Void",
       "summary": "Developed new features for gameplay, and reviewed game design documents for quality improvement.",
-      "highlights": [
-        "Space Shooter",
-        "Unity"
-      ],
+      "highlights": ["Space Shooter", "Unity"],
       "startDate": "2021-08-01",
       "endDate": "2021-12-29",
       "url": "https://github.com/JudahSan/IntoTheVoid"
@@ -247,11 +236,7 @@
     {
       "name": "Echoes of Elysium",
       "summary": "Work in progress 2D platformer pixel game developed using the Godot engine.",
-      "highlights": [
-        "Godot Engine",
-        "2D Platformer",
-        "Pixel Art"
-      ],
+      "highlights": ["Godot Engine", "2D Platformer", "Pixel Art"],
       "startDate": "2022-01-01",
       "endDate": "2024-12-31",
       "url": "https://judahsan.itch.io/echoes-of-elysium"
@@ -259,10 +244,7 @@
     {
       "name": "African Ruby Community Conference Website",
       "summary": "Collaborated on the development of the African Ruby Community Conference website.",
-      "highlights": [
-        "Ruby on Rails",
-        "Responsive Design"
-      ],
+      "highlights": ["Ruby on Rails", "Responsive Design"],
       "startDate": "2024-02-20",
       "endDate": "2025-08-05",
       "url": "https://rubyconf.africa"
@@ -270,10 +252,7 @@
     {
       "name": "Africa Ruby Community Platform",
       "summary": "Contributed to the Africa Ruby Community platform website.",
-      "highlights": [
-        "Ruby on Rails",
-        "Community Platform"
-      ],
+      "highlights": ["Ruby on Rails", "Community Platform"],
       "url": "https://rubycommunity.africa"
     }
   ]

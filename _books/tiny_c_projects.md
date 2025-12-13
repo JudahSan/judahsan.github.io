@@ -16,16 +16,17 @@ buy_link: https://www.wiley.com/en-us/Tiny+C+Projects-p-9781119828233
 status: Reading # Or Reading, Finished, On Hold, Dropped
 ---
 
-**Overview:**  
+**Overview:**
 
-Dan Gookin’s *Tiny C Projects* is a hands-on book designed to help learners strengthen their C programming skills through **practical mini-projects**. Each project is small enough to be approachable but meaningful enough to teach key programming concepts.  
+Dan Gookin’s _Tiny C Projects_ is a hands-on book designed to help learners strengthen their C programming skills through **practical mini-projects**. Each project is small enough to be approachable but meaningful enough to teach key programming concepts.
 
-You’ll learn not just the syntax of C, but how to apply it by building working programs. The book emphasizes writing code, experimenting, and learning by doing — making it an excellent resource for both beginners and programmers looking to refresh their C skills.  
+You’ll learn not just the syntax of C, but how to apply it by building working programs. The book emphasizes writing code, experimenting, and learning by doing — making it an excellent resource for both beginners and programmers looking to refresh their C skills.
 
-**Key Takeaways:**  
-- Learn C through **bite-sized, practical projects**  
-- Reinforce concepts like **loops, functions, and pointers** with real examples  
-- Build confidence by coding frequently and iterating on small programs  
-- Great for **self-study** or as a supplement to a formal programming course  
+**Key Takeaways:**
 
-This book is especially valuable for anyone interested in **systems programming**, **low-level development**, or just becoming more fluent in C through repetition and project-based learning.  
+- Learn C through **bite-sized, practical projects**
+- Reinforce concepts like **loops, functions, and pointers** with real examples
+- Build confidence by coding frequently and iterating on small programs
+- Great for **self-study** or as a supplement to a formal programming course
+
+This book is especially valuable for anyone interested in **systems programming**, **low-level development**, or just becoming more fluent in C through repetition and project-based learning.

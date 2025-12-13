@@ -2,7 +2,7 @@
 layout: book-review
 title: Thinking, Fast and Slow
 author: Daniel Kahneman
-cover: 
+cover:
 isbn: 978-0374533557
 categories: psychology decision-making economics
 tags: cognition heuristics biases rationality

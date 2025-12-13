@@ -20,4 +20,4 @@ Let's Go teaches you step-by-step how to create fast, secure and maintainable we
 
 The idea behind the book is to help you learn by doing. Together we'll walk through the start-to-finish build of a complete web application, from starting a server for the first time to session management and authenticating users.
 
-Building a complete web application has a number of benefits: it helps put the things you're learning into context, demonstrates how different parts of your codebase link together, and forces us to work through the edge-cases and difficulties that come up when writing software in real-life. 
+Building a complete web application has a number of benefits: it helps put the things you're learning into context, demonstrates how different parts of your codebase link together, and forces us to work through the edge-cases and difficulties that come up when writing software in real-life.

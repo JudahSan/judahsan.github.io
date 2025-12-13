@@ -2,7 +2,7 @@
 layout: book-review
 title: Essentialism
 author: Greg McKeown
-cover: 
+cover:
 isbn: 0804137382
 categories: productivity self-help leadership
 tags: focus simplicity decision-making

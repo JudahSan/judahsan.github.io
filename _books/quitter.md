@@ -2,7 +2,7 @@
 layout: book-review
 title: Quitter
 author: Jon Acuff
-cover: 
+cover:
 isbn: 0982986270
 categories: career self-help motivation
 tags: quitting dreams career-change

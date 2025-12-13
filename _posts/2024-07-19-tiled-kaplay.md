@@ -8,16 +8,16 @@ categories: posts
 giscus_comments: true
 thumbnail: assets/img/tiled.jpg
 mermaid:
-    enabled: true
-    zoomable: true
+  enabled: true
+  zoomable: true
 ---
 
-Personal notes from  [JLegendDev's blog post](https://jslegenddev.substack.com/p/how-to-use-tiled-with-kaplayjs)
+Personal notes from [JLegendDev's blog post](https://jslegenddev.substack.com/p/how-to-use-tiled-with-kaplayjs)
 
 #### Prerequisites:
 
 - Basic knowledge of Kaplay.js and JavaScript
-- [Tiled]((https://www.mapeditor.org/)) downloaded and installed
+- [Tiled](<(https://www.mapeditor.org/)>) downloaded and installed
 
 ##### Assets:
 
@@ -137,125 +137,127 @@ Your “map.json” contains all the data needed to to display your map in Kapla
 As your map grows in size so will this “map.json” file. That’s why I kept the map very small so I could paste the entire “map.json” file here.
 
 ```json
-{ "compressionlevel":-1,
- "height":3,
- "infinite":false,
- "layers":[
+{
+  "compressionlevel": -1,
+  "height": 3,
+  "infinite": false,
+  "layers": [
+    {
+      "data": [41, 41, 41, 41, 41, 41, 41, 41, 41],
+      "height": 3,
+      "id": 1,
+      "name": "Ground",
+      "opacity": 1,
+      "type": "tilelayer",
+      "visible": true,
+      "width": 3,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "data": [0, 0, 0, 0, 161, 0, 0, 0, 0],
+      "height": 3,
+      "id": 2,
+      "name": "Bushes",
+      "opacity": 1,
+      "type": "tilelayer",
+      "visible": true,
+      "width": 3,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "draworder": "topdown",
+      "id": 3,
+      "name": "Colliders",
+      "objects": [
         {
-         "data":[41, 41, 41,
-            41, 41, 41,
-            41, 41, 41],
-         "height":3,
-         "id":1,
-         "name":"Ground",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":3,
-         "x":0,
-         "y":0
-        }, 
+          "height": 16,
+          "id": 1,
+          "name": "",
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 16,
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": false,
+      "x": 0,
+      "y": 0
+    },
+
+    {
+      "draworder": "topdown",
+      "id": 4,
+      "name": "Positions",
+      "objects": [
         {
-         "data":[0, 0, 0,
-            0, 161, 0,
-            0, 0, 0],
-         "height":3,
-         "id":2,
-         "name":"Bushes",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":3,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":3,
-         "name":"Colliders",
-         "objects":[
-                {
-                 "height":16,
-                 "id":1,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":16,
-                 "y":16
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
+          "height": 0,
+          "id": 3,
+          "name": "player",
+          "point": true,
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 0,
+          "x": 0,
+          "y": 0
         },
-    
         {
-         "draworder":"topdown",
-         "id":4,
-         "name":"Positions",
-         "objects":[
-                {
-                 "height":0,
-                 "id":3,
-                 "name":"player",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":0,
-                 "y":0
-                }, 
-                {
-                 "height":0,
-                 "id":4,
-                 "name":"player",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":0,
-                 "y":0
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }],
- "nextlayerid":5,
- "nextobjectid":5,
- "orientation":"orthogonal",
- "renderorder":"right-down",
- "tiledversion":"1.10.2",
- "tileheight":16,
- "tilesets":[
-        {
-         "columns":39,
-         "firstgid":1,
-         "image":"topdownasset.png",
-         "imageheight":496,
-         "imagewidth":624,
-         "margin":0,
-         "name":"topdownasset",
-         "spacing":0,
-         "tilecount":1209,
-         "tileheight":16,
-         "tilewidth":16
-        }],
- "tilewidth":16,
- "type":"map",
- "version":"1.10",
- "width":3
+          "height": 0,
+          "id": 4,
+          "name": "player",
+          "point": true,
+          "rotation": 0,
+          "type": "",
+          "visible": true,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": false,
+      "x": 0,
+      "y": 0
+    }
+  ],
+  "nextlayerid": 5,
+  "nextobjectid": 5,
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "tiledversion": "1.10.2",
+  "tileheight": 16,
+  "tilesets": [
+    {
+      "columns": 39,
+      "firstgid": 1,
+      "image": "topdownasset.png",
+      "imageheight": 496,
+      "imagewidth": 624,
+      "margin": 0,
+      "name": "topdownasset",
+      "spacing": 0,
+      "tilecount": 1209,
+      "tileheight": 16,
+      "tilewidth": 16
+    }
+  ],
+  "tilewidth": 16,
+  "type": "map",
+  "version": "1.10",
+  "width": 3
 }
 ```
+
 Assuming you know how to setup Kaplay, here is the code you need to be able to display the map.
 
-```js 
+```js
 import kaplay from "./lib/kaplay.mjs";
 
 const k = kaplay({ global: false });
@@ -263,8 +265,8 @@ const k = kaplay({ global: false });
 k.loadSprite("spritesheet", "./topdownasset.png", {
   sliceX: 39,
   sliceY: 31,
-}); // this is needed for the player animations 
-// This because the tiles + player sprites are in the same image 
+}); // this is needed for the player animations
+// This because the tiles + player sprites are in the same image
 // If they were separate, we wouldn't need to load the tilesheet as the exported "map.png" would be enough
 
 k.loadSprite("map", "./map.png");
@@ -282,11 +284,7 @@ async function main() {
 
     if (layer.name === "Colliders") {
       for (const object of layer.objects) {
-        map.add([
-          k.area({ shape: new k.Rect(k.vec2(0), object.width, object.height)   }),
-          k.body({ isStatic: true }),
-          k.pos(object.x, object.y),
-        ]);
+        map.add([k.area({ shape: new k.Rect(k.vec2(0), object.width, object.height) }), k.body({ isStatic: true }), k.pos(object.x, object.y)]);
       }
       continue;
     }
@@ -318,7 +316,6 @@ However, here a few observations that will help you understand the logic further
 - We create a map Game Object acting as the parent of all Game Objects placed on the map. This is important because the position coordinates provided by “map.json” are all relative to the map. So if you create a Game Object without the map being the parent, the Game Object’s placement will be off. With our map Game Object we’re able to make sure the positions of tiles and colliders match.
 
 - Since we’re not drawing the map tile by tile and rather just using the exported image, it’s important to skip any “Tile Layer” in our for loop.
-
 
 ### The Results
 

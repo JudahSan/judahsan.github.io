@@ -17,9 +17,9 @@ When reviewing pull requests (PRs), it's often necessary to run the code locally
 
 **Benefits:**
 
-* **No branch juggling** – Avoid `git stash` / branch-switching headaches.
-* **Lightweight** – Multiple working directories share the same Git history.
-* **Great for PR reviews** – Spin up isolated environments for each PR.
+- **No branch juggling** – Avoid `git stash` / branch-switching headaches.
+- **Lightweight** – Multiple working directories share the same Git history.
+- **Great for PR reviews** – Spin up isolated environments for each PR.
 
 ### Setup
 
@@ -36,9 +36,9 @@ git config --global alias.pr '!f() { \
   git worktree add $dir $branch && \
   echo "✅ Worktree for PR #$num created at $dir"; \
 }; f'
-````
+```
 
------
+---
 
 ## 🔹 Usage
 
@@ -76,7 +76,7 @@ cd ../pr-69
 
 ...and test/run/review the code safely in isolation.
 
------
+---
 
 ## 🔹 Cleanup After Review
 

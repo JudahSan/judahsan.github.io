@@ -2,7 +2,7 @@
 layout: book-review
 title: System Design Interview
 author: Alex Xu
-cover:  # Add cover image path here if available
+cover: # Add cover image path here if available
 # olid: # Add Open Library ID here if available
 isbn: 9798664653403 # ISBN for Volume 1
 categories: technology career
@@ -16,16 +16,17 @@ buy_link: https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/B08CM
 status: Reading # Or Reading, Finished, On Hold, Dropped
 ---
 
-**Overview:**  
+**Overview:**
 
-Written by Alex Xu, this book breaks down the intimidating process of **system design interviews** into approachable frameworks and case studies. It’s structured to help software engineers practice thinking at scale and build confidence when asked to design large, distributed systems.  
+Written by Alex Xu, this book breaks down the intimidating process of **system design interviews** into approachable frameworks and case studies. It’s structured to help software engineers practice thinking at scale and build confidence when asked to design large, distributed systems.
 
-The book covers fundamentals such as scalability, reliability, and maintainability, while guiding readers through real-world scenarios like designing a URL shortener, a social media feed, or a messaging system.  
+The book covers fundamentals such as scalability, reliability, and maintainability, while guiding readers through real-world scenarios like designing a URL shortener, a social media feed, or a messaging system.
 
-**Key Takeaways:**  
-- Learn **step-by-step frameworks** for approaching open-ended design questions  
-- Review **trade-offs** between different system architectures  
-- Practice **real interview-style problems** drawn from Big Tech companies  
-- Develop intuition for designing systems that balance **performance, scalability, and cost**  
+**Key Takeaways:**
 
-This is one of the most practical resources for preparing for **technical interviews beyond coding**, and a strong complement to coding interview prep books like *Cracking the Coding Interview*.  
+- Learn **step-by-step frameworks** for approaching open-ended design questions
+- Review **trade-offs** between different system architectures
+- Practice **real interview-style problems** drawn from Big Tech companies
+- Develop intuition for designing systems that balance **performance, scalability, and cost**
+
+This is one of the most practical resources for preparing for **technical interviews beyond coding**, and a strong complement to coding interview prep books like _Cracking the Coding Interview_.

@@ -17,7 +17,6 @@ tabs: true
 
 ### Key Features of Open Web UI and Ollama
 
-
 - **Easy to Set Up**: Open Web UI provides a simple interface for managing and interacting with local large language models (LLMs).
 - **Local Model Hosting**: Ollama allows you to host models locally, reducing dependency on external services and ensuring full control over your data.
 - **User-Friendly Interface**: Open Web UI offers a straightforward graphical interface to interact with the models and adjust settings.
@@ -25,11 +24,9 @@ tabs: true
 - **Customizable**: You can fine-tune models locally or switch between different versions without hassle.
 - **Efficient Resource Usage**: Both Open Web UI and Ollama are designed to run efficiently on local hardware, ensuring that even with limited resources, you can still run powerful LLMs.
 
-
 > [Open WebUI Documentation](https://docs.openwebui.com) and [Ollama Documentation](https://ollama.com/) provide detailed installation and usage instructions.
 
 #### Use Cases for Open Web UI and Ollama
-
 
 - **Personalized AI Assistants**: Run LLMs locally for creating customized personal assistants for various tasks, such as scheduling, reminders, or content generation.
 - **Data Privacy**: Host LLMs locally to ensure sensitive data does not leave your machine, offering more control and privacy.
@@ -41,7 +38,6 @@ tabs: true
 #### Installation Guide for Open Web UI and Ollama with Docker
 
 1. **Quick Start with Docker**:
-
 
 - **If Ollama is on your computer**:
 
@@ -55,11 +51,10 @@ tabs: true
   docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cudadocker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
   ```
 
-
 2. **Open WebUI bundled with Ollama**:
 
-
 - **With GPU Support**:
+
   ```bash
   docker run -d -p 3000:8080 --gpus=all -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
   ```
@@ -69,9 +64,7 @@ tabs: true
   docker run -d -p 3000:8080 -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
   ```
 
-
 🔗 After running the above, your WebUI should be available at `http://localhost:8080`.
-
 
 ### Troubleshooting
 

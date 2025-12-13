@@ -2,7 +2,7 @@
 layout: post
 title: Intro to GCP Cloud Shell and gcloud
 date: 2024-10-20 10:00:00
-description:  Learn how to connect to computing resources hosted on Google Cloud via Cloud Shell with the gcloud tool.
+description: Learn how to connect to computing resources hosted on Google Cloud via Cloud Shell with the gcloud tool.
 tags: gcp
 categories: technology
 tabs: true
@@ -24,7 +24,7 @@ Google Cloud Shell is an online, browser-based command-line environment provided
 - List the active account name
 
 ```bash
-    gcloud auth list 
+    gcloud auth list
 ```
 
 Ouput:
@@ -36,6 +36,7 @@ ACCOUNT: <account name>
 To set the active account, run:
     $ gcloud config set account `ACCOUNT`
 ```
+
 - List the project ID:
 
 ```bash
@@ -56,11 +57,13 @@ project = qwiklabs-gcp-03-e98c139c8c35
 ```bash
 gcloud config set compute/region us-east1
 ```
+
 2. View the project region setting
 
 ```bash
 gcloud config get-value compute/region
 ```
+
 3. Set zone to `us-east1-b`:
 
 ```bash
@@ -88,6 +91,7 @@ gcloud compute project-info describe --project $(gcloud config get-value project
 ```
 
 ### 5. Setting environment variables
+
 Environment variable define your environment and help save time when you write scripts that contain APIs or executables.
 
 1. Create an environment variable to store your Project ID.
@@ -122,9 +126,10 @@ gcloud compute instances create gceinstance --machine-type e2-medium --zone $ZON
 ```
 
 ### 7. Exploring commands
+
 The gcloud tool offers simple usage guidelines that are available by adding the -h flag (for help) onto the end of any gcloud command.
 
-1. Help command:  `gcloud -h`
+1. Help command: `gcloud -h`
 2. Verbose help command: `gcloud config --help` or `gcloud help config` . Type Q and hit Enter to exit
 
 There are global flags in gcloud that govern the behavior of commands on a per-invocation level. Flags override any values set in SDK properties.
@@ -177,9 +182,10 @@ curl http://$(gcloud compute instances list --filter=name:gcelab2 --format='valu
 ```
 
 ### 10. Logs
+
 Viewing logs is essential to understanding the working of your project. Use gcloud to access the different logs available on Google Cloud.
 
 1. View available logs on the system: `gcloud logging logs list`
 2. View logs that relate to compute resources: `gcloud logging logs list --filter="compute"`
 3. Read Logs related to the resource type of gce_instance:`gcloud logging read "resource.type=gce_instance" --limit 5`
-4. Read the logs for a specific virtual machine:  `gcloud logging read "resource.type=gce_instance AND labels.instance_name='gcelab2'" --limit 5`
+4. Read the logs for a specific virtual machine: `gcloud logging read "resource.type=gce_instance AND labels.instance_name='gcelab2'" --limit 5`
