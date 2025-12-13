@@ -58,7 +58,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-testing-pull-requests-locally-with-git-worktrees",
+            },{id: "post-how-to-download-and-boost-audio-in-youtube-vidoes-guide",
+        
+          title: "How to Download and Boost Audio in Youtube Vidoes (Guide)",
+        
+        description: "A guide on how to download and boost audio in youtube videos using youtube-dl and ffmpeg",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/audio-amplification/";
+          
+        },
+      },{id: "post-testing-pull-requests-locally-with-git-worktrees",
         
           title: "Testing Pull Requests Locally with Git Worktrees",
         
@@ -269,7 +280,12 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "projects-into-the-void",
+          section: "News",},{id: "projects-stella-and-the-threads-of-dawn",
+          title: 'Stella and the Threads of Dawn',
+          description: "A relaxing yet engaging adventure that blends story, puzzle, and rhythm gameplay — perfect for players who love discovery, contemplation, and narrative-driven experiences.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/10_project/";
+            },},{id: "projects-into-the-void",
           title: 'Into the Void',
           description: "A retro-inspired casual space shooter built with Unity",
           section: "Projects",handler: () => {
