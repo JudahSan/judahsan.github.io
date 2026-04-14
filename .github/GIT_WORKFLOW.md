@@ -8,6 +8,7 @@ All commit messages should follow this format:
 
 ```
 <type>: <subject>
+
 <body (optional)>
 ```
 
