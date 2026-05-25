@@ -58,7 +58,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-how-to-download-and-boost-audio-in-youtube-vidoes-guide",
+            },{id: "post-how-to-set-up-cloudflare-tunnel-for-local-development",
+        
+          title: "How to Set Up Cloudflare Tunnel for Local Development",
+        
+        description: "A guide on how to set up Cloudflare Tunnel for local development and expose your local server to the internet securely.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/cloudflare-tunnel/";
+          
+        },
+      },{id: "post-how-to-download-and-boost-audio-in-youtube-vidoes-guide",
         
           title: "How to Download and Boost Audio in Youtube Vidoes (Guide)",
         
@@ -307,6 +318,11 @@ ninja.data = [{
           description: "A relaxing yet engaging adventure that blends story, puzzle, and rhythm gameplay — perfect for players who love discovery, contemplation, and narrative-driven experiences.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/10_project/";
+            },},{id: "projects-tms-app-mobile",
+          title: 'TMS App Mobile',
+          description: "An tool to help you stay consistent in your TMS memorization, offering series, songs, plenary guides, and more.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/11_project/";
             },},{id: "projects-into-the-void",
           title: 'Into the Void',
           description: "A retro-inspired casual space shooter built with Unity",

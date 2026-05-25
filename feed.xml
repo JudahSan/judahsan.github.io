@@ -1,4 +1,128 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://judahsan.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://judahsan.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-04-14T01:23:36+00:00</updated><id>https://judahsan.github.io/feed.xml</id><title type="html">blank</title><subtitle>Computer Science and Game Dev fellow </subtitle><entry><title type="html">How to Download and Boost Audio in Youtube Vidoes (Guide)</title><link href="https://judahsan.github.io/blog/2025/audio-amplification/" rel="alternate" type="text/html" title="How to Download and Boost Audio in Youtube Vidoes (Guide)"/><published>2025-12-12T11:59:00+00:00</published><updated>2025-12-12T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2025/audio-amplification</id><content type="html" xml:base="https://judahsan.github.io/blog/2025/audio-amplification/"><![CDATA[<p>Sometimes the audio in YouTube videos is too quite, take <a href="https://youtu.be/6kGpk8-baMM?si=pvU2DPDne79zvmpa">Help Bob Belong</a> for example. This guide shows you how to download YouTube videos and properly amplify their audio using free, open-source tools.</p> <h3 id="download-the-youtube-video">Download the YouTube Video</h3> <p><strong>Prerequisites:</strong></p> <ul> <li>Linux system (or WSL2 on Windows)</li> <li>Terminal access</li> <li>Basic command-line familiarity</li> </ul> <p><strong>Steps:</strong></p> <ol> <li>Install <code class="language-plaintext highlighter-rouge">yt-dlp</code> and download the video</li> </ol> <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://judahsan.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://judahsan.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-05-25T00:29:28+00:00</updated><id>https://judahsan.github.io/feed.xml</id><title type="html">blank</title><subtitle>Computer Science and Game Dev fellow </subtitle><entry><title type="html">How to Set Up Cloudflare Tunnel for Local Development</title><link href="https://judahsan.github.io/blog/2026/cloudflare-tunnel/" rel="alternate" type="text/html" title="How to Set Up Cloudflare Tunnel for Local Development"/><published>2026-05-24T11:59:00+00:00</published><updated>2026-05-24T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2026/cloudflare-tunnel</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/cloudflare-tunnel/"><![CDATA[<p><a href="https://developers.cloudflare.com/tunnel/">Cloudflare Tunnel</a> connects your infrastructure to Cloudflare through an outboud-only, <a href="https://developers.cloudflare.com/ssl/post-quantum-cryptography/">post-quantum encrypted</a>.</p> <blockquote> <p>Post-quantum cryptography utilizes advanced mathematicsl algorithms (like Kyber) designed to be secure against future quantum computer attacks</p> </blockquote> <p>Instead of exposing a public IP, you install a lightweight proxy that encrypts your traffic and forwards it to the server.</p> <p><img src="assets/img/cloudflare_tunnel.png" alt="img.png"/></p> <h3 id="why-use-cloudflare-tunnel">Why Use Cloudflare Tunnel?</h3> <ol> <li>It’s free.</li> <li>No <a href="https://en.wikipedia.org/wiki/Port_forwarding">port forwarding</a> required. Works behind NAT, firewalls, or VPNs.</li> <li>Instant HTTPS. While Cloudflare can use Let’s Encrypt, Coudflare Tunnels (especially the free trycloudflare.com quick tunnels) actually dunamically utilize Cloudflare’s Edge Certificates (often issued via DigiCert, Google Truest Services, or Let’s Encrypt dynamically behind the scenes.)</li> <li>Temporary public URLs - Perfect for testing webhooks or sharing with teammates</li> </ol> <h2 id="quick-setup-5-minutes">Quick Setup (5 minutes)</h2> <h3 id="1-install-cloudflared">1. Install cloudflared</h3> <p><strong>macOS:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>brew <span class="nb">install </span>cloudflared
+</pre></td></tr></tbody></table></code></pre></div></div> <p><strong>Linux:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c"># Download binary directly (fastest)</span>
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+<span class="nb">chmod</span> +x cloudflared-linux-amd64
+<span class="nb">sudo mv </span>cloudflared-linux-amd64 /usr/local/bin/cloudflared
+</pre></td></tr></tbody></table></code></pre></div></div> <p><strong>Windows:</strong></p> <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c"># Using winget</span><span class="w">
+</span><span class="n">winget</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">cloudflare.cloudflared</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div> <h3 id="2-run-your-local-server">2. Run Your Local Server</h3> <p>Start your app normally (Rails, Node, Python, etc.):</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c"># Example for Rails</span>
+rails server <span class="nt">-p</span> 3000
+
+<span class="c"># Example for Node</span>
+pnpm run dev
+
+<span class="c"># Example for Python</span>
+python <span class="nt">-m</span> http.server 3000
+</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="3-expose-it-to-the-internet">3. Expose It to the Internet</h3> <p>In a <strong>new terminal window</strong>, run:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>cloudflared tunnel <span class="nt">--url</span> http://localhost:3000
+</pre></td></tr></tbody></table></code></pre></div></div> <p>That’s it! You’ll see output like:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>INF Your quick tunnel has been created! Visit it at:
+https://random-name.trycloudflare.com
+</pre></td></tr></tbody></table></code></pre></div></div> <p>Share that URL with anyone. It works until you press <code class="language-plaintext highlighter-rouge">Ctrl+C</code>.</p> <hr/> <h2 id="common-scenarios">Common Scenarios</h2> <h3 id="test-github-webhooks-locally">Test GitHub Webhooks Locally</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="c"># Terminal 1: Your app</span>
+rails server <span class="nt">-p</span> 3000
+
+<span class="c"># Terminal 2: Tunnel</span>
+cloudflared tunnel <span class="nt">--url</span> http://localhost:3000
+
+<span class="c"># Use the Cloudflare URL as your webhook endpoint in GitHub</span>
+</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="share-with-a-remote-teammate">Share with a Remote Teammate</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>cloudflared tunnel <span class="nt">--url</span> http://localhost:3000
+<span class="c"># Send them the trycloudflare.com URL</span>
+</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="multiple-tunnels-for-different-services">Multiple Tunnels for Different Services</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="c"># Tunnel to Rails app on port 3000</span>
+cloudflared tunnel <span class="nt">--url</span> http://localhost:3000
+
+<span class="c"># Another tunnel to API on port 4000 (different terminal)</span>
+cloudflared tunnel <span class="nt">--url</span> http://localhost:4000
+</pre></td></tr></tbody></table></code></pre></div></div> <hr/> <h2 id="persistent-tunnel-with-custom-domain">Persistent Tunnel with Custom Domain</h2> <p>For a tunnel that stays alive and uses your own domain:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre><span class="c"># 1. Login to Cloudflare</span>
+cloudflared tunnel login
+
+<span class="c"># 2. Create a named tunnel</span>
+cloudflared tunnel create my-dev-tunnel
+
+<span class="c"># 3. Create config file (~/.cloudflared/config.yml)</span>
+<span class="nb">cat</span> <span class="o">&gt;</span> ~/.cloudflared/config.yml <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh">
+tunnel: my-dev-tunnel
+credentials-file: ~./cloudflared/UUID.json
+
+ingress:
+  - hostname: dev.yourdomain.com
+    service: http://localhost:3000
+  - service: http_status:404
+</span><span class="no">EOF
+
+</span><span class="c"># 4. Route DNS</span>
+cloudflared tunnel route dns my-dev-tunnel dev.yourdomain.com
+
+<span class="c"># 5. Run tunnel</span>
+cloudflared tunnel run my-dev-tunnel
+</pre></td></tr></tbody></table></code></pre></div></div> <p>Now <code class="language-plaintext highlighter-rouge">https://dev.yourdomain.com</code> points to your local server.</p> <hr/> <h2 id="useful-commands">Useful Commands</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c"># List all tunnels</span>
+cloudflared tunnel list
+
+<span class="c"># Delete a tunnel</span>
+cloudflared tunnel delete my-dev-tunnel
+
+<span class="c"># Run with debug logging</span>
+cloudflared tunnel <span class="nt">--url</span> http://localhost:3000 <span class="nt">--log-level</span> debug
+</pre></td></tr></tbody></table></code></pre></div></div> <hr/> <h2 id="troubleshooting">Troubleshooting</h2> <table> <thead> <tr> <th>Issue</th> <th>Solution</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">connection refused</code></td> <td>Your local server isn’t running on the specified port</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">tunnel not found</code></td> <td>Create tunnel first or check name spelling</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">certificate error</code></td> <td>Use <code class="language-plaintext highlighter-rouge">http://</code> not <code class="language-plaintext highlighter-rouge">https://</code> for local target service (eg, <code class="language-plaintext highlighter-rouge">cloudflared tunnel --url http://localhost:3000</code> as cloudflared handles the SSL encryption to the outside world itself</td> </tr> <tr> <td>Tunnel disconnects</td> <td>Restart with <code class="language-plaintext highlighter-rouge">--retries 5</code> flag</td> </tr> </tbody> </table> <hr/> <h2 id="when-to-use-this">When to Use This</h2> <ul> <li>✅ Testing Stripe/PayPal webhooks locally</li> <li>✅ Sharing dev site with clients</li> <li>✅ Mobile testing on real devices</li> <li>✅ Collaborating with remote teammates</li> <li>✅ Demoing work-in-progress features</li> </ul> <p><strong>Not ideal for:</strong> Production traffic, streaming video, or real-time gaming.</p> <hr/> <h2 id="links">Links</h2> <ul> <li><a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/">Official Cloudflare Tunnel Docs</a></li> <li><a href="https://github.com/cloudflare/cloudflared">cloudflared GitHub Repository</a></li> </ul>]]></content><author><name></name></author><category term="technology"/><category term="guide"/><summary type="html"><![CDATA[A guide on how to set up Cloudflare Tunnel for local development and expose your local server to the internet securely.]]></summary></entry><entry><title type="html">How to Download and Boost Audio in Youtube Vidoes (Guide)</title><link href="https://judahsan.github.io/blog/2025/audio-amplification/" rel="alternate" type="text/html" title="How to Download and Boost Audio in Youtube Vidoes (Guide)"/><published>2025-12-12T11:59:00+00:00</published><updated>2025-12-12T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2025/audio-amplification</id><content type="html" xml:base="https://judahsan.github.io/blog/2025/audio-amplification/"><![CDATA[<p>Sometimes the audio in YouTube videos is too quite, take <a href="https://youtu.be/6kGpk8-baMM?si=pvU2DPDne79zvmpa">Help Bob Belong</a> for example. This guide shows you how to download YouTube videos and properly amplify their audio using free, open-source tools.</p> <h3 id="download-the-youtube-video">Download the YouTube Video</h3> <p><strong>Prerequisites:</strong></p> <ul> <li>Linux system (or WSL2 on Windows)</li> <li>Terminal access</li> <li>Basic command-line familiarity</li> </ul> <p><strong>Steps:</strong></p> <ol> <li>Install <code class="language-plaintext highlighter-rouge">yt-dlp</code> and download the video</li> </ol> <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -863,26 +987,4 @@ go get <span class="nt">-u</span> github.com/tdewolff/minify/css
 <span class="p">}</span>
 
 <span class="nf">main</span><span class="p">();</span>
-</pre></td></tr></tbody></table></code></pre></div></div> <p>Given the code above and the content of “map.json”, you can figure out what’s going on easily. <br/> However, here a few observations that will help you understand the logic further :</p> <ul> <li> <p>You get the map’s data into your Kaplay game by making a fetch() call to the “map.json” file.</p> </li> <li> <p>We create a map Game Object acting as the parent of all Game Objects placed on the map. This is important because the position coordinates provided by “map.json” are all relative to the map. So if you create a Game Object without the map being the parent, the Game Object’s placement will be off. With our map Game Object we’re able to make sure the positions of tiles and colliders match.</p> </li> <li> <p>Since we’re not drawing the map tile by tile and rather just using the exported image, it’s important to skip any “Tile Layer” in our for loop.</p> </li> </ul> <h3 id="the-results">The Results</h3> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/result-480.webp 480w,/assets/img/result-800.webp 800w,/assets/img/result-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/result.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Now if I activate the debug mode using the “f1” key, you can see that the collider for the bush is also placed correctly. If you were to write the player movement logic, the player could collide with the bush.</p> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/result2-480.webp 480w,/assets/img/result2-800.webp 800w,/assets/img/result2-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/result2.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div>]]></content><author><name></name></author><category term="posts"/><category term="level-design"/><summary type="html"><![CDATA[Using Tiled Web Map Level editor with Kaplay.]]></summary></entry><entry><title type="html">Redis A High-Performance In-Memory Data Store</title><link href="https://judahsan.github.io/blog/2024/redis/" rel="alternate" type="text/html" title="Redis A High-Performance In-Memory Data Store"/><published>2024-07-01T10:00:00+00:00</published><updated>2024-07-01T10:00:00+00:00</updated><id>https://judahsan.github.io/blog/2024/redis</id><content type="html" xml:base="https://judahsan.github.io/blog/2024/redis/"><![CDATA[<p>Redis (Remote Dictionary Server) is an open-source, in-memory data structure store used as a database, cache, and message broker. It supports various data structures such as strings, hashes, lists, sets, and sorted sets.</p> <h4 id="key-features-of-redis">Key Features of Redis</h4> <ul> <li><strong>High Performance</strong>: Redis is renowned for its low latency and high throughput, making it suitable for applications that require real-time data processing.</li> <li><strong>Persistence</strong>: Data can be stored in-memory and periodically saved to disk, ensuring durability.</li> <li><strong>Replication</strong>: Redis supports master-slave replication, allowing data to be replicated across multiple servers for redundancy and high availability.</li> <li><strong>Transactions</strong>: Redis provides atomic operations through commands like MULTI, EXEC, DISCARD, and WATCH.</li> <li><strong>Pub/Sub Messaging</strong>: Enables message broadcasting and subscription, useful for real-time applications such as chat systems and live notifications.</li> <li><strong>Lua Scripting</strong>: Supports executing scripts to perform complex operations atomically.</li> </ul> <p><a href="https://redis.io/documentation">Redis Documentation</a> provides comprehensive details on how to get started and utilize its features.</p> <h4 id="use-cases-for-redis">Use Cases for Redis</h4> <ul> <li><strong>Caching</strong>: Improve application performance by caching frequently accessed data.</li> <li><strong>Session Management</strong>: Store and manage user sessions efficiently.</li> <li><strong>Real-time Analytics</strong>: Process and analyze real-time data streams.</li> <li><strong>Message Queues</strong>: Implement queues for background processing tasks.</li> </ul> <blockquote> <p>“Redis is not only a simple key-value store but also a rich set of powerful data structures that provide a solid foundation for building high-performance applications.”</p> </blockquote> <h4 id="getting-started-with-redis">Getting Started with Redis</h4> <ol> <li><strong>Installation</strong>: Download and install Redis from the <a href="https://redis.io/download">official website</a>.</li> <li><strong>Basic Commands</strong>: Learn the basic commands to set and get values.</li> <li><strong>Advanced Features</strong>: Explore advanced features like transactions and Lua scripting.</li> </ol> <p>For full details about Redis, visit the <a href="https://redis.io/documentation">Redis Documentation</a>.</p> <h4 id="example-commands">Example Commands</h4> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="rouge-code"><pre><span class="c"># Start Redis server</span>
-redis-server
-
-<span class="c"># Connect to Redis</span>
-redis-cli
-
-<span class="c"># Set a key-value pair</span>
-SET key <span class="s2">"value"</span>
-
-<span class="c"># Get the value of a key</span>
-GET key
-</pre></td></tr></tbody></table></code></pre></div></div>]]></content><author><name></name></author><category term="technology"/><category term="redis"/><category term="database"/><category term="in-memory"/><summary type="html"><![CDATA[Understanding Redis and its benefits for modern applications]]></summary></entry></feed>
+</pre></td></tr></tbody></table></code></pre></div></div> <p>Given the code above and the content of “map.json”, you can figure out what’s going on easily. <br/> However, here a few observations that will help you understand the logic further :</p> <ul> <li> <p>You get the map’s data into your Kaplay game by making a fetch() call to the “map.json” file.</p> </li> <li> <p>We create a map Game Object acting as the parent of all Game Objects placed on the map. This is important because the position coordinates provided by “map.json” are all relative to the map. So if you create a Game Object without the map being the parent, the Game Object’s placement will be off. With our map Game Object we’re able to make sure the positions of tiles and colliders match.</p> </li> <li> <p>Since we’re not drawing the map tile by tile and rather just using the exported image, it’s important to skip any “Tile Layer” in our for loop.</p> </li> </ul> <h3 id="the-results">The Results</h3> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/result-480.webp 480w,/assets/img/result-800.webp 800w,/assets/img/result-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/result.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Now if I activate the debug mode using the “f1” key, you can see that the collider for the bush is also placed correctly. If you were to write the player movement logic, the player could collide with the bush.</p> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/result2-480.webp 480w,/assets/img/result2-800.webp 800w,/assets/img/result2-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/result2.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div>]]></content><author><name></name></author><category term="posts"/><category term="level-design"/><summary type="html"><![CDATA[Using Tiled Web Map Level editor with Kaplay.]]></summary></entry></feed>
