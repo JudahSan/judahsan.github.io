@@ -69,6 +69,17 @@ ninja.data = [{
             window.location.href = "/blog/2026/cloudflare-tunnel/";
           
         },
+      },{id: "post-quikk-api",
+        
+          title: "Quikk API",
+        
+        description: "Intro to Quikk API, an MPESA daraja alternative and a payment gateway.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/quikk-api/";
+          
+        },
       },{id: "post-how-to-download-and-boost-audio-in-youtube-vidoes-guide",
         
           title: "How to Download and Boost Audio in Youtube Vidoes (Guide)",

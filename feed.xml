@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://judahsan.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://judahsan.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-05-25T00:29:28+00:00</updated><id>https://judahsan.github.io/feed.xml</id><title type="html">blank</title><subtitle>Computer Science and Game Dev fellow </subtitle><entry><title type="html">How to Set Up Cloudflare Tunnel for Local Development</title><link href="https://judahsan.github.io/blog/2026/cloudflare-tunnel/" rel="alternate" type="text/html" title="How to Set Up Cloudflare Tunnel for Local Development"/><published>2026-05-24T11:59:00+00:00</published><updated>2026-05-24T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2026/cloudflare-tunnel</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/cloudflare-tunnel/"><![CDATA[<p><a href="https://developers.cloudflare.com/tunnel/">Cloudflare Tunnel</a> connects your infrastructure to Cloudflare through an outboud-only, <a href="https://developers.cloudflare.com/ssl/post-quantum-cryptography/">post-quantum encrypted</a>.</p> <blockquote> <p>Post-quantum cryptography utilizes advanced mathematicsl algorithms (like Kyber) designed to be secure against future quantum computer attacks</p> </blockquote> <p>Instead of exposing a public IP, you install a lightweight proxy that encrypts your traffic and forwards it to the server.</p> <p><img src="assets/img/cloudflare_tunnel.png" alt="img.png"/></p> <h3 id="why-use-cloudflare-tunnel">Why Use Cloudflare Tunnel?</h3> <ol> <li>It’s free.</li> <li>No <a href="https://en.wikipedia.org/wiki/Port_forwarding">port forwarding</a> required. Works behind NAT, firewalls, or VPNs.</li> <li>Instant HTTPS. While Cloudflare can use Let’s Encrypt, Coudflare Tunnels (especially the free trycloudflare.com quick tunnels) actually dunamically utilize Cloudflare’s Edge Certificates (often issued via DigiCert, Google Truest Services, or Let’s Encrypt dynamically behind the scenes.)</li> <li>Temporary public URLs - Perfect for testing webhooks or sharing with teammates</li> </ol> <h2 id="quick-setup-5-minutes">Quick Setup (5 minutes)</h2> <h3 id="1-install-cloudflared">1. Install cloudflared</h3> <p><strong>macOS:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://judahsan.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://judahsan.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-05-25T00:56:44+00:00</updated><id>https://judahsan.github.io/feed.xml</id><title type="html">blank</title><subtitle>Computer Science and Game Dev fellow </subtitle><entry><title type="html">How to Set Up Cloudflare Tunnel for Local Development</title><link href="https://judahsan.github.io/blog/2026/cloudflare-tunnel/" rel="alternate" type="text/html" title="How to Set Up Cloudflare Tunnel for Local Development"/><published>2026-05-24T11:59:00+00:00</published><updated>2026-05-24T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2026/cloudflare-tunnel</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/cloudflare-tunnel/"><![CDATA[<p><a href="https://developers.cloudflare.com/tunnel/">Cloudflare Tunnel</a> connects your infrastructure to Cloudflare through an outboud-only, <a href="https://developers.cloudflare.com/ssl/post-quantum-cryptography/">post-quantum encrypted</a>.</p> <blockquote> <p>Post-quantum cryptography utilizes advanced mathematicsl algorithms (like Kyber) designed to be secure against future quantum computer attacks</p> </blockquote> <p>Instead of exposing a public IP, you install a lightweight proxy that encrypts your traffic and forwards it to the server.</p> <p><img src="assets/img/cloudflare_tunnel.png" alt="img.png"/></p> <h3 id="why-use-cloudflare-tunnel">Why Use Cloudflare Tunnel?</h3> <ol> <li>It’s free.</li> <li>No <a href="https://en.wikipedia.org/wiki/Port_forwarding">port forwarding</a> required. Works behind NAT, firewalls, or VPNs.</li> <li>Instant HTTPS. While Cloudflare can use Let’s Encrypt, Coudflare Tunnels (especially the free trycloudflare.com quick tunnels) actually dunamically utilize Cloudflare’s Edge Certificates (often issued via DigiCert, Google Truest Services, or Let’s Encrypt dynamically behind the scenes.)</li> <li>Temporary public URLs - Perfect for testing webhooks or sharing with teammates</li> </ol> <h2 id="quick-setup-5-minutes">Quick Setup (5 minutes)</h2> <h3 id="1-install-cloudflared">1. Install cloudflared</h3> <p><strong>macOS:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>brew <span class="nb">install </span>cloudflared
 </pre></td></tr></tbody></table></code></pre></div></div> <p><strong>Linux:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -122,7 +122,197 @@ cloudflared tunnel delete my-dev-tunnel
 
 <span class="c"># Run with debug logging</span>
 cloudflared tunnel <span class="nt">--url</span> http://localhost:3000 <span class="nt">--log-level</span> debug
-</pre></td></tr></tbody></table></code></pre></div></div> <hr/> <h2 id="troubleshooting">Troubleshooting</h2> <table> <thead> <tr> <th>Issue</th> <th>Solution</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">connection refused</code></td> <td>Your local server isn’t running on the specified port</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">tunnel not found</code></td> <td>Create tunnel first or check name spelling</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">certificate error</code></td> <td>Use <code class="language-plaintext highlighter-rouge">http://</code> not <code class="language-plaintext highlighter-rouge">https://</code> for local target service (eg, <code class="language-plaintext highlighter-rouge">cloudflared tunnel --url http://localhost:3000</code> as cloudflared handles the SSL encryption to the outside world itself</td> </tr> <tr> <td>Tunnel disconnects</td> <td>Restart with <code class="language-plaintext highlighter-rouge">--retries 5</code> flag</td> </tr> </tbody> </table> <hr/> <h2 id="when-to-use-this">When to Use This</h2> <ul> <li>✅ Testing Stripe/PayPal webhooks locally</li> <li>✅ Sharing dev site with clients</li> <li>✅ Mobile testing on real devices</li> <li>✅ Collaborating with remote teammates</li> <li>✅ Demoing work-in-progress features</li> </ul> <p><strong>Not ideal for:</strong> Production traffic, streaming video, or real-time gaming.</p> <hr/> <h2 id="links">Links</h2> <ul> <li><a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/">Official Cloudflare Tunnel Docs</a></li> <li><a href="https://github.com/cloudflare/cloudflared">cloudflared GitHub Repository</a></li> </ul>]]></content><author><name></name></author><category term="technology"/><category term="guide"/><summary type="html"><![CDATA[A guide on how to set up Cloudflare Tunnel for local development and expose your local server to the internet securely.]]></summary></entry><entry><title type="html">How to Download and Boost Audio in Youtube Vidoes (Guide)</title><link href="https://judahsan.github.io/blog/2025/audio-amplification/" rel="alternate" type="text/html" title="How to Download and Boost Audio in Youtube Vidoes (Guide)"/><published>2025-12-12T11:59:00+00:00</published><updated>2025-12-12T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2025/audio-amplification</id><content type="html" xml:base="https://judahsan.github.io/blog/2025/audio-amplification/"><![CDATA[<p>Sometimes the audio in YouTube videos is too quite, take <a href="https://youtu.be/6kGpk8-baMM?si=pvU2DPDne79zvmpa">Help Bob Belong</a> for example. This guide shows you how to download YouTube videos and properly amplify their audio using free, open-source tools.</p> <h3 id="download-the-youtube-video">Download the YouTube Video</h3> <p><strong>Prerequisites:</strong></p> <ul> <li>Linux system (or WSL2 on Windows)</li> <li>Terminal access</li> <li>Basic command-line familiarity</li> </ul> <p><strong>Steps:</strong></p> <ol> <li>Install <code class="language-plaintext highlighter-rouge">yt-dlp</code> and download the video</li> </ol> <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div> <hr/> <h2 id="troubleshooting">Troubleshooting</h2> <table> <thead> <tr> <th>Issue</th> <th>Solution</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">connection refused</code></td> <td>Your local server isn’t running on the specified port</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">tunnel not found</code></td> <td>Create tunnel first or check name spelling</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">certificate error</code></td> <td>Use <code class="language-plaintext highlighter-rouge">http://</code> not <code class="language-plaintext highlighter-rouge">https://</code> for local target service (eg, <code class="language-plaintext highlighter-rouge">cloudflared tunnel --url http://localhost:3000</code> as cloudflared handles the SSL encryption to the outside world itself</td> </tr> <tr> <td>Tunnel disconnects</td> <td>Restart with <code class="language-plaintext highlighter-rouge">--retries 5</code> flag</td> </tr> </tbody> </table> <hr/> <h2 id="when-to-use-this">When to Use This</h2> <ul> <li>✅ Testing Stripe/PayPal webhooks locally</li> <li>✅ Sharing dev site with clients</li> <li>✅ Mobile testing on real devices</li> <li>✅ Collaborating with remote teammates</li> <li>✅ Demoing work-in-progress features</li> </ul> <p><strong>Not ideal for:</strong> Production traffic, streaming video, or real-time gaming.</p> <hr/> <h2 id="links">Links</h2> <ul> <li><a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/">Official Cloudflare Tunnel Docs</a></li> <li><a href="https://github.com/cloudflare/cloudflared">cloudflared GitHub Repository</a></li> </ul>]]></content><author><name></name></author><category term="technology"/><category term="guide"/><summary type="html"><![CDATA[A guide on how to set up Cloudflare Tunnel for local development and expose your local server to the internet securely.]]></summary></entry><entry><title type="html">Quikk API</title><link href="https://judahsan.github.io/blog/2026/quikk-api/" rel="alternate" type="text/html" title="Quikk API"/><published>2026-05-24T01:59:00+00:00</published><updated>2026-05-24T01:59:00+00:00</updated><id>https://judahsan.github.io/blog/2026/quikk-api</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/quikk-api/"><![CDATA[<h1 id="quikk-api-setup">Quikk API Setup</h1> <h2 id="overview">Overview</h2> <p>This guide covers how to configure Quikk payments for this app, including credentials, API base URL, webhook callback, request signing, and verification.</p> <p>Reference API docs:</p> <ul> <li><a href="https://app.swaggerhub.com/apis/zegetech/Handaki/1.0#/">https://app.swaggerhub.com/apis/zegetech/Handaki/1.0#/</a></li> </ul> <h2 id="1-configure-credentials">1. Configure Credentials</h2> <p>Set these credentials per environment:</p> <ul> <li><code class="language-plaintext highlighter-rouge">quikk.api_key</code></li> <li><code class="language-plaintext highlighter-rouge">quikk.api_secret</code></li> <li><code class="language-plaintext highlighter-rouge">quikk.shortcode</code></li> </ul> <p>Expected endpoints:</p> <ul> <li>Sandbox/Test: <code class="language-plaintext highlighter-rouge">https://tryapi.quikk.dev/v1</code></li> <li>Production: <code class="language-plaintext highlighter-rouge">https://api.quikk.dev/v1</code></li> </ul> <p>In this codebase, Quikk integration is implemented in:</p> <ul> <li><code class="language-plaintext highlighter-rouge">app/services/quikk/client.rb</code></li> </ul> <h2 id="2-configure-routes">2. Configure Routes</h2> <p>Ensure these routes exist:</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="n">post</span> <span class="s2">"payments/callback"</span><span class="p">,</span> <span class="ss">to: </span><span class="s2">"webhooks#quikk"</span>
+<span class="n">get</span> <span class="s2">"checkout/mpesa_status/:id"</span><span class="p">,</span> <span class="ss">to: </span><span class="s2">"checkouts#mpesa_status"</span><span class="p">,</span> <span class="ss">as: :mpesa_status_checkout</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div> <p>Purpose:</p> <ul> <li><code class="language-plaintext highlighter-rouge">POST /payments/callback</code>: receives Quikk payment webhooks.</li> <li><code class="language-plaintext highlighter-rouge">GET /checkout/mpesa_status/:id</code>: supports frontend polling while waiting for payment completion.</li> </ul> <h2 id="3-set-quikk-webhook-url">3. Set Quikk Webhook URL</h2> <p>In Quikk dashboard/settings, set callback URL to:</p> <p><code class="language-plaintext highlighter-rouge">https://&lt;your-public-domain&gt;/payments/callback</code></p> <p>For local development with a tunnel:</p> <p><code class="language-plaintext highlighter-rouge">https://&lt;your-tunnel-domain&gt;/payments/callback</code></p> <p>Example:</p> <p><code class="language-plaintext highlighter-rouge">https://cab-bool-wmam-furnished.trycloudflare.com/payments/callback</code></p> <h2 id="4-send-charge-request">4. Send Charge Request</h2> <p>Typical request payload shape:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"charge"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDER-&lt;order-id&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"customer_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"msisdn"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"customer_no"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2547XXXXXXXX"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"short_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"174379"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDER-&lt;order-id&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"posted_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-05-25T09:15:42.000000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></pre></td></tr></tbody></table></code></pre></div></div> <p>Recommended:</p> <ul> <li>Keep <code class="language-plaintext highlighter-rouge">data.id</code> and <code class="language-plaintext highlighter-rouge">reference</code> tied to your internal order identifier (for example: <code class="language-plaintext highlighter-rouge">ORDER-&lt;order-id&gt;</code>).</li> <li>Store provider request/charge IDs on your order (<code class="language-plaintext highlighter-rouge">quikk_request_id</code>) for webhook reconciliation.</li> </ul> <h2 id="5-configure-hmac-authentication">5. Configure HMAC Authentication</h2> <p>Required request headers:</p> <ul> <li><code class="language-plaintext highlighter-rouge">Content-Type: application/vnd.api+json</code></li> <li><code class="language-plaintext highlighter-rouge">Accept: application/vnd.api+json</code></li> <li><code class="language-plaintext highlighter-rouge">Date: &lt;HTTP GMT date&gt;</code></li> <li><code class="language-plaintext highlighter-rouge">X-Custom: custom</code></li> <li><code class="language-plaintext highlighter-rouge">Authorization: keyId="...",algorithm="hmac-sha256",headers="date x-custom",signature="..."</code></li> </ul> <p>Example:</p> <div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="err">Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+Date: Mon, 25 May 2026 09:15:42 GMT
+X-Custom: custom
+Authorization: keyId="YOUR_API_KEY",algorithm="hmac-sha256",headers="date x-custom",signature="QmFzZTY0U2lnbmF0dXJlJTNE"
+
+</span></pre></td></tr></tbody></table></code></pre></div></div> <p>Signing string (must match header values exactly and is case-sensitive):</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>date: &lt;Date header value&gt;
+x-custom: custom
+
+</pre></td></tr></tbody></table></code></pre></div></div> <p>Signature process:</p> <ol> <li>HMAC-SHA256 sign using <code class="language-plaintext highlighter-rouge">quikk.api_secret</code>.</li> <li>Base64 encode the raw digest.</li> <li>URL-encode the base64 result before adding it to <code class="language-plaintext highlighter-rouge">Authorization</code>.</li> </ol> <p>Ruby reference:</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="n">request_date</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">httpdate</span>
+<span class="n">x_custom</span> <span class="o">=</span> <span class="s2">"custom"</span>
+<span class="n">signing_string</span> <span class="o">=</span> <span class="s2">"date: </span><span class="si">#{</span><span class="n">request_date</span><span class="si">}</span><span class="se">\n</span><span class="s2">x-custom: </span><span class="si">#{</span><span class="n">x_custom</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="n">raw_signature</span> <span class="o">=</span> <span class="no">Base64</span><span class="p">.</span><span class="nf">strict_encode64</span><span class="p">(</span>
+  <span class="no">OpenSSL</span><span class="o">::</span><span class="no">HMAC</span><span class="p">.</span><span class="nf">digest</span><span class="p">(</span><span class="s2">"SHA256"</span><span class="p">,</span> <span class="n">quikk_api_secret</span><span class="p">,</span> <span class="n">signing_string</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">encoded_signature</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">encode_www_form_component</span><span class="p">(</span><span class="n">raw_signature</span><span class="p">)</span>
+
+<span class="n">authorization</span> <span class="o">=</span> <span class="s2">"keyId=</span><span class="se">\"</span><span class="si">#{</span><span class="n">quikk_api_key</span><span class="si">}</span><span class="se">\"</span><span class="s2">,algorithm=</span><span class="se">\"</span><span class="s2">hmac-sha256</span><span class="se">\"</span><span class="s2">,headers=</span><span class="se">\"</span><span class="s2">date x-custom</span><span class="se">\"</span><span class="s2">,signature=</span><span class="se">\"</span><span class="si">#{</span><span class="n">encoded_signature</span><span class="si">}</span><span class="se">\"</span><span class="s2">"</span>
+
+<span class="c1"># Remember to append 'Content-Type' and 'Accept' as 'application/vnd.api+json' when making requests</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div> <p>Important:</p> <ul> <li>⚠️ <strong>Server Clock Drift:</strong> The <code class="language-plaintext highlighter-rouge">Date</code> value in the header must be the exact value used in <code class="language-plaintext highlighter-rouge">signing_string</code>. Ensure your host server’s clock is synchronized via NTP. If your system time drifts by more than a few minutes, Quikk will reject requests with an authentication error.</li> <li>Header list in <code class="language-plaintext highlighter-rouge">Authorization</code> must remain <code class="language-plaintext highlighter-rouge">headers="date x-custom"</code>.</li> <li>Do not send raw base64 signature without URL-encoding.</li> <li>Use GMT HTTP date format (<code class="language-plaintext highlighter-rouge">Time.now.httpdate</code> in Ruby).</li> </ul> <h3 id="hmac-header-generation-scripts">HMAC Header Generation Scripts</h3> <p>Use one of these scripts to generate auth headers for manual API tests.</p> <p>Bash (<code class="language-plaintext highlighter-rouge">openssl</code> + <code class="language-plaintext highlighter-rouge">base64</code> + <code class="language-plaintext highlighter-rouge">jq</code>):</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="c">#!/usr/bin/env bash</span>
+<span class="nb">set</span> <span class="nt">-euo</span> pipefail
+
+<span class="nv">API_KEY</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">QUIKK_API_KEY</span>:?set<span class="p"> QUIKK_API_KEY</span><span class="k">}</span><span class="s2">"</span>
+<span class="nv">API_SECRET</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">QUIKK_API_SECRET</span>:?set<span class="p"> QUIKK_API_SECRET</span><span class="k">}</span><span class="s2">"</span>
+<span class="nv">X_CUSTOM</span><span class="o">=</span><span class="s2">"custom"</span>
+<span class="nv">DATE_HEADER</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nv">LC_ALL</span><span class="o">=</span>C <span class="nb">date</span> <span class="nt">-u</span> <span class="s1">'+%a, %d %b %Y %H:%M:%S GMT'</span><span class="si">)</span><span class="s2">"</span>
+
+<span class="nv">SIGNING_STRING</span><span class="o">=</span><span class="s2">"date: </span><span class="k">${</span><span class="nv">DATE_HEADER</span><span class="k">}</span><span class="s2">"</span><span class="s1">$'</span><span class="se">\n</span><span class="s1">'</span><span class="s2">"x-custom: </span><span class="k">${</span><span class="nv">X_CUSTOM</span><span class="k">}</span><span class="s2">"</span>
+<span class="nv">RAW_SIGNATURE</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">printf</span> <span class="s1">'%s'</span> <span class="s2">"</span><span class="nv">$SIGNING_STRING</span><span class="s2">"</span> | openssl dgst <span class="nt">-sha256</span> <span class="nt">-hmac</span> <span class="s2">"</span><span class="nv">$API_SECRET</span><span class="s2">"</span> <span class="nt">-binary</span> | <span class="nb">base64</span><span class="si">)</span><span class="s2">"</span>
+<span class="nv">ENCODED_SIGNATURE</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">printf</span> <span class="s1">'%s'</span> <span class="s2">"</span><span class="nv">$RAW_SIGNATURE</span><span class="s2">"</span> | jq <span class="nt">-sRr</span> @uri<span class="si">)</span><span class="s2">"</span>
+
+<span class="nv">AUTH_HEADER</span><span class="o">=</span><span class="s2">"keyId=</span><span class="se">\"</span><span class="k">${</span><span class="nv">API_KEY</span><span class="k">}</span><span class="se">\"</span><span class="s2">,algorithm=</span><span class="se">\"</span><span class="s2">hmac-sha256</span><span class="se">\"</span><span class="s2">,headers=</span><span class="se">\"</span><span class="s2">date x-custom</span><span class="se">\"</span><span class="s2">,signature=</span><span class="se">\"</span><span class="k">${</span><span class="nv">ENCODED_SIGNATURE</span><span class="k">}</span><span class="se">\"</span><span class="s2">"</span>
+
+<span class="nb">echo</span> <span class="s2">"Content-Type: application/vnd.api+json"</span>
+<span class="nb">echo</span> <span class="s2">"Accept: application/vnd.api+json"</span>
+<span class="nb">echo</span> <span class="s2">"Date: </span><span class="k">${</span><span class="nv">DATE_HEADER</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"X-Custom: </span><span class="k">${</span><span class="nv">X_CUSTOM</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"Authorization: </span><span class="k">${</span><span class="nv">AUTH_HEADER</span><span class="k">}</span><span class="s2">"</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div> <p>Ruby (standalone script):</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre><span class="c1">#!/usr/bin/env ruby</span>
+<span class="nb">require</span> <span class="s2">"openssl"</span>
+<span class="nb">require</span> <span class="s2">"base64"</span>
+<span class="nb">require</span> <span class="s2">"uri"</span>
+<span class="nb">require</span> <span class="s2">"time"</span>
+
+<span class="n">api_key</span> <span class="o">=</span> <span class="no">ENV</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="s2">"QUIKK_API_KEY"</span><span class="p">)</span>
+<span class="n">api_secret</span> <span class="o">=</span> <span class="no">ENV</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="s2">"QUIKK_API_SECRET"</span><span class="p">)</span>
+<span class="n">x_custom</span> <span class="o">=</span> <span class="s2">"custom"</span>
+<span class="n">date_header</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">httpdate</span>
+
+<span class="n">signing_string</span> <span class="o">=</span> <span class="s2">"date: </span><span class="si">#{</span><span class="n">date_header</span><span class="si">}</span><span class="se">\n</span><span class="s2">x-custom: </span><span class="si">#{</span><span class="n">x_custom</span><span class="si">}</span><span class="s2">"</span>
+<span class="n">raw_signature</span> <span class="o">=</span> <span class="no">Base64</span><span class="p">.</span><span class="nf">strict_encode64</span><span class="p">(</span>
+  <span class="no">OpenSSL</span><span class="o">::</span><span class="no">HMAC</span><span class="p">.</span><span class="nf">digest</span><span class="p">(</span><span class="s2">"SHA256"</span><span class="p">,</span> <span class="n">api_secret</span><span class="p">,</span> <span class="n">signing_string</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">encoded_signature</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">encode_www_form_component</span><span class="p">(</span><span class="n">raw_signature</span><span class="p">)</span>
+
+<span class="n">authorization</span> <span class="o">=</span> <span class="s2">"keyId=</span><span class="se">\"</span><span class="si">#{</span><span class="n">api_key</span><span class="si">}</span><span class="se">\"</span><span class="s2">,algorithm=</span><span class="se">\"</span><span class="s2">hmac-sha256</span><span class="se">\"</span><span class="s2">,headers=</span><span class="se">\"</span><span class="s2">date x-custom</span><span class="se">\"</span><span class="s2">,signature=</span><span class="se">\"</span><span class="si">#{</span><span class="n">encoded_signature</span><span class="si">}</span><span class="se">\"</span><span class="s2">"</span>
+
+<span class="nb">puts</span> <span class="s2">"Content-Type: application/vnd.api+json"</span>
+<span class="nb">puts</span> <span class="s2">"Accept: application/vnd.api+json"</span>
+<span class="nb">puts</span> <span class="s2">"Date: </span><span class="si">#{</span><span class="n">date_header</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">puts</span> <span class="s2">"X-Custom: </span><span class="si">#{</span><span class="n">x_custom</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">puts</span> <span class="s2">"Authorization: </span><span class="si">#{</span><span class="n">authorization</span><span class="si">}</span><span class="s2">"</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div> <p>Quick <code class="language-plaintext highlighter-rouge">curl</code> usage pattern:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>curl <span class="nt">-X</span> POST <span class="s2">"https://tryapi.quikk.dev/v1/mpesa/charge"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/vnd.api+json"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Accept: application/vnd.api+json"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Date: </span><span class="k">${</span><span class="nv">DATE_HEADER</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"X-Custom: custom"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="k">${</span><span class="nv">AUTH_HEADER</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">--data</span> <span class="s1">'{"data":{"type":"charge","id":"ORDER-123","attributes":{"amount":1,"customer_type":"msisdn","customer_no":"2547XXXXXXXX","short_code":"174379","reference":"ORDER-123","posted_at":"2026-05-25T09:15:42.000000Z"}}}'</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div> <h2 id="6-handle-webhook-variants-safely">6. Handle Webhook Variants Safely</h2> <p>Quikk callbacks may provide different ID fields depending on flow. Parse all when present:</p> <ul> <li><code class="language-plaintext highlighter-rouge">data.id</code></li> <li><code class="language-plaintext highlighter-rouge">attributes.txn_charge_id</code></li> <li><code class="language-plaintext highlighter-rouge">attributes.resource_id</code></li> <li><code class="language-plaintext highlighter-rouge">attributes.response_id</code></li> </ul> <p>Order lookup strategy:</p> <ol> <li>First match known callback IDs against stored <code class="language-plaintext highlighter-rouge">quikk_request_id</code>.</li> <li>If <code class="language-plaintext highlighter-rouge">data.id</code> starts with <code class="language-plaintext highlighter-rouge">ORDER-</code>, extract order id and match internal order.</li> </ol> <p>Phone field fallback:</p> <ul> <li>Use <code class="language-plaintext highlighter-rouge">attributes.customer_no || attributes.sender_no</code>.</li> </ul> <p>Status mapping:</p> <ul> <li>Success: <code class="language-plaintext highlighter-rouge">SUCCESS|SUCCESSFUL|COMPLETED|PAID</code></li> <li>Failure: <code class="language-plaintext highlighter-rouge">FAILED|FAIL|ERROR|DECLINED|CANCELLED|CANCELED</code></li> <li>Fallback: if <code class="language-plaintext highlighter-rouge">txn_status</code> is missing but <code class="language-plaintext highlighter-rouge">txn_id</code> exists, treat as success.</li> </ul> <p>Webhook controller location:</p> <ul> <li><code class="language-plaintext highlighter-rouge">app/controllers/webhooks_controller.rb</code></li> </ul> <h2 id="7-frontend-polling-contract">7. Frontend Polling Contract</h2> <p>Polling response example:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w"> </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w"> </span><span class="nl">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="w"> </span><span class="p">}</span><span class="w">
+
+</span></pre></td></tr></tbody></table></code></pre></div></div> <p>Expected UI behavior:</p> <ul> <li>If <code class="language-plaintext highlighter-rouge">payment_status == "paid"</code> (or <code class="language-plaintext highlighter-rouge">status == "completed"</code>): redirect to confirmation page.</li> <li>If <code class="language-plaintext highlighter-rouge">status == "failed"</code>: redirect to retry page.</li> <li>Otherwise: continue polling for a bounded time.</li> </ul> <p>Implementation:</p> <ul> <li><code class="language-plaintext highlighter-rouge">app/controllers/checkouts_controller.rb</code> (<code class="language-plaintext highlighter-rouge">mpesa_status</code>)</li> <li><code class="language-plaintext highlighter-rouge">app/javascript/controllers/mpesa_polling_controller.js</code></li> </ul> <h2 id="8-setup-checklist">8. Setup Checklist</h2> <ul class="task-list"> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Add Quikk credentials for current environment.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Confirm API base URL (sandbox vs production).</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Ensure callback and polling routes are present.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Set callback URL in Quikk dashboard.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Trigger a sandbox payment request.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Verify webhook reaches <code class="language-plaintext highlighter-rouge">POST /payments/callback</code>.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Confirm order transitions to paid/failed correctly.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Verify polling flow redirects user from waiting screen.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Test idempotency by replaying callback payload.</li> </ul> <h2 id="9-troubleshooting">9. Troubleshooting</h2> <p>If payment succeeds on M-Pesa but checkout stays on waiting screen:</p> <ul> <li>Check webhook logs for exceptions in <code class="language-plaintext highlighter-rouge">WebhooksController#quikk</code>.</li> <li>Verify callback IDs map to either <code class="language-plaintext highlighter-rouge">quikk_request_id</code> or <code class="language-plaintext highlighter-rouge">ORDER-&lt;id&gt;</code>.</li> <li>Ensure status mapping handles your callback payload variant.</li> <li>Confirm polling endpoint returns updated status after callback processing.</li> </ul>]]></content><author><name></name></author><category term="technology"/><category term="guide"/><summary type="html"><![CDATA[Intro to Quikk API, an MPESA daraja alternative and a payment gateway.]]></summary></entry><entry><title type="html">How to Download and Boost Audio in Youtube Vidoes (Guide)</title><link href="https://judahsan.github.io/blog/2025/audio-amplification/" rel="alternate" type="text/html" title="How to Download and Boost Audio in Youtube Vidoes (Guide)"/><published>2025-12-12T11:59:00+00:00</published><updated>2025-12-12T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2025/audio-amplification</id><content type="html" xml:base="https://judahsan.github.io/blog/2025/audio-amplification/"><![CDATA[<p>Sometimes the audio in YouTube videos is too quite, take <a href="https://youtu.be/6kGpk8-baMM?si=pvU2DPDne79zvmpa">Help Bob Belong</a> for example. This guide shows you how to download YouTube videos and properly amplify their audio using free, open-source tools.</p> <h3 id="download-the-youtube-video">Download the YouTube Video</h3> <p><strong>Prerequisites:</strong></p> <ul> <li>Linux system (or WSL2 on Windows)</li> <li>Terminal access</li> <li>Basic command-line familiarity</li> </ul> <p><strong>Steps:</strong></p> <ol> <li>Install <code class="language-plaintext highlighter-rouge">yt-dlp</code> and download the video</li> </ol> <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -661,330 +851,4 @@ go get <span class="nt">-u</span> github.com/tdewolff/minify/css
 </pre></td><td class="rouge-code"><pre>go run main.go <span class="nt">-build</span>
 </pre></td></tr></tbody></table></code></pre></div> </div> </li> <li> <p><strong>Serve the Project:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>go run main.go <span class="nt">-serve</span>
-</pre></td></tr></tbody></table></code></pre></div> </div> </li> </ol>]]></content><author><name></name></author><category term="technology"/><category term="golang"/><category term="vite"/><summary type="html"><![CDATA[Crating a build tool using Go]]></summary></entry><entry><title type="html">Using Tiled with Kaplay</title><link href="https://judahsan.github.io/blog/2024/tiled-kaplay/" rel="alternate" type="text/html" title="Using Tiled with Kaplay"/><published>2024-07-18T23:01:00+00:00</published><updated>2024-07-18T23:01:00+00:00</updated><id>https://judahsan.github.io/blog/2024/tiled-kaplay</id><content type="html" xml:base="https://judahsan.github.io/blog/2024/tiled-kaplay/"><![CDATA[<p>Personal notes from <a href="https://jslegenddev.substack.com/p/how-to-use-tiled-with-kaplayjs">JLegendDev’s blog post</a></p> <h4 id="prerequisites">Prerequisites:</h4> <ul> <li>Basic knowledge of Kaplay.js and JavaScript</li> <li><a href="(https://www.mapeditor.org/)">Tiled</a> downloaded and installed</li> </ul> <h5 id="assets">Assets:</h5> <ul> <li>A 3 tiles wide x 3 tiles tall map. Download assets <a href="https://github.com/JSLegendDev/Zelda-like-Kaplayjs/blob/master/assets/topdownasset.png">here</a>.</li> <li>Bonus: The assets were used in the <a href="https://www.youtube.com/watch?v=pVAmEJqK-3A">Zelda-like tutorial</a></li> </ul> <h3 id="setting-up-tiled">Setting up Tiled</h3> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/setup1-480.webp 480w,/assets/img/setup1-800.webp 800w,/assets/img/setup1-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/setup1.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Once Tiled is installed, open the program and create a new map like shown in the screenshot above.</p> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/setup2-480.webp 480w,/assets/img/setup2-800.webp 800w,/assets/img/setup2-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/setup2.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Next, set the map size to 3 x 3 and the tile size to 16 x 16 (Since our spritesheet is designed to be tiles of 16 x 16 pixels). Make sure the “Fixed” option is the one selected. Then, click “OK”.</p> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/setup3-480.webp 480w,/assets/img/setup3-800.webp 800w,/assets/img/setup3-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/setup3.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Now we still need to add our spritesheet so we can start drawing our level. Click on “New Tileset” as shown in the screenshot above.</p> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/setup4-480.webp 480w,/assets/img/setup4-800.webp 800w,/assets/img/setup4-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/setup4.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Click on the “Browse” button and select the spritesheet image you want to use in your file explorer. Then, click “OK”.</p> <h3 id="creating-tile-layers">Creating Tile Layers</h3> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/layer-480.webp 480w,/assets/img/layer-800.webp 800w,/assets/img/layer-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/layer.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Rename the default layer named “Tile Layer 1” to “Ground” at the top-right of the editor by double clicking on the current layer name. This will make it editable allowing you to write a new name. Then at the bottom-right where you can see the spritesheet, select the grass tile and start drawing on your grid like shown in the screenshot above. Tip : You can use Ctrl + mouse wheel to zoom in and out.</p> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/layer2-480.webp 480w,/assets/img/layer2-800.webp 800w,/assets/img/layer2-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/layer2.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>In Tiled, there two major types of layers you can create. The first one is the “Tile Layer” which is used for drawing tiles. The other one is the “Object Layer” and is used to set colliders (hitboxes) or spawn positions for your game entities. <br/> By default, Tiled creates a “Tile Layer” as the first layer, that’s why you were able to draw on the grid previously. Now that you have drawn the ground which is composed of only grass tiles, it’s time to add a bush. <br/> To do this, create a new “Tile Layer” like shown in the screenshot above and name it “Bushes”.</p> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/layer3-480.webp 480w,/assets/img/layer3-800.webp 800w,/assets/img/layer3-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/layer3.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Make sure this new layer is placed on top of the “Ground” layer. If not the case by default, you can drag a layer around by holding the left mouse button over the tile layer name. <br/> Finally, draw a bush at the center of the grid like shown in the screenshot. Make sure before you do this to have the “Bushes” layer selected in the Layers inspector (located at the top-right). You can select a layer by clicking on its name.</p> <h3 id="creating-object-layers">Creating Object Layers</h3> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/obj-480.webp 480w,/assets/img/obj-800.webp 800w,/assets/img/obj-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/obj.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Now that we’re done with placing our tiles we need to place our colliders. Colliders are static objects that can serve as obstacles or walls in games. The appropriate layer type for this would be an “Object Layer” because we only care about the position, the height and width of the collider which isn’t possible to set in a “Tile Layer”. <br/> As shown in the screenshot above, create an “Object Layer”.</p> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/obj2-480.webp 480w,/assets/img/obj2-800.webp 800w,/assets/img/obj2-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/obj2.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Rename it to “Colliders”. Names are important because they’re used to determine what to do with each layer in our code. <br/> Select the rectangle icon at the top-left of the editor (shown in the screenshot above). Draw a square on the grid by clicking and dragging it around to set its size. <br/> If we had 3 bushes aligned, we would draw one long rectangle as the collider instead of 3 squares as it would be better for performance. In Kaplay.js, the more Game Objects are created the less the game remains performant so it’s important to limit the amount of colliders needed (as much as possible). <br/></p> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/obj3-480.webp 480w,/assets/img/obj3-800.webp 800w,/assets/img/obj3-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/obj3.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>To make things easy, make sure to enable the “Snap to Grid” option before drawing the rectangle on the grid. This option will make sure the square fits the tile perfectly. It makes things less error prone. You can access this option by going to “View” &gt; “Snapping” &gt; “Snap to Grid”. This is shown in the screenshot above.</p> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/obj4-480.webp 480w,/assets/img/obj4-800.webp 800w,/assets/img/obj4-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/obj4.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Now, create another “Object Layer” and name it “Positions”. This layer will be used to determine where to place our player on the map. Instead of drawing a square like we did for the “Colliders” layer, select the pin icon (at the top-left of the editor) and place a pin at the top-left of the grid. This is where our player will spawn. Using the properties tab on the left, set the name of the pin to be “player”. This is useful to know in your code where to place what. For example, you could have pins named “spider”, “bear”, etc… and for each you would write code to display something different. <br/> Make sure to save your map by going to “File” &gt; “Save As…”. Name the map file as “map.json” and save it to your project’s directory.</p> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/obj5-480.webp 480w,/assets/img/obj5-800.webp 800w,/assets/img/obj5-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/obj5.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>In Kaplay, drawing tiles individually using k.drawSprite() calls is less efficient than using Tiled to convert our map into a single image and then displaying it within a sprite component. This might sound strange and it is. In other game libraries, it’s more efficient to draw tiles individually rather than baking them into an image. I don’t know how Kaplay implements this, I’m as puzzled as you. <br/> To convert our tilemap to a single image, first, In the Layers inspector, hide the “Positions” and “Colliders” layers by clicking on the eye icons as shown in the screenshot above. <br/> Then, go to “File” and click on “Export As Image”.</p> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/obj6-480.webp 480w,/assets/img/obj6-800.webp 800w,/assets/img/obj6-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/obj6.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>A new menu will appear. Set the place where you want to save the image using the “Browse” button. Once done, make sure to select the option “Only include visible layers” and then click “Export”.</p> <h3 id="rendering-the-map-in-kaplay">Rendering The map in Kaplay</h3> <p>Your “map.json” contains all the data needed to to display your map in Kaplay. Not all of the data is useful, so the most important part is the “layers” property which contains an array of layers. In this project, we only created 3 layers so this array should only have three elements. <br/> As your map grows in size so will this “map.json” file. That’s why I kept the map very small so I could paste the entire “map.json” file here.</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
-  </span><span class="nl">"compressionlevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"infinite"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"layers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">],</span><span class="w">
-      </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ground"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"opacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tilelayer"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"visible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">161</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">],</span><span class="w">
-      </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bushes"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"opacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tilelayer"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"visible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"draworder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"topdown"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Colliders"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"objects"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"rotation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"visible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"opacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"objectgroup"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"visible"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"draworder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"topdown"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Positions"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"objects"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"player"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"point"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"rotation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"visible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"player"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"point"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"rotation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"visible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"opacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"objectgroup"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"visible"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"x"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"y"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"nextlayerid"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"nextobjectid"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orientation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orthogonal"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"renderorder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"right-down"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tiledversion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.10.2"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tileheight"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tilesets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"columns"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"firstgid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"topdownasset.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"imageheight"</span><span class="p">:</span><span class="w"> </span><span class="mi">496</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"imagewidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">624</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"margin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"topdownasset"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"spacing"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"tilecount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1209</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"tileheight"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"tilewidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"tilewidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"map"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.10"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></div></div> <p>Assuming you know how to setup Kaplay, here is the code you need to be able to display the map.</p> <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-</pre></td><td class="rouge-code"><pre><span class="k">import</span> <span class="nx">kaplay</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./lib/kaplay.mjs</span><span class="dl">"</span><span class="p">;</span>
-
-<span class="kd">const</span> <span class="nx">k</span> <span class="o">=</span> <span class="nf">kaplay</span><span class="p">({</span> <span class="na">global</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
-
-<span class="nx">k</span><span class="p">.</span><span class="nf">loadSprite</span><span class="p">(</span><span class="dl">"</span><span class="s2">spritesheet</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">./topdownasset.png</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
-  <span class="na">sliceX</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
-  <span class="na">sliceY</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span>
-<span class="p">});</span> <span class="c1">// this is needed for the player animations</span>
-<span class="c1">// This because the tiles + player sprites are in the same image</span>
-<span class="c1">// If they were separate, we wouldn't need to load the tilesheet as the exported "map.png" would be enough</span>
-
-<span class="nx">k</span><span class="p">.</span><span class="nf">loadSprite</span><span class="p">(</span><span class="dl">"</span><span class="s2">map</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">./map.png</span><span class="dl">"</span><span class="p">);</span>
-
-<span class="k">async</span> <span class="kd">function</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">mapData</span> <span class="o">=</span> <span class="k">await </span><span class="p">(</span><span class="k">await</span> <span class="nf">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">./map.json</span><span class="dl">"</span><span class="p">)).</span><span class="nf">json</span><span class="p">();</span>
-  <span class="kd">const</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">k</span><span class="p">.</span><span class="nf">add</span><span class="p">([</span><span class="nx">k</span><span class="p">.</span><span class="nf">pos</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)]);</span>
-  <span class="nx">k</span><span class="p">.</span><span class="nf">camPos</span><span class="p">(</span><span class="nx">map</span><span class="p">.</span><span class="nx">pos</span><span class="p">);</span>
-  <span class="nx">k</span><span class="p">.</span><span class="nf">camScale</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-
-  <span class="nx">map</span><span class="p">.</span><span class="nf">add</span><span class="p">([</span><span class="nx">k</span><span class="p">.</span><span class="nf">sprite</span><span class="p">(</span><span class="dl">"</span><span class="s2">map</span><span class="dl">"</span><span class="p">)]);</span>
-
-  <span class="k">for </span><span class="p">(</span><span class="kd">const</span> <span class="nx">layer</span> <span class="k">of</span> <span class="nx">mapData</span><span class="p">.</span><span class="nx">layers</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if </span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">tilelayer</span><span class="dl">"</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
-
-    <span class="k">if </span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">Colliders</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">for </span><span class="p">(</span><span class="kd">const</span> <span class="nx">object</span> <span class="k">of</span> <span class="nx">layer</span><span class="p">.</span><span class="nx">objects</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">map</span><span class="p">.</span><span class="nf">add</span><span class="p">([</span><span class="nx">k</span><span class="p">.</span><span class="nf">area</span><span class="p">({</span> <span class="na">shape</span><span class="p">:</span> <span class="k">new</span> <span class="nx">k</span><span class="p">.</span><span class="nc">Rect</span><span class="p">(</span><span class="nx">k</span><span class="p">.</span><span class="nf">vec2</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nx">object</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">object</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="p">}),</span> <span class="nx">k</span><span class="p">.</span><span class="nf">body</span><span class="p">({</span> <span class="na">isStatic</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}),</span> <span class="nx">k</span><span class="p">.</span><span class="nf">pos</span><span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">object</span><span class="p">.</span><span class="nx">y</span><span class="p">)]);</span>
-      <span class="p">}</span>
-      <span class="k">continue</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">if </span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">Positions</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">for </span><span class="p">(</span><span class="kd">const</span> <span class="nx">object</span> <span class="k">of</span> <span class="nx">layer</span><span class="p">.</span><span class="nx">objects</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if </span><span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">player</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">map</span><span class="p">.</span><span class="nf">add</span><span class="p">([</span>
-            <span class="nx">k</span><span class="p">.</span><span class="nf">sprite</span><span class="p">(</span><span class="dl">"</span><span class="s2">spritesheet</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">frame</span><span class="p">:</span> <span class="mi">936</span> <span class="p">}),</span> <span class="c1">// idle frame of the player sprite</span>
-            <span class="nx">k</span><span class="p">.</span><span class="nf">area</span><span class="p">(),</span>
-            <span class="nx">k</span><span class="p">.</span><span class="nf">pos</span><span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">object</span><span class="p">.</span><span class="nx">y</span><span class="p">),</span>
-          <span class="p">]);</span>
-          <span class="k">continue</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="nf">main</span><span class="p">();</span>
-</pre></td></tr></tbody></table></code></pre></div></div> <p>Given the code above and the content of “map.json”, you can figure out what’s going on easily. <br/> However, here a few observations that will help you understand the logic further :</p> <ul> <li> <p>You get the map’s data into your Kaplay game by making a fetch() call to the “map.json” file.</p> </li> <li> <p>We create a map Game Object acting as the parent of all Game Objects placed on the map. This is important because the position coordinates provided by “map.json” are all relative to the map. So if you create a Game Object without the map being the parent, the Game Object’s placement will be off. With our map Game Object we’re able to make sure the positions of tiles and colliders match.</p> </li> <li> <p>Since we’re not drawing the map tile by tile and rather just using the exported image, it’s important to skip any “Tile Layer” in our for loop.</p> </li> </ul> <h3 id="the-results">The Results</h3> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/result-480.webp 480w,/assets/img/result-800.webp 800w,/assets/img/result-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/result.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <p>Now if I activate the debug mode using the “f1” key, you can see that the collider for the bush is also placed correctly. If you were to write the player movement logic, the player could collide with the bush.</p> <div class="col-sm row mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/result2-480.webp 480w,/assets/img/result2-800.webp 800w,/assets/img/result2-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/result2.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div>]]></content><author><name></name></author><category term="posts"/><category term="level-design"/><summary type="html"><![CDATA[Using Tiled Web Map Level editor with Kaplay.]]></summary></entry></feed>
+</pre></td></tr></tbody></table></code></pre></div> </div> </li> </ol>]]></content><author><name></name></author><category term="technology"/><category term="golang"/><category term="vite"/><summary type="html"><![CDATA[Crating a build tool using Go]]></summary></entry></feed>
