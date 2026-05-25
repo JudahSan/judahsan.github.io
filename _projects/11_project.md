@@ -27,16 +27,13 @@ in your journey anytime and anywhere.
 - Optimized for **mobile-first use** with responsive design
 
 **Link to Project(Private Beta):**
-[Public Beta Testing](https://appdistribution.firebase.dev/i/5a3f2e3abd5b4c6b)
+[Private Beta Testing](https://appdistribution.firebase.dev/i/5a3f2e3abd5b4c6b)
 
 ---
 
 <div class="row mt-3">
   <div class="col-sm-6 mt-3 mt-md-0">
     {% include figure.liquid path="assets/img/t_app_series.jpeg" title="Mobile Home" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-6 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/t_app_seriesmenu.jpeg" title="Mobile Sidebar" class="img-fluid rounded z-depth-1" %}
   </div>
     <div class="col-sm-6 mt-3 mt-md-0">
     {% include figure.liquid path="assets/img/t_app_journal.jpeg" title="Mobile Journal" class="img-fluid rounded z-depth-1" %}
