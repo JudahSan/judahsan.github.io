@@ -24,8 +24,12 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-My work involves backend, frontend, and game development, along with disassembling and reassembling computer parts.
+My work spans game development, backend development, and hardware tinkering — including disassembling, repairing, and Frankenstein-ing dead electronics.
 
-I like orchestral music, read thriller and tech books, and enjoy sim games. I'm also trying walking these days.
+I enjoy orchestral music, thriller books, casual chess, estate/station wagons, and simulation games. Euro Truck Simulator 2 is still my go-to game for relaxing. I’m also trying to get back into walking and forcing myself to read more technical books.
 
-Currently, I'm refining Ruby on Rails, learning Golang, resuming my operating system development study group program, and prepping for AWS exams. I'm interested in Inertia Rails, Golang, and ERPNext projects, but remain flexible.
+Technically, I’m currently refining Unity/C#, tinkering with DragonRuby, exploring AI while trying to find my footing in the space, learning Go, and considering a return to C++. I’m also working on a database project in Go, resuming my operating-system development study group, preparing for Azure exams, and prototyping with ERPNext, Rails, and Flutter. 
+
+On the game-development side, I’m also porting games I’ve previously worked on or experimented with to Android and publishing them on the Play Store, mostly for fun and as a way to revisit and finish old projects.
+
+I’m keeping things flexible and exploring where these interests take me.

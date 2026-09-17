@@ -23,7 +23,13 @@ I contribute to the **maintenance and feature development** of the ARC platform.
 - Blocking bots by adding **Cloudflare reCAPTCHA**
 - Maintaining event workflows, project listings, and learning materials
 - Supporting infrastructure and developer tooling (**Capistrano + GitHub Actions**)
-- Currently resolving issues with **transactional email setup**
+- Resolving issues with **transactional email setup**
+- **Redesigning the landing page** with a refreshed hero section, stats, activities, footer, and responsive navbar
+- Implementing a **light/dark theme switcher**
+- Refreshing UI across public-facing pages (About Us, Chapters, Projects, Learning Materials, Sponsors, Sign in/Sign up)
+- Adding a **dashboard layout** for authenticated views
+- Building a **project search controller** and **theme controller** in JavaScript
+- Updating **Tailwind config and styles**
 
 **Tech Stack:**
 
@@ -34,14 +40,16 @@ I contribute to the **maintenance and feature development** of the ARC platform.
 **Note:**  
 This project was **not built from scratch by me** — I contribute as a maintainer and developer, ensuring the platform continues to serve the community effectively.
 
-**Link to Project:**  
-[Visit ARC Platform](https://rubycommunity.africa/)
+**Links:**
+
+- [Visit ARC Platform](https://rubycommunity.africa/)
+- [View on GitHub](https://github.com/African-Ruby-Community/arc_platform)
 
 ---
 
 <div class="row mt-3">
   <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/arc_home.png" title="ARC Homepage" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid path="assets/img/arc_platform.png" title="ARC Homepage" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
 <div class="caption">
