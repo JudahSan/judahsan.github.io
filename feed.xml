@@ -1,4 +1,641 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://judahsan.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://judahsan.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-05-25T00:56:44+00:00</updated><id>https://judahsan.github.io/feed.xml</id><title type="html">blank</title><subtitle>Computer Science and Game Dev fellow </subtitle><entry><title type="html">How to Set Up Cloudflare Tunnel for Local Development</title><link href="https://judahsan.github.io/blog/2026/cloudflare-tunnel/" rel="alternate" type="text/html" title="How to Set Up Cloudflare Tunnel for Local Development"/><published>2026-05-24T11:59:00+00:00</published><updated>2026-05-24T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2026/cloudflare-tunnel</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/cloudflare-tunnel/"><![CDATA[<p><a href="https://developers.cloudflare.com/tunnel/">Cloudflare Tunnel</a> connects your infrastructure to Cloudflare through an outboud-only, <a href="https://developers.cloudflare.com/ssl/post-quantum-cryptography/">post-quantum encrypted</a>.</p> <blockquote> <p>Post-quantum cryptography utilizes advanced mathematicsl algorithms (like Kyber) designed to be secure against future quantum computer attacks</p> </blockquote> <p>Instead of exposing a public IP, you install a lightweight proxy that encrypts your traffic and forwards it to the server.</p> <p><img src="assets/img/cloudflare_tunnel.png" alt="img.png"/></p> <h3 id="why-use-cloudflare-tunnel">Why Use Cloudflare Tunnel?</h3> <ol> <li>It’s free.</li> <li>No <a href="https://en.wikipedia.org/wiki/Port_forwarding">port forwarding</a> required. Works behind NAT, firewalls, or VPNs.</li> <li>Instant HTTPS. While Cloudflare can use Let’s Encrypt, Coudflare Tunnels (especially the free trycloudflare.com quick tunnels) actually dunamically utilize Cloudflare’s Edge Certificates (often issued via DigiCert, Google Truest Services, or Let’s Encrypt dynamically behind the scenes.)</li> <li>Temporary public URLs - Perfect for testing webhooks or sharing with teammates</li> </ol> <h2 id="quick-setup-5-minutes">Quick Setup (5 minutes)</h2> <h3 id="1-install-cloudflared">1. Install cloudflared</h3> <p><strong>macOS:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://judahsan.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://judahsan.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-09-18T00:00:11+00:00</updated><id>https://judahsan.github.io/feed.xml</id><title type="html">blank</title><subtitle>Computer Science and Game Dev fellow </subtitle><entry><title type="html">Scraping Historical X (Twitter) Posts via Firefox Console</title><link href="https://judahsan.github.io/blog/2026/scraping-posts-via-firefox-console/" rel="alternate" type="text/html" title="Scraping Historical X (Twitter) Posts via Firefox Console"/><published>2026-09-17T11:59:00+00:00</published><updated>2026-09-17T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2026/scraping-posts-via-firefox-console</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/scraping-posts-via-firefox-console/"><![CDATA[<h3 id="the-motivation">The Motivation</h3> <p>There’s a car reviewer I used to follow religiously. They didn’t review high-end cars – just ordinary, affordable cars. The kind you’d actually consider buying. But what made their videos special was the level of detail: the walkarounds, the trim and engine breakdown, the honest takes on what it’s like to live with a car day to day.</p> <p>For me, they were the ultimate window-shopping companion. When I wanted to daydream about an ex-Japanese import — a Honda Jade, a Mitsubishi Delica, a Subaru forester SG5 — I’d go back to their reviews and imagine myself behind the wheel.</p> <p>Then one day, those videos were gone. Deleted, unlisted, wiped from the channel. I wanted to know what else had disappeared. And I had a hunch: before each video release, this reviewer used to post teasers on X (Twitter). If I could find those old posts, I could piece together which videos had once existed.</p> <p>The catch? Scrolling through years of tweets manually wasn’t realistic. Third-party scraping tools wanted money, and paid APIs were off the table. So I opened the Firefox console and built my own scraper.</p> <hr/> <h3 id="why-x-search-is-trickier-than-it-looks">Why X Search Is Trickier Than It Looks</h3> <p>Standard search queries like <code class="language-plaintext highlighter-rouge">youtube.com</code> often miss results on X because the platform rewrites every external link into its internal shortener: <code class="language-plaintext highlighter-rouge">t.co</code>. Searching for the raw domain returns almost nothing.</p> <p>The fix is X’s native filter flags. Here’s the query that worked:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>from:carnversations filter:links until:2024-03-25 -filter:retweets
+</pre></td></tr></tbody></table></code></pre></div></div> <table> <thead> <tr> <th>Operator</th> <th>Function</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">from:USERNAME</code></td> <td>Author Filter</td> <td>Scopes the search strictly to posts created by <code class="language-plaintext highlighter-rouge">@carnversations</code>.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">filter:links</code></td> <td>Media Filter</td> <td>Matches posts containing any URL — including shortened <code class="language-plaintext highlighter-rouge">t.co</code> links.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">until:YYYY-MM-DD</code></td> <td>Date Upper Bound</td> <td>Exclusive cutoff. <code class="language-plaintext highlighter-rouge">until:2024-03-25</code> includes posts up to <strong>23:59:59 UTC on March 24, 2024</strong>.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">-filter:retweets</code></td> <td>Exclusion</td> <td>Excludes native retweets, returning only original tweets and direct replies.</td> </tr> </tbody> </table> <blockquote> <p><strong>Crucial step:</strong> After running the search, switch from the <strong>Top</strong> tab to the <strong>Latest</strong> tab. This presents tweets in strict reverse chronological order, letting the script scroll cleanly backward through time.</p> </blockquote> <hr/> <h3 id="why-scraping-x-is-hard">Why Scraping X Is Hard</h3> <p>Modern single-page apps like X don’t behave like static websites. Two challenges stand out:</p> <ul> <li><strong>DOM Recycling:</strong> X unmounts off-screen DOM nodes as you scroll to keep browser memory in check. If you aren’t capturing elements as they appear, they vanish.</li> <li><strong>Obfuscated CSS Classes:</strong> Class names like <code class="language-plaintext highlighter-rouge">.r-18u37iz</code> are dynamically generated at build time and change frequently. Targeting them is a losing game.</li> </ul> <p><strong>The solution:</strong></p> <ol> <li><strong>Stable Selector Targets</strong> — Target X’s internal <code class="language-plaintext highlighter-rouge">data-testid</code> attributes, which stay consistent across deployments.</li> <li><strong>Key-Based Deduplication</strong> — Use each tweet’s unique status URL as a key in a JavaScript <code class="language-plaintext highlighter-rouge">Map()</code>, so re-encountered nodes update rather than duplicate.</li> <li><strong>Async Scroll &amp; Render Loop</strong> — Trigger window scrolling with <code class="language-plaintext highlighter-rouge">await</code> pauses so X’s virtual DOM has time to fetch and render the next chunk.</li> </ol> <hr/> <h3 id="the-scraper-script">The Scraper Script</h3> <p>Open <strong>Firefox Developer Tools</strong> (<code class="language-plaintext highlighter-rouge">F12</code> or <code class="language-plaintext highlighter-rouge">Ctrl + Shift + K</code>), paste the script into the <strong>Console</strong> tab, and press Enter.</p> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+</pre></td><td class="rouge-code"><pre><span class="cm">/**
+ * Dynamic DOM Scraper for X (Twitter) Search Results
+ * Optimized for Firefox Developer Console
+ */</span>
+<span class="p">(</span><span class="k">async </span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 1. Data Structure Setup</span>
+  <span class="c1">// Map keyed by tweet URL prevents duplicates as elements scroll in/out of DOM</span>
+  <span class="kd">const</span> <span class="nx">scrapedData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Map</span><span class="p">();</span>
+
+  <span class="c1">// Execution Configuration</span>
+  <span class="kd">const</span> <span class="nx">SCROLL_CYCLES</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>       <span class="c1">// Total number of scroll operations</span>
+  <span class="kd">const</span> <span class="nx">SCROLL_DISTANCE</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>   <span class="c1">// Vertical scroll distance per cycle (pixels)</span>
+  <span class="kd">const</span> <span class="nx">PAUSE_DELAY_MS</span> <span class="o">=</span> <span class="mi">1500</span><span class="p">;</span>    <span class="c1">// Wait time for network fetch &amp; DOM render</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`[+] Initializing scraper: </span><span class="p">${</span><span class="nx">SCROLL_CYCLES</span><span class="p">}</span><span class="s2"> cycles scheduled.`</span><span class="p">);</span>
+
+  <span class="c1">// Utility helper for delaying execution in async workflow</span>
+  <span class="kd">const</span> <span class="nx">sleep</span> <span class="o">=</span> <span class="p">(</span><span class="nx">ms</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nc">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
+
+  <span class="c1">// 2. DOM Parser Function</span>
+  <span class="kd">function</span> <span class="nf">extractVisibleTweets</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Select all currently mounted tweet article components</span>
+    <span class="kd">const</span> <span class="nx">tweetElements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">article[data-testid="tweet"]</span><span class="dl">'</span><span class="p">);</span>
+
+    <span class="nx">tweetElements</span><span class="p">.</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">tweetEl</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// Locate time element (contains ISO timestamp string)</span>
+      <span class="kd">const</span> <span class="nx">timeEl</span> <span class="o">=</span> <span class="nx">tweetEl</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">time</span><span class="dl">'</span><span class="p">);</span>
+
+      <span class="c1">// Locate text wrapper container</span>
+      <span class="kd">const</span> <span class="nx">textEl</span> <span class="o">=</span> <span class="nx">tweetEl</span><span class="p">.</span><span class="nf">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">div[data-testid="tweetText"]</span><span class="dl">'</span><span class="p">);</span>
+
+      <span class="c1">// Extract permalink from the anchor wrapping the time element</span>
+      <span class="kd">const</span> <span class="nx">permalinkEl</span> <span class="o">=</span> <span class="nx">timeEl</span> <span class="p">?</span> <span class="nx">timeEl</span><span class="p">.</span><span class="nf">closest</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+
+      <span class="k">if </span><span class="p">(</span><span class="nx">permalinkEl</span> <span class="o">&amp;&amp;</span> <span class="nx">permalinkEl</span><span class="p">.</span><span class="nx">href</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">tweetUrl</span> <span class="o">=</span> <span class="nx">permalinkEl</span><span class="p">.</span><span class="nx">href</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">isoDate</span> <span class="o">=</span> <span class="nx">timeEl</span> <span class="p">?</span> <span class="nx">timeEl</span><span class="p">.</span><span class="nf">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">datetime</span><span class="dl">'</span><span class="p">)</span> <span class="p">:</span> <span class="dl">''</span><span class="p">;</span>
+
+        <span class="c1">// Normalize text string by converting newlines to spaces</span>
+        <span class="kd">const</span> <span class="nx">rawText</span> <span class="o">=</span> <span class="nx">textEl</span> <span class="p">?</span> <span class="nx">textEl</span><span class="p">.</span><span class="nx">innerText</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\n</span><span class="sr">/g</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">)</span> <span class="p">:</span> <span class="dl">''</span><span class="p">;</span>
+
+        <span class="c1">// Extract internal links (t.co shorteners) contained within the post body</span>
+        <span class="kd">const</span> <span class="nx">embeddedUrls</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="nx">tweetEl</span><span class="p">.</span><span class="nf">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">a[href*="t.co"]</span><span class="dl">'</span><span class="p">).</span><span class="nf">forEach</span><span class="p">((</span><span class="nx">anchor</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">if </span><span class="p">(</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">href</span><span class="p">)</span> <span class="nx">embeddedUrls</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
+        <span class="p">});</span>
+
+        <span class="c1">// Write or update entry in the Map</span>
+        <span class="nx">scrapedData</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="nx">tweetUrl</span><span class="p">,</span> <span class="p">{</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="nx">isoDate</span><span class="p">,</span>
+          <span class="na">url</span><span class="p">:</span> <span class="nx">tweetUrl</span><span class="p">,</span>
+          <span class="na">text</span><span class="p">:</span> <span class="nx">rawText</span><span class="p">,</span>
+          <span class="na">links</span><span class="p">:</span> <span class="nx">embeddedUrls</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">)</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 3. Main Scraping Loop</span>
+  <span class="k">for </span><span class="p">(</span><span class="kd">let</span> <span class="nx">cycle</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">cycle</span> <span class="o">&lt;=</span> <span class="nx">SCROLL_CYCLES</span><span class="p">;</span> <span class="nx">cycle</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Parse visible elements before scrolling</span>
+    <span class="nf">extractVisibleTweets</span><span class="p">();</span>
+
+    <span class="c1">// Scroll browser window down</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nf">scrollBy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">SCROLL_DISTANCE</span><span class="p">);</span>
+
+    <span class="c1">// Logging checkpoint every 10 iterations</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">cycle</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">cycle</span> <span class="o">===</span> <span class="nx">SCROLL_CYCLES</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`[+] Cycle </span><span class="p">${</span><span class="nx">cycle</span><span class="p">}</span><span class="s2">/</span><span class="p">${</span><span class="nx">SCROLL_CYCLES</span><span class="p">}</span><span class="s2">: </span><span class="p">${</span><span class="nx">scrapedData</span><span class="p">.</span><span class="nx">size</span><span class="p">}</span><span class="s2"> unique posts recorded.`</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Pause execution to allow DOM hydration</span>
+    <span class="k">await</span> <span class="nf">sleep</span><span class="p">(</span><span class="nx">PAUSE_DELAY_MS</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 4. Data Formatting and Export</span>
+  <span class="kd">const</span> <span class="nx">dataset</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">scrapedData</span><span class="p">.</span><span class="nf">values</span><span class="p">());</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`[✔] Extraction complete. Total items: </span><span class="p">${</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+
+  <span class="c1">// Create an in-memory JSON file and trigger browser download</span>
+  <span class="kd">const</span> <span class="nx">jsonBlob</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Blob</span><span class="p">([</span><span class="nx">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="nx">dataset</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="kd">const</span> <span class="nx">downloadLink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nf">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="nx">downloadLink</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nf">createObjectURL</span><span class="p">(</span><span class="nx">jsonBlob</span><span class="p">);</span>
+  <span class="nx">downloadLink</span><span class="p">.</span><span class="nx">download</span> <span class="o">=</span> <span class="s2">`x_scraped_tweets_</span><span class="p">${</span><span class="nb">Date</span><span class="p">.</span><span class="nf">now</span><span class="p">()}</span><span class="s2">.json`</span><span class="p">;</span>
+
+  <span class="c1">// Programmatically click link to download</span>
+  <span class="nx">downloadLink</span><span class="p">.</span><span class="nf">click</span><span class="p">();</span>
+
+  <span class="c1">// Clean up object URL memory reference</span>
+  <span class="nx">URL</span><span class="p">.</span><span class="nf">revokeObjectURL</span><span class="p">(</span><span class="nx">downloadLink</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></td></tr></tbody></table></code></pre></div></div> <hr/> <h3 id="output-schema">Output Schema</h3> <p>The scraper exports a JSON array of objects:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-15T14:30:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://x.com/carnversations/status/1559187364123456789"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The 0-100 on the Honda jade RS was such a thrilling experience... https://t.co/example"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"links"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://t.co/example"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div> <p>Each entry captures the timestamp, permalink, cleaned post text, and any embedded links.</p> <hr/> <h3 id="cleaning-the-data-with-go">Cleaning the Data with Go</h3> <p>Raw scraped text is messy — links are often broken up by spaces, and there’s a lot of noise mixed in. I wrote a small Go program to extract only the <strong>YouTube links</strong> from each tweet and produce a clean, focused dataset.</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+</pre></td><td class="rouge-code"><pre><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"encoding/json"</span>
+	<span class="s">"fmt"</span>
+	<span class="s">"os"</span>
+	<span class="s">"regexp"</span>
+	<span class="s">"strings"</span>
+<span class="p">)</span>
+
+<span class="c">// RawItem represents the structure of the input JSON</span>
+<span class="k">type</span> <span class="n">RawItem</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Date</span>     <span class="kt">string</span> <span class="s">`json:"date"`</span>
+	<span class="n">TweetURL</span> <span class="kt">string</span> <span class="s">`json:"tweet_url"`</span>
+	<span class="n">Text</span>     <span class="kt">string</span> <span class="s">`json:"text"`</span>
+	<span class="n">Links</span>    <span class="kt">string</span> <span class="s">`json:"links"`</span>
+<span class="p">}</span>
+
+<span class="c">// CleanItem represents the desired cleaned output schema</span>
+<span class="k">type</span> <span class="n">CleanItem</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Date</span>        <span class="kt">string</span> <span class="s">`json:"date"`</span>
+	<span class="n">VideoLink</span>   <span class="kt">string</span> <span class="s">`json:"video_link"`</span>
+	<span class="n">Description</span> <span class="kt">string</span> <span class="s">`json:"description"`</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c">// 1. Read raw JSON file</span>
+	<span class="n">fileData</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">ReadFile</span><span class="p">(</span><span class="s">"raw_tweets.json"</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Error reading input file: %v</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="k">var</span> <span class="n">rawItems</span> <span class="p">[]</span><span class="n">RawItem</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">Unmarshal</span><span class="p">(</span><span class="n">fileData</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rawItems</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Error unmarshaling JSON: %v</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="c">// 2. Compile Regex to catch YouTube links (including those with spaces)</span>
+	<span class="n">ytRegex</span> <span class="o">:=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">MustCompile</span><span class="p">(</span><span class="s">`(?i)https?://\s*(?:www\.)?(?:youtube\.com/[^\s]+|youtu\.be/[^\s]+)`</span><span class="p">)</span>
+	<span class="n">spaceRegex</span> <span class="o">:=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">MustCompile</span><span class="p">(</span><span class="s">`\s+`</span><span class="p">)</span>
+
+	<span class="k">var</span> <span class="n">cleanedData</span> <span class="p">[]</span><span class="n">CleanItem</span>
+
+	<span class="c">// 3. Process items</span>
+	<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">item</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">rawItems</span> <span class="p">{</span>
+		<span class="n">match</span> <span class="o">:=</span> <span class="n">ytRegex</span><span class="o">.</span><span class="n">FindString</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">match</span> <span class="o">!=</span> <span class="s">""</span> <span class="p">{</span>
+			<span class="c">// Remove spaces inside the matched URL</span>
+			<span class="n">videoLink</span> <span class="o">:=</span> <span class="n">strings</span><span class="o">.</span><span class="n">ReplaceAll</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+
+			<span class="c">// Clean description by removing the URL and collapsing extra whitespace</span>
+			<span class="n">description</span> <span class="o">:=</span> <span class="n">ytRegex</span><span class="o">.</span><span class="n">ReplaceAllString</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">Text</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+			<span class="n">description</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="n">TrimSpace</span><span class="p">(</span><span class="n">spaceRegex</span><span class="o">.</span><span class="n">ReplaceAllString</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="s">" "</span><span class="p">))</span>
+
+			<span class="n">cleanedData</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">cleanedData</span><span class="p">,</span> <span class="n">CleanItem</span><span class="p">{</span>
+				<span class="n">Date</span><span class="o">:</span>        <span class="n">item</span><span class="o">.</span><span class="n">Date</span><span class="p">,</span>
+				<span class="n">VideoLink</span><span class="o">:</span>   <span class="n">videoLink</span><span class="p">,</span>
+				<span class="n">Description</span><span class="o">:</span> <span class="n">description</span><span class="p">,</span>
+			<span class="p">})</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="c">// 4. Export cleaned JSON</span>
+	<span class="n">outputJSON</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">MarshalIndent</span><span class="p">(</span><span class="n">cleanedData</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="s">"  "</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Error marshaling output JSON: %v</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">WriteFile</span><span class="p">(</span><span class="s">"cleaned_videos.json"</span><span class="p">,</span> <span class="n">outputJSON</span><span class="p">,</span> <span class="m">0644</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Error writing file: %v</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Success! Extracted %d valid YouTube videos.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cleanedData</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div> <p>This pulls out the YouTube link from each tweet, strips the URL from the description, and outputs a tidy <code class="language-plaintext highlighter-rouge">cleaned_videos.json</code>:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-08-15T14:30:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"video_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://youtu.be/example"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The 0-100 on the Honda jade RS was such a thrilling experience..."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div> <hr/> <h3 id="exploring-the-dataset-with-go">Exploring the Dataset with Go</h3> <p>Once the data was clean, I ran a quick exploratory analysis in Go: date range, word counts, and the most common keywords across all descriptions. It gave me a sense of what kinds of cars and themes showed up most often.</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+</pre></td><td class="rouge-code"><pre><span class="c">/*
+eda_analysis.go
+Perform dataset exploration and word count analysis on parsed video metadata.
+*/</span>
+
+<span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"encoding/json"</span>
+	<span class="s">"fmt"</span>
+	<span class="s">"os"</span>
+	<span class="s">"regexp"</span>
+	<span class="s">"sort"</span>
+	<span class="s">"strings"</span>
+	<span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="k">type</span> <span class="n">VideoRecord</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Date</span>        <span class="kt">string</span> <span class="s">`json:"date"`</span>
+	<span class="n">VideoLink</span>   <span class="kt">string</span> <span class="s">`json:"video_link"`</span>
+	<span class="n">Description</span> <span class="kt">string</span> <span class="s">`json:"description"`</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">WordCount</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Word</span>  <span class="kt">string</span>
+	<span class="n">Count</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c">// 1. Read Cleaned JSON</span>
+	<span class="n">fileData</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">os</span><span class="o">.</span><span class="n">ReadFile</span><span class="p">(</span><span class="s">"cleaned_videos.json"</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Error reading file: %v</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="k">var</span> <span class="n">records</span> <span class="p">[]</span><span class="n">VideoRecord</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">Unmarshal</span><span class="p">(</span><span class="n">fileData</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">records</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Error unmarshaling JSON: %v</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)</span> <span class="o">==</span> <span class="m">0</span> <span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"No records to process."</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="c">// 2. Variables for Stats</span>
+	<span class="k">var</span> <span class="n">totalWords</span> <span class="kt">int</span>
+	<span class="n">minWords</span><span class="p">,</span> <span class="n">maxWords</span> <span class="o">:=</span> <span class="m">1</span><span class="o">&lt;&lt;</span><span class="m">31</span><span class="o">-</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span>
+	<span class="k">var</span> <span class="n">minTime</span><span class="p">,</span> <span class="n">maxTime</span> <span class="n">time</span><span class="o">.</span><span class="n">Time</span>
+	<span class="n">wordMap</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+	<span class="n">wordRegex</span> <span class="o">:=</span> <span class="n">regexp</span><span class="o">.</span><span class="n">MustCompile</span><span class="p">(</span><span class="s">`\b\w+\b`</span><span class="p">)</span>
+	<span class="n">stopWords</span> <span class="o">:=</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">bool</span><span class="p">{</span><span class="s">"the"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="s">"a"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="s">"to"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="s">"and"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="s">"of"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="s">"in"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="s">"is"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="s">"on"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="s">"for"</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="s">"this"</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span>
+
+	<span class="c">// 3. Iterative Analysis</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">records</span> <span class="p">{</span>
+		<span class="n">t</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">RFC3339</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="m">0</span> <span class="o">||</span> <span class="n">t</span><span class="o">.</span><span class="n">Before</span><span class="p">(</span><span class="n">minTime</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">minTime</span> <span class="o">=</span> <span class="n">t</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="m">0</span> <span class="o">||</span> <span class="n">t</span><span class="o">.</span><span class="n">After</span><span class="p">(</span><span class="n">maxTime</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">maxTime</span> <span class="o">=</span> <span class="n">t</span>
+		<span class="p">}</span>
+
+		<span class="c">// Text Stats</span>
+		<span class="n">words</span> <span class="o">:=</span> <span class="n">wordRegex</span><span class="o">.</span><span class="n">FindAllString</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">ToLower</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">Description</span><span class="p">),</span> <span class="o">-</span><span class="m">1</span><span class="p">)</span>
+		<span class="n">wc</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+		<span class="n">totalWords</span> <span class="o">+=</span> <span class="n">wc</span>
+
+		<span class="k">if</span> <span class="n">wc</span> <span class="o">&lt;</span> <span class="n">minWords</span> <span class="p">{</span>
+			<span class="n">minWords</span> <span class="o">=</span> <span class="n">wc</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="n">wc</span> <span class="o">&gt;</span> <span class="n">maxWords</span> <span class="p">{</span>
+			<span class="n">maxWords</span> <span class="o">=</span> <span class="n">wc</span>
+		<span class="p">}</span>
+
+		<span class="c">// Track keywords</span>
+		<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">w</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">words</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="o">!</span><span class="n">stopWords</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="m">2</span> <span class="p">{</span>
+				<span class="n">wordMap</span><span class="p">[</span><span class="n">w</span><span class="p">]</span><span class="o">++</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="c">// 4. Sort Top Keywords</span>
+	<span class="k">var</span> <span class="n">wordCounts</span> <span class="p">[]</span><span class="n">WordCount</span>
+	<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">wordMap</span> <span class="p">{</span>
+		<span class="n">wordCounts</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">wordCounts</span><span class="p">,</span> <span class="n">WordCount</span><span class="p">{</span><span class="n">Word</span><span class="o">:</span> <span class="n">k</span><span class="p">,</span> <span class="n">Count</span><span class="o">:</span> <span class="n">v</span><span class="p">})</span>
+	<span class="p">}</span>
+	<span class="n">sort</span><span class="o">.</span><span class="n">Slice</span><span class="p">(</span><span class="n">wordCounts</span><span class="p">,</span> <span class="k">func</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">wordCounts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">Count</span> <span class="o">&gt;</span> <span class="n">wordCounts</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">Count</span>
+	<span class="p">})</span>
+
+	<span class="c">// 5. Print Results</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"================ EDA SUMMARY REPORT ================"</span><span class="p">)</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Total Videos Analyzed : %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">))</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Date Range           : %s to %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">minTime</span><span class="o">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"2006-01-02"</span><span class="p">),</span> <span class="n">maxTime</span><span class="o">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"2006-01-02"</span><span class="p">))</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">--- Description Text Metrics ---"</span><span class="p">)</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Avg Word Count       : %.2f words</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="kt">float64</span><span class="p">(</span><span class="n">totalWords</span><span class="p">)</span><span class="o">/</span><span class="kt">float64</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">)))</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Max Word Count       : %d words</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">maxWords</span><span class="p">)</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Min Word Count       : %d words</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">minWords</span><span class="p">)</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">--- Top Keywords / Themes ---"</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="m">5</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">wordCounts</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">" - %s: %d occurrences</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">wordCounts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">Word</span><span class="p">,</span> <span class="n">wordCounts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">Count</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"===================================================="</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div> <p>A sample run looked something like this:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre>================ EDA SUMMARY REPORT ================
+Total Videos Analyzed : 87
+Date Range           : 2019-04-12 to 2024-03-24
+
+--- Description Text Metrics ---
+Avg Word Count       : 42.31 words
+Max Word Count       : 118 words
+Min Word Count       : 9 words
+
+--- Top Keywords / Themes ---
+ - honda: 23 occurrences
+ - toyota: 19 occurrences
+ - review: 17 occurrences
+ - jade: 11 occurrences
+ - fielder: 8 occurrences
+====================================================
+</pre></td></tr></tbody></table></code></pre></div></div> <p>It was a neat little confirmation: the reviewer really did focus on the everyday, affordable Japanese imports I remembered — and now I had a paper trail of everything they’d once covered.</p> <hr/> <h3 id="what-i-found">What I Found</h3> <p>Running this against the reviewer’s timeline surfaced a long trail of teaser posts — release announcements, behind-the-scenes clips, and direct links to videos that no longer exist on their channel. Some had been replaced by re-uploads; others had vanished entirely. The scrape gave me the receipts: a documented record of what had once been published, and a clear view of what was quietly removed.</p> <p>It’s a small win, but it scratches an itch every car enthusiast knows: when the reviews you used to window-shop with disappear, you want to know <em>what</em> disappeared — and now I do.</p>]]></content><author><name></name></author><category term="blog"/><category term="scraping"/><category term="javascript"/><category term="firefox"/><category term="go"/><category term="data"/><summary type="html"><![CDATA[How I recovered lost car review videos by scraping historical posts from X using nothing but the Firefox console and a bit of JavaScript — then cleaned and analysed the results with Go.]]></summary></entry><entry><title type="html">Android Package Conflict</title><link href="https://judahsan.github.io/blog/2026/android-package-conflict/" rel="alternate" type="text/html" title="Android Package Conflict"/><published>2026-07-13T00:00:00+00:00</published><updated>2026-07-13T00:00:00+00:00</updated><id>https://judahsan.github.io/blog/2026/android-package-conflict</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/android-package-conflict/"><![CDATA[<hr/> <p>layout: post title: “Fixing Android’s ‘Incompatible Version Already Installed’ Error” date: 2026-07-13 02:15:00 description: “How to fix Android installation conflicts when switching between Firebase App Distribution and Google Play Console.” tags: [android, debugging] categories: [technology] tabs: true mermaid: enabled: true zoomable: true ————–</p> <p>When testing an Android app across different distribution channels, such as moving from <strong>Firebase App Distribution</strong> to the <strong>Google Play Console</strong>, you may encounter this error:</p> <blockquote> <p><em>“Another user has already installed an incompatible version of this app on this device.”</em></p> </blockquote> <p>This can be particularly common on devices with <strong>secondary users, work profiles, or other isolated profiles</strong>.</p> <h3 id="why-it-happens">Why it happens</h3> <p>Uninstalling an app from your primary profile does not necessarily remove the package from the entire device. If the app is still installed or available to another user profile, Android’s package manager can continue to treat it as installed.</p> <p>This becomes a problem when the new APK has a different <strong>signing key</strong> or an incompatible <strong>version code</strong>.</p> <p>The basic conflict looks like this:</p> <pre><code class="language-mermaid">graph TD
+    A[Firebase App Distribution Build] --&gt; B[Owner Profile]
+    A --&gt; C[Secondary / Work Profile]
+    B --&gt; D[Uninstall App]
+    D --&gt; E{Package still installed elsewhere?}
+    E --&gt;|Yes| F[Install Play Console Build]
+    F --&gt; G[Incompatible Version Error]
+</code></pre> <h3 id="fix">Fix</h3> <p>The simplest solution is to remove the application from the other profiles on the device.</p> <p><strong>1. Check your other profiles</strong></p> <p>Go to:</p> <p><strong>Settings → System → Multiple Users</strong></p> <p>Depending on the device, you may also be able to switch profiles from the Quick Settings panel.</p> <p>Check any secondary users, Guest profiles, or work profiles.</p> <p><strong>2. Find the application</strong></p> <p>In the secondary profile, open:</p> <p><strong>Settings → Apps → See all apps</strong></p> <p>Search for your application. It may still be listed even though you removed it from the primary profile.</p> <p><strong>3. Remove it for all users</strong></p> <p>Open the application’s <strong>App Info</strong> screen.</p> <p>From the three-dot menu, select:</p> <p><strong>Uninstall for all users</strong></p> <p>The exact wording can vary depending on the Android version and device manufacturer.</p> <p><strong>4. Try the installation again</strong></p> <p>Return to your primary profile and install the build from Google Play Console again.</p> <h3 id="if-it-still-doesnt-work">If it still doesn’t work</h3> <p>You can use ADB to remove the package:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>adb uninstall &lt;your.package.name&gt;
+</pre></td></tr></tbody></table></code></pre></div></div> <p>You can also check which users Android knows about:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>adb shell pm list <span class="nb">users</span>
+</pre></td></tr></tbody></table></code></pre></div></div> <p>And check whether the package is still installed for a particular user:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>adb shell pm list packages <span class="nt">--user</span> &lt;user_id&gt; | <span class="nb">grep</span> &lt;your.package.name&gt;
+</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="preventing-the-problem">Preventing the problem</h3> <p>A few practices can make switching between distribution channels less painful:</p> <ul> <li><strong>Use the same signing key</strong> where possible. Firebase and Play-distributed builds should use compatible signing credentials.</li> <li><strong>Keep version codes increasing.</strong> Android generally prevents installing an older version over a newer one.</li> <li><strong>Clean up unused profiles.</strong> Guest and secondary profiles can retain applications that are no longer visible from the owner profile.</li> <li><strong>Use separate application IDs for development builds</strong> when you regularly need multiple variants installed at the same time.</li> </ul> <p>For example:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>com.example.app
+com.example.app.dev
+</pre></td></tr></tbody></table></code></pre></div></div> <p>This avoids package-level conflicts altogether when testing different builds.</p> <h3 id="takeaway">Takeaway</h3> <p>If Android says another user has already installed an incompatible version, don’t assume the application is completely uninstalled.</p> <p><strong>Check the other profiles first.</strong> The package may still exist there even though it has disappeared from your primary profile.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">How to Set Up Cloudflare Tunnel for Local Development</title><link href="https://judahsan.github.io/blog/2026/cloudflare-tunnel/" rel="alternate" type="text/html" title="How to Set Up Cloudflare Tunnel for Local Development"/><published>2026-05-24T11:59:00+00:00</published><updated>2026-05-24T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2026/cloudflare-tunnel</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/cloudflare-tunnel/"><![CDATA[<p><a href="https://developers.cloudflare.com/tunnel/">Cloudflare Tunnel</a> connects your infrastructure to Cloudflare through an outboud-only, <a href="https://developers.cloudflare.com/ssl/post-quantum-cryptography/">post-quantum encrypted</a>.</p> <blockquote> <p>Post-quantum cryptography utilizes advanced mathematicsl algorithms (like Kyber) designed to be secure against future quantum computer attacks</p> </blockquote> <p>Instead of exposing a public IP, you install a lightweight proxy that encrypts your traffic and forwards it to the server.</p> <p><img src="assets/img/cloudflare_tunnel.png" alt="img.png"/></p> <h3 id="why-use-cloudflare-tunnel">Why Use Cloudflare Tunnel?</h3> <ol> <li>It’s free.</li> <li>No <a href="https://en.wikipedia.org/wiki/Port_forwarding">port forwarding</a> required. Works behind NAT, firewalls, or VPNs.</li> <li>Instant HTTPS. While Cloudflare can use Let’s Encrypt, Coudflare Tunnels (especially the free trycloudflare.com quick tunnels) actually dunamically utilize Cloudflare’s Edge Certificates (often issued via DigiCert, Google Truest Services, or Let’s Encrypt dynamically behind the scenes.)</li> <li>Temporary public URLs - Perfect for testing webhooks or sharing with teammates</li> </ol> <h2 id="quick-setup-5-minutes">Quick Setup (5 minutes)</h2> <h3 id="1-install-cloudflared">1. Install cloudflared</h3> <p><strong>macOS:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>brew <span class="nb">install </span>cloudflared
 </pre></td></tr></tbody></table></code></pre></div></div> <p><strong>Linux:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -122,13 +759,19 @@ cloudflared tunnel delete my-dev-tunnel
 
 <span class="c"># Run with debug logging</span>
 cloudflared tunnel <span class="nt">--url</span> http://localhost:3000 <span class="nt">--log-level</span> debug
-</pre></td></tr></tbody></table></code></pre></div></div> <hr/> <h2 id="troubleshooting">Troubleshooting</h2> <table> <thead> <tr> <th>Issue</th> <th>Solution</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">connection refused</code></td> <td>Your local server isn’t running on the specified port</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">tunnel not found</code></td> <td>Create tunnel first or check name spelling</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">certificate error</code></td> <td>Use <code class="language-plaintext highlighter-rouge">http://</code> not <code class="language-plaintext highlighter-rouge">https://</code> for local target service (eg, <code class="language-plaintext highlighter-rouge">cloudflared tunnel --url http://localhost:3000</code> as cloudflared handles the SSL encryption to the outside world itself</td> </tr> <tr> <td>Tunnel disconnects</td> <td>Restart with <code class="language-plaintext highlighter-rouge">--retries 5</code> flag</td> </tr> </tbody> </table> <hr/> <h2 id="when-to-use-this">When to Use This</h2> <ul> <li>✅ Testing Stripe/PayPal webhooks locally</li> <li>✅ Sharing dev site with clients</li> <li>✅ Mobile testing on real devices</li> <li>✅ Collaborating with remote teammates</li> <li>✅ Demoing work-in-progress features</li> </ul> <p><strong>Not ideal for:</strong> Production traffic, streaming video, or real-time gaming.</p> <hr/> <h2 id="links">Links</h2> <ul> <li><a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/">Official Cloudflare Tunnel Docs</a></li> <li><a href="https://github.com/cloudflare/cloudflared">cloudflared GitHub Repository</a></li> </ul>]]></content><author><name></name></author><category term="technology"/><category term="guide"/><summary type="html"><![CDATA[A guide on how to set up Cloudflare Tunnel for local development and expose your local server to the internet securely.]]></summary></entry><entry><title type="html">Quikk API</title><link href="https://judahsan.github.io/blog/2026/quikk-api/" rel="alternate" type="text/html" title="Quikk API"/><published>2026-05-24T01:59:00+00:00</published><updated>2026-05-24T01:59:00+00:00</updated><id>https://judahsan.github.io/blog/2026/quikk-api</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/quikk-api/"><![CDATA[<h1 id="quikk-api-setup">Quikk API Setup</h1> <h2 id="overview">Overview</h2> <p>This guide covers how to configure Quikk payments for this app, including credentials, API base URL, webhook callback, request signing, and verification.</p> <p>Reference API docs:</p> <ul> <li><a href="https://app.swaggerhub.com/apis/zegetech/Handaki/1.0#/">https://app.swaggerhub.com/apis/zegetech/Handaki/1.0#/</a></li> </ul> <h2 id="1-configure-credentials">1. Configure Credentials</h2> <p>Set these credentials per environment:</p> <ul> <li><code class="language-plaintext highlighter-rouge">quikk.api_key</code></li> <li><code class="language-plaintext highlighter-rouge">quikk.api_secret</code></li> <li><code class="language-plaintext highlighter-rouge">quikk.shortcode</code></li> </ul> <p>Expected endpoints:</p> <ul> <li>Sandbox/Test: <code class="language-plaintext highlighter-rouge">https://tryapi.quikk.dev/v1</code></li> <li>Production: <code class="language-plaintext highlighter-rouge">https://api.quikk.dev/v1</code></li> </ul> <p>In this codebase, Quikk integration is implemented in:</p> <ul> <li><code class="language-plaintext highlighter-rouge">app/services/quikk/client.rb</code></li> </ul> <h2 id="2-configure-routes">2. Configure Routes</h2> <p>Ensure these routes exist:</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div> <hr/> <h2 id="troubleshooting">Troubleshooting</h2> <table> <thead> <tr> <th>Issue</th> <th>Solution</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">connection refused</code></td> <td>Your local server isn’t running on the specified port</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">tunnel not found</code></td> <td>Create tunnel first or check name spelling</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">certificate error</code></td> <td>Use <code class="language-plaintext highlighter-rouge">http://</code> not <code class="language-plaintext highlighter-rouge">https://</code> for local target service (eg, <code class="language-plaintext highlighter-rouge">cloudflared tunnel --url http://localhost:3000</code> as cloudflared handles the SSL encryption to the outside world itself</td> </tr> <tr> <td>Tunnel disconnects</td> <td>Restart with <code class="language-plaintext highlighter-rouge">--retries 5</code> flag</td> </tr> </tbody> </table> <hr/> <h2 id="when-to-use-this">When to Use This</h2> <ul> <li>✅ Testing Stripe/PayPal webhooks locally</li> <li>✅ Sharing dev site with clients</li> <li>✅ Mobile testing on real devices</li> <li>✅ Collaborating with remote teammates</li> <li>✅ Demoing work-in-progress features</li> </ul> <p><strong>Not ideal for:</strong> Production traffic, streaming video, or real-time gaming.</p> <hr/> <h2 id="links">Links</h2> <ul> <li><a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/">Official Cloudflare Tunnel Docs</a></li> <li><a href="https://github.com/cloudflare/cloudflared">cloudflared GitHub Repository</a></li> </ul>]]></content><author><name></name></author><category term="technology"/><category term="guide"/><summary type="html"><![CDATA[A guide on how to set up Cloudflare Tunnel for local development and expose your local server to the internet securely.]]></summary></entry><entry><title type="html">Quikk API Setup</title><link href="https://judahsan.github.io/blog/2026/quikk-api/" rel="alternate" type="text/html" title="Quikk API Setup"/><published>2026-05-24T01:59:00+00:00</published><updated>2026-05-24T01:59:00+00:00</updated><id>https://judahsan.github.io/blog/2026/quikk-api</id><content type="html" xml:base="https://judahsan.github.io/blog/2026/quikk-api/"><![CDATA[<h1 id="quikk-api-setup">Quikk API Setup</h1> <h2 id="a-note-before-you-start">A note before you start</h2> <p>I originally put this guide together after integrating Quikk into a Rails application. We tried taking the integration to production and, honestly, it gave me and the team <strong>about two weeks of absolute horror</strong>.</p> <p>The documentation and API behaviour weren’t always as straightforward as we expected, particularly when moving from testing to a real M-Pesa setup.</p> <p>Quikk actually has a guide that describes the proper setup:</p> <p><a href="https://quikkdev.medium.com/how-to-setup-mpesa-stk-push-charge-api-on-quikk-api-cd0dd405e125">How to Setup Mpesa STK Push (Charge API) on Quikk API</a></p> <p><strong>Read that first.</strong> It explains the Quikk-side configuration that needs to happen, including setting up the M-Pesa APIs, credentials, shortcode, passkey, and callbacks. The catch is that some of this setup requires contacting Quikk directly, which can be a bit of a hustle when you’re trying to get a production integration working.</p> <p>This guide focuses more on the <strong>application-side integration</strong> and the things I needed to account for in the actual Rails application.</p> <blockquote> <p><strong>Disclaimer:</strong> This is based on my experience integrating Quikk into one application and is not a replacement for Quikk’s official documentation or support. API configuration and requirements may change.</p> </blockquote> <h2 id="overview">Overview</h2> <p>This guide covers:</p> <ul> <li>Credentials and API configuration</li> <li>Webhook callbacks</li> <li>M-Pesa charge requests</li> <li>HMAC authentication</li> <li>Webhook handling</li> <li>Frontend payment polling</li> <li>Common troubleshooting issues</li> </ul> <p>Reference API documentation:</p> <p><a href="https://app.swaggerhub.com/apis/zegetech/Handaki/1.0#/">Handaki API — SwaggerHub</a></p> <h2 id="1-configure-credentials">1. Configure credentials</h2> <p>Set these credentials per environment:</p> <ul> <li><code class="language-plaintext highlighter-rouge">quikk.api_key</code></li> <li><code class="language-plaintext highlighter-rouge">quikk.api_secret</code></li> <li><code class="language-plaintext highlighter-rouge">quikk.shortcode</code></li> </ul> <p>Expected endpoints:</p> <ul> <li>Sandbox/Test: <code class="language-plaintext highlighter-rouge">https://tryapi.quikk.dev/v1</code></li> <li>Production: <code class="language-plaintext highlighter-rouge">https://api.quikk.dev/v1</code></li> </ul> <p>In this codebase, the Quikk integration is implemented in:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>app/services/quikk/client.rb
+</pre></td></tr></tbody></table></code></pre></div></div> <p><strong>Important:</strong> Getting the API key and secret is only part of the setup. Your M-Pesa account and the relevant Quikk APIs also need to be configured on the Quikk side.</p> <h2 id="2-configure-routes">2. Configure routes</h2> <p>Ensure these routes exist:</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-3
 </pre></td><td class="rouge-code"><pre><span class="n">post</span> <span class="s2">"payments/callback"</span><span class="p">,</span> <span class="ss">to: </span><span class="s2">"webhooks#quikk"</span>
 <span class="n">get</span> <span class="s2">"checkout/mpesa_status/:id"</span><span class="p">,</span> <span class="ss">to: </span><span class="s2">"checkouts#mpesa_status"</span><span class="p">,</span> <span class="ss">as: :mpesa_status_checkout</span>
-
-</pre></td></tr></tbody></table></code></pre></div></div> <p>Purpose:</p> <ul> <li><code class="language-plaintext highlighter-rouge">POST /payments/callback</code>: receives Quikk payment webhooks.</li> <li><code class="language-plaintext highlighter-rouge">GET /checkout/mpesa_status/:id</code>: supports frontend polling while waiting for payment completion.</li> </ul> <h2 id="3-set-quikk-webhook-url">3. Set Quikk Webhook URL</h2> <p>In Quikk dashboard/settings, set callback URL to:</p> <p><code class="language-plaintext highlighter-rouge">https://&lt;your-public-domain&gt;/payments/callback</code></p> <p>For local development with a tunnel:</p> <p><code class="language-plaintext highlighter-rouge">https://&lt;your-tunnel-domain&gt;/payments/callback</code></p> <p>Example:</p> <p><code class="language-plaintext highlighter-rouge">https://cab-bool-wmam-furnished.trycloudflare.com/payments/callback</code></p> <h2 id="4-send-charge-request">4. Send Charge Request</h2> <p>Typical request payload shape:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div> <p>The routes are used for:</p> <ul> <li><code class="language-plaintext highlighter-rouge">POST /payments/callback</code> — receiving Quikk payment webhooks.</li> <li><code class="language-plaintext highlighter-rouge">GET /checkout/mpesa_status/:id</code> — allowing the frontend to poll for payment completion.</li> </ul> <h2 id="3-configure-the-quikk-webhook">3. Configure the Quikk webhook</h2> <p>Set the callback URL in Quikk to:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>https://&lt;your-public-domain&gt;/payments/callback
+</pre></td></tr></tbody></table></code></pre></div></div> <p>For local development with a tunnel:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>https://&lt;your-tunnel-domain&gt;/payments/callback
+</pre></td></tr></tbody></table></code></pre></div></div> <p>For example:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>https://cab-bool-wmam-furnished.trycloudflare.com/payments/callback
+</pre></td></tr></tbody></table></code></pre></div></div> <p>Make sure the URL is publicly accessible.</p> <h2 id="4-send-the-charge-request">4. Send the charge request</h2> <p>A typical charge request looks like:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -142,7 +785,6 @@ cloudflared tunnel <span class="nt">--url</span> http://localhost:3000 <span cla
 12
 13
 14
-15
 </pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"charge"</span><span class="p">,</span><span class="w">
@@ -157,26 +799,23 @@ cloudflared tunnel <span class="nt">--url</span> http://localhost:3000 <span cla
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
-</span></pre></td></tr></tbody></table></code></pre></div></div> <p>Recommended:</p> <ul> <li>Keep <code class="language-plaintext highlighter-rouge">data.id</code> and <code class="language-plaintext highlighter-rouge">reference</code> tied to your internal order identifier (for example: <code class="language-plaintext highlighter-rouge">ORDER-&lt;order-id&gt;</code>).</li> <li>Store provider request/charge IDs on your order (<code class="language-plaintext highlighter-rouge">quikk_request_id</code>) for webhook reconciliation.</li> </ul> <h2 id="5-configure-hmac-authentication">5. Configure HMAC Authentication</h2> <p>Required request headers:</p> <ul> <li><code class="language-plaintext highlighter-rouge">Content-Type: application/vnd.api+json</code></li> <li><code class="language-plaintext highlighter-rouge">Accept: application/vnd.api+json</code></li> <li><code class="language-plaintext highlighter-rouge">Date: &lt;HTTP GMT date&gt;</code></li> <li><code class="language-plaintext highlighter-rouge">X-Custom: custom</code></li> <li><code class="language-plaintext highlighter-rouge">Authorization: keyId="...",algorithm="hmac-sha256",headers="date x-custom",signature="..."</code></li> </ul> <p>Example:</p> <div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</span></pre></td></tr></tbody></table></code></pre></div></div> <p>Keep <code class="language-plaintext highlighter-rouge">data.id</code> and <code class="language-plaintext highlighter-rouge">reference</code> tied to your internal order identifier.</p> <p>For example:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>ORDER-123
+</pre></td></tr></tbody></table></code></pre></div></div> <p>It’s also useful to store the provider request/charge ID on your order so that incoming webhooks can be reconciled reliably.</p> <h2 id="5-configure-hmac-authentication">5. Configure HMAC authentication</h2> <p>Required headers include:</p> <div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6
 </pre></td><td class="rouge-code"><pre><span class="err">Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
-Date: Mon, 25 May 2026 09:15:42 GMT
+Date: &lt;HTTP GMT date&gt;
 X-Custom: custom
-Authorization: keyId="YOUR_API_KEY",algorithm="hmac-sha256",headers="date x-custom",signature="QmFzZTY0U2lnbmF0dXJlJTNE"
-
-</span></pre></td></tr></tbody></table></code></pre></div></div> <p>Signing string (must match header values exactly and is case-sensitive):</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+Authorization: keyId="...",algorithm="hmac-sha256",headers="date x-custom",signature="..."
+</span></pre></td></tr></tbody></table></code></pre></div></div> <p>The signing string must match the header values exactly:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-3
 </pre></td><td class="rouge-code"><pre>date: &lt;Date header value&gt;
 x-custom: custom
-
-</pre></td></tr></tbody></table></code></pre></div></div> <p>Signature process:</p> <ol> <li>HMAC-SHA256 sign using <code class="language-plaintext highlighter-rouge">quikk.api_secret</code>.</li> <li>Base64 encode the raw digest.</li> <li>URL-encode the base64 result before adding it to <code class="language-plaintext highlighter-rouge">Authorization</code>.</li> </ol> <p>Ruby reference:</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div> <p>The signature is generated by:</p> <ol> <li>Creating an HMAC-SHA256 digest using <code class="language-plaintext highlighter-rouge">quikk.api_secret</code>.</li> <li>Base64-encoding the digest.</li> <li>URL-encoding the Base64 value.</li> <li>Adding it to the <code class="language-plaintext highlighter-rouge">Authorization</code> header.</li> </ol> <p>Ruby example:</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -188,21 +827,23 @@ x-custom: custom
 10
 11
 12
-13
 </pre></td><td class="rouge-code"><pre><span class="n">request_date</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">httpdate</span>
 <span class="n">x_custom</span> <span class="o">=</span> <span class="s2">"custom"</span>
+
 <span class="n">signing_string</span> <span class="o">=</span> <span class="s2">"date: </span><span class="si">#{</span><span class="n">request_date</span><span class="si">}</span><span class="se">\n</span><span class="s2">x-custom: </span><span class="si">#{</span><span class="n">x_custom</span><span class="si">}</span><span class="s2">"</span>
 
 <span class="n">raw_signature</span> <span class="o">=</span> <span class="no">Base64</span><span class="p">.</span><span class="nf">strict_encode64</span><span class="p">(</span>
   <span class="no">OpenSSL</span><span class="o">::</span><span class="no">HMAC</span><span class="p">.</span><span class="nf">digest</span><span class="p">(</span><span class="s2">"SHA256"</span><span class="p">,</span> <span class="n">quikk_api_secret</span><span class="p">,</span> <span class="n">signing_string</span><span class="p">)</span>
 <span class="p">)</span>
+
 <span class="n">encoded_signature</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">encode_www_form_component</span><span class="p">(</span><span class="n">raw_signature</span><span class="p">)</span>
 
 <span class="n">authorization</span> <span class="o">=</span> <span class="s2">"keyId=</span><span class="se">\"</span><span class="si">#{</span><span class="n">quikk_api_key</span><span class="si">}</span><span class="se">\"</span><span class="s2">,algorithm=</span><span class="se">\"</span><span class="s2">hmac-sha256</span><span class="se">\"</span><span class="s2">,headers=</span><span class="se">\"</span><span class="s2">date x-custom</span><span class="se">\"</span><span class="s2">,signature=</span><span class="se">\"</span><span class="si">#{</span><span class="n">encoded_signature</span><span class="si">}</span><span class="se">\"</span><span class="s2">"</span>
-
-<span class="c1"># Remember to append 'Content-Type' and 'Accept' as 'application/vnd.api+json' when making requests</span>
-
-</pre></td></tr></tbody></table></code></pre></div></div> <p>Important:</p> <ul> <li>⚠️ <strong>Server Clock Drift:</strong> The <code class="language-plaintext highlighter-rouge">Date</code> value in the header must be the exact value used in <code class="language-plaintext highlighter-rouge">signing_string</code>. Ensure your host server’s clock is synchronized via NTP. If your system time drifts by more than a few minutes, Quikk will reject requests with an authentication error.</li> <li>Header list in <code class="language-plaintext highlighter-rouge">Authorization</code> must remain <code class="language-plaintext highlighter-rouge">headers="date x-custom"</code>.</li> <li>Do not send raw base64 signature without URL-encoding.</li> <li>Use GMT HTTP date format (<code class="language-plaintext highlighter-rouge">Time.now.httpdate</code> in Ruby).</li> </ul> <h3 id="hmac-header-generation-scripts">HMAC Header Generation Scripts</h3> <p>Use one of these scripts to generate auth headers for manual API tests.</p> <p>Bash (<code class="language-plaintext highlighter-rouge">openssl</code> + <code class="language-plaintext highlighter-rouge">base64</code> + <code class="language-plaintext highlighter-rouge">jq</code>):</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="things-that-can-bite-you">Things that can bite you</h3> <p><strong>Server clock</strong></p> <p>The <code class="language-plaintext highlighter-rouge">Date</code> header must be exactly the same value used in the signing string. Make sure the server clock is synchronized with NTP.</p> <p><strong>Header order</strong></p> <p>Keep:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>headers="date x-custom"
+</pre></td></tr></tbody></table></code></pre></div></div> <p><strong>Signature encoding</strong></p> <p>Don’t send the raw Base64 signature. URL-encode it first.</p> <p><strong>HTTP date format</strong></p> <p>Use GMT HTTP date format:</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">httpdate</span>
+</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="hmac-header-generation">HMAC header generation</h3> <p>For manual API testing, I used the following scripts.</p> <h4 id="bash">Bash</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -221,7 +862,6 @@ x-custom: custom
 17
 18
 19
-20
 </pre></td><td class="rouge-code"><pre><span class="c">#!/usr/bin/env bash</span>
 <span class="nb">set</span> <span class="nt">-euo</span> pipefail
 
@@ -241,8 +881,7 @@ x-custom: custom
 <span class="nb">echo</span> <span class="s2">"Date: </span><span class="k">${</span><span class="nv">DATE_HEADER</span><span class="k">}</span><span class="s2">"</span>
 <span class="nb">echo</span> <span class="s2">"X-Custom: </span><span class="k">${</span><span class="nv">X_CUSTOM</span><span class="k">}</span><span class="s2">"</span>
 <span class="nb">echo</span> <span class="s2">"Authorization: </span><span class="k">${</span><span class="nv">AUTH_HEADER</span><span class="k">}</span><span class="s2">"</span>
-
-</pre></td></tr></tbody></table></code></pre></div></div> <p>Ruby (standalone script):</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div> <h4 id="ruby">Ruby</h4> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -267,7 +906,11 @@ x-custom: custom
 23
 24
 25
+26
+27
+28
 </pre></td><td class="rouge-code"><pre><span class="c1">#!/usr/bin/env ruby</span>
+
 <span class="nb">require</span> <span class="s2">"openssl"</span>
 <span class="nb">require</span> <span class="s2">"base64"</span>
 <span class="nb">require</span> <span class="s2">"uri"</span>
@@ -275,13 +918,16 @@ x-custom: custom
 
 <span class="n">api_key</span> <span class="o">=</span> <span class="no">ENV</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="s2">"QUIKK_API_KEY"</span><span class="p">)</span>
 <span class="n">api_secret</span> <span class="o">=</span> <span class="no">ENV</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="s2">"QUIKK_API_SECRET"</span><span class="p">)</span>
+
 <span class="n">x_custom</span> <span class="o">=</span> <span class="s2">"custom"</span>
 <span class="n">date_header</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">httpdate</span>
 
 <span class="n">signing_string</span> <span class="o">=</span> <span class="s2">"date: </span><span class="si">#{</span><span class="n">date_header</span><span class="si">}</span><span class="se">\n</span><span class="s2">x-custom: </span><span class="si">#{</span><span class="n">x_custom</span><span class="si">}</span><span class="s2">"</span>
+
 <span class="n">raw_signature</span> <span class="o">=</span> <span class="no">Base64</span><span class="p">.</span><span class="nf">strict_encode64</span><span class="p">(</span>
   <span class="no">OpenSSL</span><span class="o">::</span><span class="no">HMAC</span><span class="p">.</span><span class="nf">digest</span><span class="p">(</span><span class="s2">"SHA256"</span><span class="p">,</span> <span class="n">api_secret</span><span class="p">,</span> <span class="n">signing_string</span><span class="p">)</span>
 <span class="p">)</span>
+
 <span class="n">encoded_signature</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">encode_www_form_component</span><span class="p">(</span><span class="n">raw_signature</span><span class="p">)</span>
 
 <span class="n">authorization</span> <span class="o">=</span> <span class="s2">"keyId=</span><span class="se">\"</span><span class="si">#{</span><span class="n">api_key</span><span class="si">}</span><span class="se">\"</span><span class="s2">,algorithm=</span><span class="se">\"</span><span class="s2">hmac-sha256</span><span class="se">\"</span><span class="s2">,headers=</span><span class="se">\"</span><span class="s2">date x-custom</span><span class="se">\"</span><span class="s2">,signature=</span><span class="se">\"</span><span class="si">#{</span><span class="n">encoded_signature</span><span class="si">}</span><span class="se">\"</span><span class="s2">"</span>
@@ -291,28 +937,27 @@ x-custom: custom
 <span class="nb">puts</span> <span class="s2">"Date: </span><span class="si">#{</span><span class="n">date_header</span><span class="si">}</span><span class="s2">"</span>
 <span class="nb">puts</span> <span class="s2">"X-Custom: </span><span class="si">#{</span><span class="n">x_custom</span><span class="si">}</span><span class="s2">"</span>
 <span class="nb">puts</span> <span class="s2">"Authorization: </span><span class="si">#{</span><span class="n">authorization</span><span class="si">}</span><span class="s2">"</span>
-
-</pre></td></tr></tbody></table></code></pre></div></div> <p>Quick <code class="language-plaintext highlighter-rouge">curl</code> usage pattern:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div> <h2 id="6-handle-webhook-variants">6. Handle webhook variants</h2> <p>Quikk callbacks can contain different ID fields depending on the flow. When processing callbacks, account for the fields that may be present:</p> <ul> <li><code class="language-plaintext highlighter-rouge">data.id</code></li> <li><code class="language-plaintext highlighter-rouge">attributes.txn_charge_id</code></li> <li><code class="language-plaintext highlighter-rouge">attributes.resource_id</code></li> <li><code class="language-plaintext highlighter-rouge">attributes.response_id</code></li> </ul> <p>A reasonable lookup strategy is:</p> <ol> <li>Match known callback IDs against the stored <code class="language-plaintext highlighter-rouge">quikk_request_id</code>.</li> <li>If <code class="language-plaintext highlighter-rouge">data.id</code> starts with <code class="language-plaintext highlighter-rouge">ORDER-</code>, extract the order ID and match it against the internal order.</li> </ol> <p>For phone numbers, use:</p> <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">attributes</span><span class="p">.</span><span class="nf">customer_no</span> <span class="o">||</span> <span class="n">attributes</span><span class="p">.</span><span class="nf">sender_no</span>
+</pre></td></tr></tbody></table></code></pre></div></div> <p>For status handling:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>Success: SUCCESS | SUCCESSFUL | COMPLETED | PAID
+Failure: FAILED | FAIL | ERROR | DECLINED | CANCELLED | CANCELED
+</pre></td></tr></tbody></table></code></pre></div></div> <p>If <code class="language-plaintext highlighter-rouge">txn_status</code> is missing but <code class="language-plaintext highlighter-rouge">txn_id</code> exists, the application can treat the transaction as successful if that matches the behaviour you’ve verified for your integration.</p> <p>Webhook controller:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>app/controllers/webhooks_controller.rb
+</pre></td></tr></tbody></table></code></pre></div></div> <h2 id="7-frontend-polling">7. Frontend polling</h2> <p>The frontend can poll the payment status endpoint while waiting for the webhook.</p> <p>Example response:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
-5
-6
-7
-8
-</pre></td><td class="rouge-code"><pre>curl <span class="nt">-X</span> POST <span class="s2">"https://tryapi.quikk.dev/v1/mpesa/charge"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Content-Type: application/vnd.api+json"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Accept: application/vnd.api+json"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Date: </span><span class="k">${</span><span class="nv">DATE_HEADER</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"X-Custom: custom"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="k">${</span><span class="nv">AUTH_HEADER</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="s1">'{"data":{"type":"charge","id":"ORDER-123","attributes":{"amount":1,"customer_type":"msisdn","customer_no":"2547XXXXXXXX","short_code":"174379","reference":"ORDER-123","posted_at":"2026-05-25T09:15:42.000000Z"}}}'</span>
-
-</pre></td></tr></tbody></table></code></pre></div></div> <h2 id="6-handle-webhook-variants-safely">6. Handle Webhook Variants Safely</h2> <p>Quikk callbacks may provide different ID fields depending on flow. Parse all when present:</p> <ul> <li><code class="language-plaintext highlighter-rouge">data.id</code></li> <li><code class="language-plaintext highlighter-rouge">attributes.txn_charge_id</code></li> <li><code class="language-plaintext highlighter-rouge">attributes.resource_id</code></li> <li><code class="language-plaintext highlighter-rouge">attributes.response_id</code></li> </ul> <p>Order lookup strategy:</p> <ol> <li>First match known callback IDs against stored <code class="language-plaintext highlighter-rouge">quikk_request_id</code>.</li> <li>If <code class="language-plaintext highlighter-rouge">data.id</code> starts with <code class="language-plaintext highlighter-rouge">ORDER-</code>, extract order id and match internal order.</li> </ol> <p>Phone field fallback:</p> <ul> <li>Use <code class="language-plaintext highlighter-rouge">attributes.customer_no || attributes.sender_no</code>.</li> </ul> <p>Status mapping:</p> <ul> <li>Success: <code class="language-plaintext highlighter-rouge">SUCCESS|SUCCESSFUL|COMPLETED|PAID</code></li> <li>Failure: <code class="language-plaintext highlighter-rouge">FAILED|FAIL|ERROR|DECLINED|CANCELLED|CANCELED</code></li> <li>Fallback: if <code class="language-plaintext highlighter-rouge">txn_status</code> is missing but <code class="language-plaintext highlighter-rouge">txn_id</code> exists, treat as success.</li> </ul> <p>Webhook controller location:</p> <ul> <li><code class="language-plaintext highlighter-rouge">app/controllers/webhooks_controller.rb</code></li> </ul> <h2 id="7-frontend-polling-contract">7. Frontend Polling Contract</h2> <p>Polling response example:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div> <p>The UI can then:</p> <ul> <li>Redirect to confirmation when payment succeeds.</li> <li>Redirect to retry when payment fails.</li> <li>Continue polling while the payment is still pending.</li> <li>Stop after a reasonable timeout.</li> </ul> <p>Implementation:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w"> </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w"> </span><span class="nl">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paid"</span><span class="w"> </span><span class="p">}</span><span class="w">
-
-</span></pre></td></tr></tbody></table></code></pre></div></div> <p>Expected UI behavior:</p> <ul> <li>If <code class="language-plaintext highlighter-rouge">payment_status == "paid"</code> (or <code class="language-plaintext highlighter-rouge">status == "completed"</code>): redirect to confirmation page.</li> <li>If <code class="language-plaintext highlighter-rouge">status == "failed"</code>: redirect to retry page.</li> <li>Otherwise: continue polling for a bounded time.</li> </ul> <p>Implementation:</p> <ul> <li><code class="language-plaintext highlighter-rouge">app/controllers/checkouts_controller.rb</code> (<code class="language-plaintext highlighter-rouge">mpesa_status</code>)</li> <li><code class="language-plaintext highlighter-rouge">app/javascript/controllers/mpesa_polling_controller.js</code></li> </ul> <h2 id="8-setup-checklist">8. Setup Checklist</h2> <ul class="task-list"> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Add Quikk credentials for current environment.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Confirm API base URL (sandbox vs production).</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Ensure callback and polling routes are present.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Set callback URL in Quikk dashboard.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Trigger a sandbox payment request.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Verify webhook reaches <code class="language-plaintext highlighter-rouge">POST /payments/callback</code>.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Confirm order transitions to paid/failed correctly.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Verify polling flow redirects user from waiting screen.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Test idempotency by replaying callback payload.</li> </ul> <h2 id="9-troubleshooting">9. Troubleshooting</h2> <p>If payment succeeds on M-Pesa but checkout stays on waiting screen:</p> <ul> <li>Check webhook logs for exceptions in <code class="language-plaintext highlighter-rouge">WebhooksController#quikk</code>.</li> <li>Verify callback IDs map to either <code class="language-plaintext highlighter-rouge">quikk_request_id</code> or <code class="language-plaintext highlighter-rouge">ORDER-&lt;id&gt;</code>.</li> <li>Ensure status mapping handles your callback payload variant.</li> <li>Confirm polling endpoint returns updated status after callback processing.</li> </ul>]]></content><author><name></name></author><category term="technology"/><category term="guide"/><summary type="html"><![CDATA[Intro to Quikk API, an MPESA daraja alternative and a payment gateway.]]></summary></entry><entry><title type="html">How to Download and Boost Audio in Youtube Vidoes (Guide)</title><link href="https://judahsan.github.io/blog/2025/audio-amplification/" rel="alternate" type="text/html" title="How to Download and Boost Audio in Youtube Vidoes (Guide)"/><published>2025-12-12T11:59:00+00:00</published><updated>2025-12-12T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2025/audio-amplification</id><content type="html" xml:base="https://judahsan.github.io/blog/2025/audio-amplification/"><![CDATA[<p>Sometimes the audio in YouTube videos is too quite, take <a href="https://youtu.be/6kGpk8-baMM?si=pvU2DPDne79zvmpa">Help Bob Belong</a> for example. This guide shows you how to download YouTube videos and properly amplify their audio using free, open-source tools.</p> <h3 id="download-the-youtube-video">Download the YouTube Video</h3> <p><strong>Prerequisites:</strong></p> <ul> <li>Linux system (or WSL2 on Windows)</li> <li>Terminal access</li> <li>Basic command-line familiarity</li> </ul> <p><strong>Steps:</strong></p> <ol> <li>Install <code class="language-plaintext highlighter-rouge">yt-dlp</code> and download the video</li> </ol> <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>app/controllers/checkouts_controller.rb
+app/javascript/controllers/mpesa_polling_controller.js
+</pre></td></tr></tbody></table></code></pre></div></div> <h2 id="8-setup-checklist">8. Setup checklist</h2> <ul class="task-list"> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Create/configure the Quikk application.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Configure the required M-Pesa APIs with Quikk.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Obtain API credentials.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Add Quikk credentials to the application.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Confirm the sandbox/production API URL.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Configure the callback route.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Give Quikk the callback URL.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Send a sandbox payment request.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Verify the webhook reaches the application.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Confirm orders transition correctly.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Test frontend payment polling.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Replay webhook payloads to test idempotency.</li> <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"/>Test the complete flow in production before relying on it for real orders.</li> </ul> <h2 id="9-troubleshooting">9. Troubleshooting</h2> <h3 id="m-pesa-payment-succeeds-but-checkout-stays-on-the-waiting-screen">M-Pesa payment succeeds but checkout stays on the waiting screen</h3> <p>Check:</p> <ul> <li>Webhook logs for exceptions in <code class="language-plaintext highlighter-rouge">WebhooksController#quikk</code>.</li> <li>Whether the callback ID matches <code class="language-plaintext highlighter-rouge">quikk_request_id</code>.</li> <li>Whether the <code class="language-plaintext highlighter-rouge">ORDER-&lt;id&gt;</code> fallback works.</li> <li>Whether the webhook status is covered by your status mapping.</li> <li>Whether the polling endpoint returns the updated order status.</li> </ul> <h3 id="authentication-errors">Authentication errors</h3> <p>Check:</p> <ul> <li>Server time synchronization.</li> <li><code class="language-plaintext highlighter-rouge">Date</code> header and signing string match exactly.</li> <li><code class="language-plaintext highlighter-rouge">x-custom</code> is included in both.</li> <li><code class="language-plaintext highlighter-rouge">headers="date x-custom"</code> is correct.</li> <li>The signature is URL-encoded.</li> <li>The correct API key/secret is being used for the environment.</li> </ul> <h3 id="production-setup-problems">Production setup problems</h3> <p>If everything works in sandbox but production is giving you trouble, <strong>check the Quikk-side configuration before spending days debugging your application</strong>.</p> <p>The official Quikk setup guide specifically requires the relevant M-Pesa APIs and account details to be configured on their platform, including credentials, shortcode, passkey, and callback configuration.</p> <p>That was the part that cost us the most time during our production integration.</p> <p><strong>Read the official setup guide and contact Quikk directly when required before assuming the API request itself is the problem.</strong></p> <p><a href="https://quikkdev.medium.com/how-to-setup-mpesa-stk-push-charge-api-on-quikk-api-cd0dd405e125">Official Quikk STK Push setup guide</a></p>]]></content><author><name></name></author><category term="technology"/><category term="guide"/><category term="quikk"/><category term="mpesa"/><category term="rails"/><summary type="html"><![CDATA[A practical guide to integrating Quikk API for M-Pesa payments, based on a production integration.]]></summary></entry><entry><title type="html">How to Download and Boost Audio in Youtube Vidoes (Guide)</title><link href="https://judahsan.github.io/blog/2025/audio-amplification/" rel="alternate" type="text/html" title="How to Download and Boost Audio in Youtube Vidoes (Guide)"/><published>2025-12-12T11:59:00+00:00</published><updated>2025-12-12T11:59:00+00:00</updated><id>https://judahsan.github.io/blog/2025/audio-amplification</id><content type="html" xml:base="https://judahsan.github.io/blog/2025/audio-amplification/"><![CDATA[<p>Sometimes the audio in YouTube videos is too quite, take <a href="https://youtu.be/6kGpk8-baMM?si=pvU2DPDne79zvmpa">Help Bob Belong</a> for example. This guide shows you how to download YouTube videos and properly amplify their audio using free, open-source tools.</p> <h3 id="download-the-youtube-video">Download the YouTube Video</h3> <p><strong>Prerequisites:</strong></p> <ul> <li>Linux system (or WSL2 on Windows)</li> <li>Terminal access</li> <li>Basic command-line familiarity</li> </ul> <p><strong>Steps:</strong></p> <ol> <li>Install <code class="language-plaintext highlighter-rouge">yt-dlp</code> and download the video</li> </ol> <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -635,220 +1280,4 @@ Note: Communication with the virtual machine will fail as it does not have an ap
 
 </pre></td></tr></tbody></table></code></pre></div></div> <ol> <li> <p>Add a tag to the virtual machine: <code class="language-plaintext highlighter-rouge">gcloud compute instances add-tags gcelab2 --tags http-server,https-server</code></p> </li> <li>Update the firewall rule to allow: <code class="language-plaintext highlighter-rouge">gcloud compute firewall-rules create default-allow-http --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:80 --source-ranges=0.0.0.0/0 --target-tags=http-server</code></li> <li>List the firewall rules for the project: <code class="language-plaintext highlighter-rouge">gcloud compute firewall-rules list --filter=ALLOW:'80'</code></li> <li>Verify communication is possible for http to the VM:</li> </ol> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>curl http://$(gcloud compute instances list --filter=name:gcelab2 --format='value(EXTERNAL_IP)')
-</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="10-logs">10. Logs</h3> <p>Viewing logs is essential to understanding the working of your project. Use gcloud to access the different logs available on Google Cloud.</p> <ol> <li>View available logs on the system: <code class="language-plaintext highlighter-rouge">gcloud logging logs list</code></li> <li>View logs that relate to compute resources: <code class="language-plaintext highlighter-rouge">gcloud logging logs list --filter="compute"</code></li> <li>Read Logs related to the resource type of gce_instance:<code class="language-plaintext highlighter-rouge">gcloud logging read "resource.type=gce_instance" --limit 5</code></li> <li>Read the logs for a specific virtual machine: <code class="language-plaintext highlighter-rouge">gcloud logging read "resource.type=gce_instance AND labels.instance_name='gcelab2'" --limit 5</code></li> </ol>]]></content><author><name></name></author><category term="technology"/><category term="gcp"/><summary type="html"><![CDATA[Learn how to connect to computing resources hosted on Google Cloud via Cloud Shell with the gcloud tool.]]></summary></entry><entry><title type="html">Google Kubernetes Engine</title><link href="https://judahsan.github.io/blog/2024/k8s/" rel="alternate" type="text/html" title="Google Kubernetes Engine"/><published>2024-10-20T10:00:00+00:00</published><updated>2024-10-20T10:00:00+00:00</updated><id>https://judahsan.github.io/blog/2024/k8s</id><content type="html" xml:base="https://judahsan.github.io/blog/2024/k8s/"><![CDATA[<p>Part of <a href="https://www.cloudskillsboost.google/course_templates/621/labs/403399">Google Cloud Skills Boost</a> labs</p> <h3 id="google-kubernetes-enginegke">Google Kubernetes Engine(GKE)</h3> <ul> <li> <p><code class="language-plaintext highlighter-rouge">Kubernetes</code> is an open source system for automating deployment, scaling, and management of containerized applications.</p> </li> <li> <p><code class="language-plaintext highlighter-rouge">Google Kubernetes Engine(GKE)</code> is a fully managed Kubernetes service with full Kubernetes API, 4-way autoscaling, release channels, and multi-cluster support.</p> </li> <li> <p>We’ll learn how to create a GKE cluster, deploy an application to the cluster and delete the cluster</p> </li> </ul> <h3 id="1-create-gcp-account">1. <a href="https://www.geeksforgeeks.org/how-to-create-a-free-tier-account-on-gcp/">Create GCP account</a></h3> <h3 id="2-activate-cloud-shell">2. Activate Cloud Shell</h3> <ul> <li>Click <strong>Activate Cloud Shell</strong> at the top of the Google Cloud console: Vite utilizes ESBuild, a Go-based bundler, for production builds. ESBuild is renowned for its incredible speed and efficiency.</li> <li>List the active account name</li> </ul> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>    gcloud auth list
-</pre></td></tr></tbody></table></code></pre></div></div> <p>Ouput:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre>ACTIVE: <span class="k">*</span>
-ACCOUNT: &lt;account name&gt;
-
-To <span class="nb">set </span>the active account, run:
-    <span class="nv">$ </span>gcloud config <span class="nb">set </span>account <span class="sb">`</span>ACCOUNT<span class="sb">`</span>
-</pre></td></tr></tbody></table></code></pre></div></div> <ul> <li>List the project ID:</li> </ul> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>gcloud config list project
-</pre></td></tr></tbody></table></code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre><span class="o">[</span>core]
-project <span class="o">=</span> qwiklabs-gcp-03-e98c139c8c35
-</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="3-configure-your-environment">3. Configure your environment</h3> <ul> <li><a href="https://cloud.google.com/compute/docs/regions-zones/">Region and zones reading</a></li> </ul> <ol> <li>Set the region to <code class="language-plaintext highlighter-rouge">us-east1</code></li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>gcloud config <span class="nb">set </span>compute/region us-east1
-</pre></td></tr></tbody></table></code></pre></div></div> <ol> <li>View the project region setting</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>gcloud config get-value compute/region
-</pre></td></tr></tbody></table></code></pre></div></div> <ol> <li>Set zone to <code class="language-plaintext highlighter-rouge">us-east1-b</code>:</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>gcloud config <span class="nb">set </span>compute/zone us-east1-b
-</pre></td></tr></tbody></table></code></pre></div></div> <ol> <li>View project zone setting.</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>gcloud config get-value compute/zone
-</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="4-create-a-gke-cluster">4. Create a GKE cluster</h3> <p>A <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture">cluster</a> consists of at least one <strong>cluster master</strong> and multiple worker machines called <strong>nodes</strong>. Nodes are <a href="https://cloud.google.com/compute/docs/instances/">Computer Engine virtual machine instances</a> that run the Kubernetes processes necessary to make them part of the cluster.</p> <ul> <li>Create a cluster: <code class="language-plaintext highlighter-rouge">gcloud container clusters create --machine-type=e2-medium --zone=ZONE lab-cluster</code></li> </ul> <h3 id="5-get-authentication-credentials-for-the-cluster">5. Get authentication credentials for the cluster</h3> <ul> <li>You need authentication credentials to interact with the cluster.</li> <li>Authenticate with the cluster: <code class="language-plaintext highlighter-rouge">gcloud container clusters get-credentials lab-cluster</code></li> </ul> <h3 id="6-deploy-an-app-to-the-cluster">6. Deploy an app to the cluster</h3> <ul> <li>Example: deploy and run the hello-app in the cluster</li> </ul> <ol> <li>Run the following <code class="language-plaintext highlighter-rouge">kubectl create</code> command to <code class="language-plaintext highlighter-rouge">create a new Deployment</code> <code class="language-plaintext highlighter-rouge">hello-server</code> from the hello-app container image</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>kubectl create deployment hello-server <span class="nt">--image</span><span class="o">=</span>gcr.io/google-samples/hello-app:1.0
-</pre></td></tr></tbody></table></code></pre></div></div> <ol> <li>Create a <code class="language-plaintext highlighter-rouge">Kubernetes Service</code>, a k8s resource that lets you expose your application to external traffic, using the following <code class="language-plaintext highlighter-rouge">kubectl expose</code> command.</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>kubectl expose deployment hello-server <span class="nt">--type</span><span class="o">=</span>loadBalancer <span class="nt">--port</span> 8080
-</pre></td></tr></tbody></table></code></pre></div></div> <ol> <li> <p>Run <code class="language-plaintext highlighter-rouge">kubectl get</code> command to inspect the <code class="language-plaintext highlighter-rouge">hello-server</code>: <code class="language-plaintext highlighter-rouge">kubectl get service</code></p> </li> <li> <p>View the application from the web browser. <code class="language-plaintext highlighter-rouge">http://[EXTERNAL-IP]:8080</code></p> </li> </ol> <h3 id="7-deleting-the-cluster">7. Deleting the cluster</h3> <ol> <li>Delete the cluster: <code class="language-plaintext highlighter-rouge">gcloud container clusters delete lab-cluster</code></li> <li>When prompted, type <code class="language-plaintext highlighter-rouge">Y</code> to confirm.</li> </ol>]]></content><author><name></name></author><category term="technology"/><category term="gcp"/><category term="k8s"/><summary type="html"><![CDATA[An intro to Google Kubernetes Engine in GCP]]></summary></entry><entry><title type="html">Creating A Build Tool Using Go</title><link href="https://judahsan.github.io/blog/2024/creating-a-build-tool-using-golang/" rel="alternate" type="text/html" title="Creating A Build Tool Using Go"/><published>2024-07-28T10:00:00+00:00</published><updated>2024-07-28T10:00:00+00:00</updated><id>https://judahsan.github.io/blog/2024/creating-a-build-tool-using-golang</id><content type="html" xml:base="https://judahsan.github.io/blog/2024/creating-a-build-tool-using-golang/"><![CDATA[<p>Part of <a href="https://www.linkedin.com/in/katungi/">Daniel Katungi’s</a> talk during Daytona Developers Club Tour ‘24, Nairobi on Thurdsay July 18th</p> <h4 id="understanding-a-fully-fledged-web-build-toolvite">Understanding a fully-fledged web build tool(Vite)</h4> <p>Vite is a frontend build tool that has revolutionized the development experience by leveraging native ESM capabilities of modern browsers. To fully grasp its power. Core concepts:</p> <ol> <li>Native ESM</li> </ol> <ul> <li><strong>Leveraging Browser Capabilities</strong>: Vite takes advantage of the native ESM (EcmaScript Modules) support in modern browsers. It can serve you code directly as ESM modules without the need for bundling during development.</li> <li><strong>Improved Development Experience</strong>: This approach significantly speeds up development because the browser handles module loading efficiently.</li> <li><a href="https://vitejs.dev/guide/why">Why Vite</a></li> <li><a href="https://medium.com/@iboroinyang01/bundle-up-vite-or-webpack-c260915e0ff7">Bundle Up? Vite or Webpack?</a></li> </ul> <ol> <li>ESBuild</li> </ol> <ul> <li><strong>High-Performance Builder</strong>: Vite utilizes ESBuild, a Go-based bundler, for production builds. ESBuild is renowned for its incredible speed and efficiency.</li> <li><strong>Optimized Output</strong>: It produces highly optimized bundles, resulting in faster load times for your application.</li> <li><a href="https://vitejs.dev/guide/">Getting started with Vite</a></li> </ul> <ol> <li>Dependency Pre-Bundling</li> </ol> <ul> <li><strong>Optimized Import Paths</strong>: Vite pre-bundles large dependency libraries into chunks to reduce the number of requests and improve load performance.</li> <li><strong>Faster Development</strong>: This optimization helps in faster development by avoiding unnecessary re-bundling during development.</li> <li><a href="https://vitejs.dev/guide/dep-pre-bundling">Dependency Pre-Bundling</a></li> </ul> <ol> <li>Hot Module Replacement (HMR)</li> </ol> <ul> <li><strong>Instant Updates</strong>: Vite implements HMR to enable rapid development by updating only the changed modules in the browser without a full page reload.</li> <li><strong>Improved Developer Experience</strong>: This significantly enhances the development workflow by providing instant feedback on code changes.</li> </ul> <ol> <li>Plugin System</li> </ol> <ul> <li><strong>Extensibility</strong>: Vite offers a flexible plugin system that allows developers to customize the build process to fit their specific needs.</li> <li><strong>Rich Ecosystem</strong>: There’s a vast ecosystem of Vite plugins available for various tasks like TypeScript support, CSS preprocessors, and more.</li> <li><a href="https://www.dhiwise.com/post/the-ultimate-guide-to-using-vite-plugin-for-lightning-fast-web-development#:~:text=By%20supporting%20Rollup%20plugins%2C%20Vite,enhancing%20its%20flexibility%20and%20extensibility.">The Ultimate Guide to Using Vite Plugin for Lightning-Fast Web Development</a></li> </ul> <h4 id="how-it-works">How It Works</h4> <ul> <li><strong>Development Server</strong>: Vite starts a development server that serves your code directly as ESM modules. The browser handles module imports efficiently.</li> <li><strong>HMR</strong>: Vite watches for changes in your code and uses WebSockets to send updates to the browser.1 Only the affected modules are reloaded, providing a fast feedback loop. <a href="https://divriots.com/blog/vite-in-the-browser/#:~:text=Hot%20Module%20Reload%20(HMR),to%20the%20client%20(browser).">Vite In The Browser</a> <a href="https://blog.stackblitz.com/posts/what-is-vite-introduction/#:~:text=Each%20time%20you%20change%20any,their%20effects%20on%20the%20application.">Vite Core Features</a></li> <li><strong>Production Build</strong>: When building for production, Vite uses ESBuild to bundle your code into optimized chunks. Dependency pre-bundling is applied to further improve performance.</li> </ul> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/vite-image.webp" sizes="95vw"/> <img src="/assets/img/vite-image.webp" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <blockquote> <p>“Vite isn’t just a fast bundler, it’s a development powerhouse. Native ESM support and Hot Module Replacement (HMR) dramatically accelerate your development workflow, while ESBuild and dependency pre-bundling ensure your production builds fly.”</p> </blockquote> <h4 id="creating-a-build-tool-using-go">Creating a Build Tool Using Go</h4> <ol> <li><strong>Set Up Your Go Environment:</strong></li> </ol> <ul> <li>Install Go from the official <a href="https://golang.org/dl/">Go website</a>.</li> <li>Create a new Go project directory.</li> </ul> <ol> <li><strong>Install Dependencies:</strong></li> </ol> <ul> <li>Run the following commands to install the <code class="language-plaintext highlighter-rouge">minify</code> package and its sub-packages for JavaScript and CSS minification: <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>go get <span class="nt">-u</span> github.com/tdewolff/minify
-go get <span class="nt">-u</span> github.com/tdewolff/minify/js
-go get <span class="nt">-u</span> github.com/tdewolff/minify/css
-</pre></td></tr></tbody></table></code></pre></div> </div> </li> </ul> <ol> <li><strong>Read and Parse Files:</strong></li> </ol> <ul> <li>Use the <code class="language-plaintext highlighter-rouge">os</code> and <code class="language-plaintext highlighter-rouge">io/ioutil</code> packages to read files from the filesystem.</li> </ul> <ol> <li><strong>Transpile, Bundle, and Minify Code:</strong></li> </ol> <ul> <li>Use the <code class="language-plaintext highlighter-rouge">minify</code> package to minify JavaScript and CSS files.</li> <li>Bundle multiple JavaScript and CSS modules into a single file.</li> </ul> <ol> <li><strong>Serve Files:</strong></li> </ol> <ul> <li>Use the <code class="language-plaintext highlighter-rouge">net/http</code> package to serve files during development.</li> <li>Implement a simple server that watches for file changes and reloads the browser.</li> </ul> <ol> <li><strong>Command-Line Interface (CLI):</strong></li> </ol> <ul> <li>Create a CLI using the <code class="language-plaintext highlighter-rouge">flag</code> package to provide options for building, serving, and watching files.</li> </ul> <p>Here is the complete code for the build tool:</p> <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-</pre></td><td class="rouge-code"><pre><span class="k">package</span> <span class="n">main</span>
-
-<span class="k">import</span> <span class="p">(</span>
-    <span class="s">"flag"</span>
-    <span class="s">"fmt"</span>
-    <span class="s">"io/ioutil"</span>
-    <span class="s">"net/http"</span>
-    <span class="s">"os"</span>
-    <span class="s">"path/filepath"</span>
-    <span class="s">"strings"</span>
-
-    <span class="s">"github.com/tdewolff/minify"</span>
-    <span class="s">"github.com/tdewolff/minify/css"</span>
-    <span class="s">"github.com/tdewolff/minify/js"</span>
-<span class="p">)</span>
-
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c">// Define CLI flags</span>
-    <span class="n">build</span> <span class="o">:=</span> <span class="n">flag</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="s">"build"</span><span class="p">,</span> <span class="no">false</span><span class="p">,</span> <span class="s">"Build the project"</span><span class="p">)</span>
-    <span class="n">serve</span> <span class="o">:=</span> <span class="n">flag</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="s">"serve"</span><span class="p">,</span> <span class="no">false</span><span class="p">,</span> <span class="s">"Serve the project"</span><span class="p">)</span>
-    <span class="n">flag</span><span class="o">.</span><span class="n">Parse</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="o">*</span><span class="n">build</span> <span class="p">{</span>
-        <span class="n">buildProject</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="o">*</span><span class="n">serve</span> <span class="p">{</span>
-        <span class="n">serveProject</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">func</span> <span class="n">buildProject</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c">// Initialize minifier</span>
-    <span class="n">m</span> <span class="o">:=</span> <span class="n">minify</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
-    <span class="n">m</span><span class="o">.</span><span class="n">AddFunc</span><span class="p">(</span><span class="s">"text/javascript"</span><span class="p">,</span> <span class="n">js</span><span class="o">.</span><span class="n">Minify</span><span class="p">)</span>
-    <span class="n">m</span><span class="o">.</span><span class="n">AddFunc</span><span class="p">(</span><span class="s">"text/css"</span><span class="p">,</span> <span class="n">css</span><span class="o">.</span><span class="n">Minify</span><span class="p">)</span>
-
-    <span class="c">// Read and concatenate JavaScript and CSS files</span>
-    <span class="n">files</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadDir</span><span class="p">(</span><span class="s">"./src"</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Error reading source directory:"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
-        <span class="k">return</span>
-    <span class="p">}</span>
-
-    <span class="k">var</span> <span class="n">bundledCode</span> <span class="n">strings</span><span class="o">.</span><span class="n">Builder</span>
-    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">file</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">files</span> <span class="p">{</span>
-        <span class="n">content</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadFile</span><span class="p">(</span><span class="s">"./src/"</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="n">Name</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-            <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Error reading file:"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="p">}</span>
-
-        <span class="k">var</span> <span class="n">minifiedContent</span> <span class="kt">string</span>
-        <span class="k">if</span> <span class="n">strings</span><span class="o">.</span><span class="n">HasSuffix</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">Name</span><span class="p">(),</span> <span class="s">".js"</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">minifiedContent</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="s">"text/javascript"</span><span class="p">,</span> <span class="kt">string</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">strings</span><span class="o">.</span><span class="n">HasSuffix</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">Name</span><span class="p">(),</span> <span class="s">".css"</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">minifiedContent</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="s">"text/css"</span><span class="p">,</span> <span class="kt">string</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-            <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Error minifying file:"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="p">}</span>
-
-        <span class="n">bundledCode</span><span class="o">.</span><span class="n">WriteString</span><span class="p">(</span><span class="n">minifiedContent</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="c">// Ensure the dist directory exists</span>
-    <span class="n">err</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">MkdirAll</span><span class="p">(</span><span class="s">"./dist"</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">ModePerm</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Error creating dist directory:"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
-        <span class="k">return</span>
-    <span class="p">}</span>
-
-    <span class="c">// Write the bundled and minified code to a file</span>
-    <span class="n">err</span> <span class="o">=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">WriteFile</span><span class="p">(</span><span class="s">"./dist/bundle.js"</span><span class="p">,</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">bundledCode</span><span class="o">.</span><span class="n">String</span><span class="p">()),</span> <span class="m">0644</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
-        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Error writing bundled file:"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Project built successfully."</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">func</span> <span class="n">serveProject</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">http</span><span class="o">.</span><span class="n">Handle</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">http</span><span class="o">.</span><span class="n">FileServer</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">Dir</span><span class="p">(</span><span class="s">"./dist"</span><span class="p">)))</span>
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Serving project at http://localhost:8080"</span><span class="p">)</span>
-    <span class="n">http</span><span class="o">.</span><span class="n">ListenAndServe</span><span class="p">(</span><span class="s">":8080"</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="steps-to-use-the-build-tool">Steps to Use the Build Tool</h3> <ol> <li> <p><strong>Build the Project:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>go run main.go <span class="nt">-build</span>
-</pre></td></tr></tbody></table></code></pre></div> </div> </li> <li> <p><strong>Serve the Project:</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>go run main.go <span class="nt">-serve</span>
-</pre></td></tr></tbody></table></code></pre></div> </div> </li> </ol>]]></content><author><name></name></author><category term="technology"/><category term="golang"/><category term="vite"/><summary type="html"><![CDATA[Crating a build tool using Go]]></summary></entry></feed>
+</pre></td></tr></tbody></table></code></pre></div></div> <h3 id="10-logs">10. Logs</h3> <p>Viewing logs is essential to understanding the working of your project. Use gcloud to access the different logs available on Google Cloud.</p> <ol> <li>View available logs on the system: <code class="language-plaintext highlighter-rouge">gcloud logging logs list</code></li> <li>View logs that relate to compute resources: <code class="language-plaintext highlighter-rouge">gcloud logging logs list --filter="compute"</code></li> <li>Read Logs related to the resource type of gce_instance:<code class="language-plaintext highlighter-rouge">gcloud logging read "resource.type=gce_instance" --limit 5</code></li> <li>Read the logs for a specific virtual machine: <code class="language-plaintext highlighter-rouge">gcloud logging read "resource.type=gce_instance AND labels.instance_name='gcelab2'" --limit 5</code></li> </ol>]]></content><author><name></name></author><category term="technology"/><category term="gcp"/><summary type="html"><![CDATA[Learn how to connect to computing resources hosted on Google Cloud via Cloud Shell with the gcloud tool.]]></summary></entry></feed>

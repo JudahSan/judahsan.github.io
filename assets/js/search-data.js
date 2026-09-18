@@ -58,7 +58,29 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-how-to-set-up-cloudflare-tunnel-for-local-development",
+            },{id: "post-scraping-historical-x-twitter-posts-via-firefox-console",
+        
+          title: "Scraping Historical X (Twitter) Posts via Firefox Console",
+        
+        description: "How I recovered lost car review videos by scraping historical posts from X using nothing but the Firefox console and a bit of JavaScript — then cleaned and analysed the results with Go.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/scraping-posts-via-firefox-console/";
+          
+        },
+      },{id: "post-android-package-conflict",
+        
+          title: "Android Package Conflict",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/android-package-conflict/";
+          
+        },
+      },{id: "post-how-to-set-up-cloudflare-tunnel-for-local-development",
         
           title: "How to Set Up Cloudflare Tunnel for Local Development",
         
@@ -69,11 +91,11 @@ ninja.data = [{
             window.location.href = "/blog/2026/cloudflare-tunnel/";
           
         },
-      },{id: "post-quikk-api",
+      },{id: "post-quikk-api-setup",
         
-          title: "Quikk API",
+          title: "Quikk API Setup",
         
-        description: "Intro to Quikk API, an MPESA daraja alternative and a payment gateway.",
+        description: "A practical guide to integrating Quikk API for M-Pesa payments, based on a production integration.",
         section: "Posts",
         handler: () => {
           
@@ -331,17 +353,22 @@ ninja.data = [{
               window.location.href = "/projects/10_project/";
             },},{id: "projects-tms-app-mobile",
           title: 'TMS App Mobile',
-          description: "An tool to help you stay consistent in your TMS memorization, offering series, songs, plenary guides, and more.",
+          description: "A discipleship companion app for scripture memorization, journaling, worship, and study — built for CORE groups, campus ministries, and individual disciples.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/11_project/";
+            },},{id: "projects-tms-companion-pwa",
+          title: 'TMS Companion PWA',
+          description: "Progressive Web App for the TMS Companion — scripture memorization, worship, and study, installable on any device.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/12_project/";
             },},{id: "projects-into-the-void",
           title: 'Into the Void',
           description: "A retro-inspired casual space shooter built with Unity",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
-            },},{id: "projects-medimartxpress",
-          title: 'Medimartxpress',
-          description: "Fostering accessibility for all Kenyans, Medimartxpress provides a seamless experience for accessing premium, secure, and budget-friendly medicine and wellness products online.",
+            },},{id: "projects-saka-rieng",
+          title: 'Saka Rieng',
+          description: "An offline-first scavenger hunt adventure game that turns campsites and cities into interactive playgrounds for team-building.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project/";
             },},{id: "projects-echoes-of-elysium",
@@ -349,11 +376,6 @@ ninja.data = [{
           description: "A fun and simple platformer built with Godot as part of my game development learning journey.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/3_project/";
-            },},{id: "projects-tms-companion-app",
-          title: 'TMS Companion App',
-          description: "A cross-platform tool to help you stay consistent in your TMS memorization, offering series, songs, plenary guides, and more.",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/4_project/";
             },},{id: "projects-african-ruby-community-platform",
           title: 'African Ruby Community Platform',
           description: "Open-source community platform for the African Ruby Community (ARC), built and maintained by contributors across East Africa.",
