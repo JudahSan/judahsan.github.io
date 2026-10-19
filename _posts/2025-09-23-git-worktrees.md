@@ -23,20 +23,36 @@ When reviewing pull requests (PRs), it's often necessary to run the code locally
 
 ### Setup
 
-Using `git worktrees` can seem **intimidating** at first, but once you get the hang of it, you'll appreciate its benefits. That said, I've created a one-time setup guide that you can reuse for your projects for those who want to dive right in. We'll use aliases to simplify the setup and make it user-friendly.
+Using `Git worktrees` can seem **intimidating** at first, but once you get the hang of it, you'll appreciate its benefits. That said, I've created a one-time setup guide that you can reuse for your projects for those who want to dive right in. We'll use aliases to simplify the setup and make it user-friendly.
 
 Run this in your terminal:
 
 ```bash
-git config --global alias.pr '!f() { \
-  num=$1; \
-  branch="pr-$num"; \
-  dir="../pr-$num"; \
-  git fetch upstream pull/$num/head:$branch && \
-  git worktree add $dir $branch && \
-  echo "✅ Worktree for PR #$num created at $dir"; \
+git config --global alias.pr '!f() {
+  num="$1";
+  if [ -z "$num" ]; then
+    echo "Usage: git pr <pull-request-number>";
+    return 1;
+  fi;
+
+  branch="pr-$num";
+  dir="../pr-$num";
+  remote=$(git remote | grep -qx "upstream" && echo "upstream" || echo "origin");
+
+  echo "Fetching PR #$num from remote '\''$remote'\''...";
+
+  git fetch "$remote" "pull/$num/head:refs/heads/$branch" &&
+  git worktree add "$dir" "$branch" &&
+  echo "Worktree for PR #$num created at $dir";
 }; f'
 ```
+
+### Prerequisites:
+- Git installed and a local clone of the repository. 
+- An upstream or origin remote pointing to the GitHub repository containing the PR. 
+- Access to the pull request.
+
+The alias automatically prefers upstream when available, falling back to origin otherwise. It fetches the PR into a local branch named pr-<number> and creates a worktree in a sibling directory.
 
 ---
 
@@ -50,12 +66,12 @@ git pr 69
 
 This command will:
 
-1.  Fetch the PR branch from **upstream**.
+1.  **Fetch the pull request** from the configured remote (`upstream` if available, otherwise `origin`).
 
 <!-- end list -->
 
 ```bash
-git fetch upstream pull/69/head:pr-69
+git fetch <remote> pull/69/head:refs/heads/pr-69
 ```
 
 2.  Create a new worktree at `../pr-69`.
@@ -66,7 +82,8 @@ git fetch upstream pull/69/head:pr-69
 git worktree add ../pr-69 pr-69
 ```
 
-3.  Print a confirmation message.
+3.  Print a confirmation message. 
+    - This keeps the instructions consistent with the alias and avoids implying that every repository uses `upstream`.
 
 Then you can:
 
@@ -86,4 +103,10 @@ When you're done with the PR:
 cd ..
 git worktree remove ../pr-69
 git branch -D pr-69   # removes the temporary branch
+```
+
+You can verify your remaining worktrees with:
+
+```bash
+git worktree list
 ```
